@@ -3,14 +3,20 @@
 from django.contrib import admin
 from bosques.models import *
 from django.forms import CheckboxSelectMultiple
-
+from django import forms
+from bosques.forms import *
 
 class PropietarioBosqueAdmin(admin.ModelAdmin):
-	#fields = ['fecha', ('encuestador', 'empresa')]
 	formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
-
+#    field_formfield_overrides = { 
+#        'tipo_propiedad': { 'widget':CheckboxSelectMultiple}, 
+#    }
+#    def formfield_for_dbfield(self, db_field, **kwargs):
+#        if db_field.name == 'tipo_propiedad':
+#            kwargs['widget'] = CheckboxSelectMultiple
+#        return super(PropietarioBosqueAdmin, self).formfield_for_dbfield(db_field, **kwargs) 
 	fieldsets = (
         (None, {
             'fields': ('fecha', ('encuestador', 'empresa'))
@@ -67,3 +73,21 @@ admin.site.register(TipoBosqueUmf)
 admin.site.register(MetodoExtraccion)
 admin.site.register(Madera)
 admin.site.register(PropietarioBosques, PropietarioBosqueAdmin)
+
+#---------------- seguimiento -------------------------------
+
+class DatosAdminInline(admin.StackedInline):
+    model = Datos
+    fields = ['fecha_seguimiento',('hombre','mujeres'),('uso_agricola','uso_pecuario','uso_foretal'),
+             ('bosque_bajo_manejo','uso_agroforestal','otros_usos'),('poa_ejecucion','area_poa','permiso_poa'),
+             ('volumen_cosecha','segui_plantaciones','registro_orfn'),('certificado','tipo_certificacion',
+             'estado_certificado')]
+    extra = 1
+
+
+class SeguimientoAdmin(admin.ModelAdmin):
+    inlines = [DatosAdminInline]
+
+admin.site.register(Seguimiento, SeguimientoAdmin)
+admin.site.register(TipoCertificacion)
+

@@ -1,0 +1,131 @@
+.prueba h2 {
+    background-color: #ccc;
+    background-image: none;
+    
+    color: #000;
+    
+    
+}
+
+.field-tipo_propiedad ul li {
+    float: left;
+    list-style: none;
+}
+
+.field-tipo_propiedad .help {
+    display: none;
+}
+
+.field-organizado ul li {
+    float: left;
+    list-style: none;
+}
+
+.field-organizado .help {
+    display: none;
+}
+
+.field-organizacion ul li {
+    float: left;
+    list-style: none;
+}
+
+.field-organizacion .help {
+    display: none;
+}
+
+.field-naturales ul li {
+    float: left;
+    list-style: none;
+}
+
+.field-naturales .help {
+    display: none;
+}
+
+.field-introducida ul li {
+    float: left;
+    list-style: none;
+}
+
+.field-introducida .help {
+    display: none;
+}
+
+.field-tipo_producto ul li {
+    float: left;
+    list-style: none;
+}
+
+.field-tipo_producto .help {
+    display: none;
+}
+
+.field-procesos_industriales ul li {
+    float: left;
+    list-style: none;
+}
+
+.field-procesos_industriales .help {
+    display: none;
+}
+
+.field-secado ul li {
+    float: left;
+    list-style: none;
+}
+
+.field-secado .help {
+    display: none;
+}
+
+.field-buenas_practicas ul li {
+    float: left;
+    list-style: none;
+}
+
+.field-buenas_practicas .help {
+    display: none;
+}
+
+.field-proveedores ul li {
+    float: left;
+    list-style: none;
+}
+
+.field-proveedores .help {
+    display: none;
+}
+
+.field-bosques_umf ul li {
+    float: left;
+    list-style: none;
+}
+
+.field-bosques_umf .help {
+    display: none;
+}
+
+.field-extraccion ul li {
+    float: left;
+    list-style: none;
+}
+
+.field-extraccion .help {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

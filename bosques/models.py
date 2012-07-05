@@ -160,18 +160,19 @@ class PropietarioBosques(models.Model):
     fecha = models.DateField()
     encuestador = models.ForeignKey(Encuestador)
     empresa = models.ForeignKey(Empresa)
-    nombre_propietario = models.CharField('Nombre del propietario o representante legal', 
+    nombre_propietario = models.CharField('Nombre del propietario', 
                                            max_length=200, 
                                            help_text='Nombre del propietario o representante legal')
     sexo_propietario = models.IntegerField(choices=SEXO_CHOICE)
-    cedula_propietario = models.CharField(max_length=200, help_text='Cédula')
-    propietario_ruc = models.CharField(max_length=200, help_text='Registro RUC')
-    representante_tecnico = models.CharField('Nombre del representante técnico', 
+    cedula_propietario = models.CharField('Cédula', max_length=200, 
+                                           help_text='Cédula del propietario ó representante legal')
+    propietario_ruc = models.CharField('RUC', max_length=200, help_text='Registro RUC del propietario')
+    representante_tecnico = models.CharField('Nombre del técnico', 
                                            max_length=200, 
                                            help_text='Nombre del representante técnico')
     sexo_tecnico = models.IntegerField(choices=SEXO_CHOICE)
-    cedula_tecnico = models.CharField(max_length=200, help_text='Cédula')
-    tecnico_ruc = models.CharField(max_length=200, help_text='Registro RUC')
+    cedula_tecnico = models.CharField('Cédula', max_length=200, help_text='Cédula del representante técnico')
+    tecnico_ruc = models.CharField('RUC', max_length=200, help_text='Registro RUC del técnico')
     nombre_propiedad = models.CharField('Nombre de la propiedad', 
                                            max_length=200, 
                                            help_text='Nombre de la propiedad')
@@ -221,21 +222,62 @@ class PropietarioBosques(models.Model):
     class Meta:
         verbose_name_plural = "Ficha 1 Dueños de bosques"
     
+#--------------------- modelo de seguimiento -----------------------------------
+
+class Seguimiento(models.Model):
+    propietario = models.ForeignKey(PropietarioBosques)
     
+    def __unicode__(self):
+        return self.propietario.nombre_propietario
+        
+    class Meta:
+        verbose_name_plural = "Datos para seguimiento"
+
+CERTIFICADO_CHOICE = (
+    (1, 'Si'),
+    (2, 'No'),
+    (3, 'En proceso')
+)
+
+class TipoCertificacion(models.Model):
+    nombre = models.CharField(max_length=200)
     
+    def __unicode__(self):
+        return self.nombre
+        
+    class Meta:
+        verbose_name_plural = "Tipos de certificación"
+
+
+ESTADO_CERTIFICADO_CHOICE = (
+    (1, 'Vigente'),
+    (2, 'Suspendido'),
+    (3, 'Renovado'),
+    (4, 'Cancelado')
+)
+                
+class Datos(models.Model):
+    fecha_seguimiento = models.DateField()
+    hombre = models.IntegerField()
+    mujeres = models.IntegerField()
+    uso_agricola = models.FloatField()
+    uso_pecuario = models.FloatField()
+    uso_foretal = models.FloatField()
+    bosque_bajo_manejo = models.FloatField()
+    uso_agroforestal = models.FloatField()
+    otros_usos = models.FloatField()
+    poa_ejecucion = models.IntegerField()
+    area_poa = models.FloatField()
+    permiso_poa = models.CharField(max_length=200)
+    volumen_cosecha = models.FloatField()
+    segui_plantaciones = models.FloatField()
+    registro_orfn = models.CharField(max_length=200)
+    certificado = models.IntegerField(choices=CERTIFICADO_CHOICE)
+    tipo_certificacion = models.ManyToManyField(TipoCertificacion)
+    estado_certificado = models.IntegerField(choices=ESTADO_CERTIFICADO_CHOICE)
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    sequimiento = models.ForeignKey(Seguimiento)
+        
+    class Meta:
+        verbose_name_plural = "Datos para el seguimiento de monitoreo"
+
