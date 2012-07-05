@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
+from lugar.models import *
 import datetime
 
 # Create your models here.
@@ -30,7 +33,7 @@ SINO_CHOICE = (
 )
 
 class TipoPropiedadBosque(models.Model):
-    nombre = models.CharField(max_length)
+    nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.nombre
@@ -38,7 +41,7 @@ class TipoPropiedadBosque(models.Model):
         verbose_name_plural = "Tipo de propiedad del bosque"
         
 class Organizado(models.Model):
-    nombre = models.CharField(max_length)
+    nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.nombre
@@ -46,7 +49,7 @@ class Organizado(models.Model):
         verbose_name_plural = "Organizado"
 
 class Organizacion(models.Model):
-    nombre = models.CharField(max_length)
+    nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.nombre
@@ -54,7 +57,7 @@ class Organizacion(models.Model):
         verbose_name_plural = "Organizacion"
         
 class GobiernoGti(models.Model):
-    nombre = models.CharField(max_length)
+    nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.nombre
@@ -62,7 +65,7 @@ class GobiernoGti(models.Model):
         verbose_name_plural = "Gobiernos territoriales indigenas"
 
 class EspeciesNaturales(models.Model):
-    nombre = models.CharField(max_length)
+    nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.nombre
@@ -70,16 +73,20 @@ class EspeciesNaturales(models.Model):
         verbose_name_plural = "Especies forestales naturales"
 
 class EspeciesIntroducidas(models.Model):
-    nombre = models.CharField(max_length)
+    nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.nombre
     class Meta:
         verbose_name_plural = "Especies plantaciones introducidas"
         
-MADERA_CHOICE = (
-    (1, 'Maderas en rollo')
-)
+class Madera(models.Model):
+    nombre = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.nombre
+    class Meta:
+        verbose_name_plural = "Madera"
 
 MADERA_PROCESADAS_CHOICE = (
     (1, 'Con moto sierras'),
@@ -93,7 +100,7 @@ CONSUMO_CHOICE = (
 )
 
 class TipoProducto(models.Model):
-    nombre = models.CharField(max_length)
+    nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.nombre
@@ -101,7 +108,7 @@ class TipoProducto(models.Model):
         verbose_name_plural = "Tipo de productos"
         
 class ProcesoIndustrialBosque(models.Model):
-    nombre = models.CharField(max_length)
+    nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.nombre
@@ -109,7 +116,7 @@ class ProcesoIndustrialBosque(models.Model):
         verbose_name_plural = "Otros procesos industriales integrados al bosque"
         
 class TipoSecados(models.Model):
-    nombre = models.CharField(max_length)
+    nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.nombre
@@ -117,7 +124,7 @@ class TipoSecados(models.Model):
         verbose_name_plural = "Tipos de secados"
 
 class BuenasPracticas(models.Model):
-    nombre = models.CharField(max_length)
+    nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.nombre
@@ -125,7 +132,7 @@ class BuenasPracticas(models.Model):
         verbose_name_plural = "Buenas prácticas que implementan"
 
 class ProveedoresSuministros(models.Model):
-    nombre = models.CharField(max_length)
+    nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.nombre
@@ -133,7 +140,7 @@ class ProveedoresSuministros(models.Model):
         verbose_name_plural = "Principales proveedores de suministros y materiales"
         
 class TipoBosqueUmf(models.Model):
-    nombre = models.CharField(max_length)
+    nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.nombre
@@ -141,7 +148,7 @@ class TipoBosqueUmf(models.Model):
         verbose_name_plural = "Tipo de Bosque de la UMF"
         
 class MetodoExtraccion(models.Model):
-    nombre = models.CharField(max_length)
+    nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
         return self.nombre
@@ -174,7 +181,7 @@ class PropietarioBosques(models.Model):
     tel_convencional = models.CharField('Teléfono convencional', max_length=15, null=True, blank=True)
     tel_celular = models.CharField('Teléfono celular', max_length=15, null=True, blank=True)
     email = models.EmailField('Correo electrónico', null=True, blank=True)
-    web = models.LinkField('Página web', null=True, blank=True)
+    web = models.URLField('Página web', null=True, blank=True)
     direccion = models.CharField('Dirección', max_length=200, null=True, blank=True)
     latitud = models.FloatField(null=True, blank=True)
     longitud = models.FloatField(null=True, blank=True)
@@ -188,9 +195,9 @@ class PropietarioBosques(models.Model):
     nombre_gti = models.ForeignKey(GobiernoGti)
     naturales = models.ManyToManyField(EspeciesNaturales, verbose_name='Especies naturales')
     introducida = models.ManyToManyField(EspeciesIntroducidas, verbose_name='Especies introducidas')
-    madera = models.IntegerField(choices=MADERA_CHOICE)
-    madera_procesada = models.IntegerField(choices=MADERA_PROCESADAS_CHOICE)
-    consumo = models.IntegerField(choices=CONSUMO_CHOICE)
+    madera = models.ForeignKey(Madera, null=True, blank=True)
+    madera_procesada = models.IntegerField(choices=MADERA_PROCESADAS_CHOICE, null=True, blank=True)
+    consumo = models.IntegerField(choices=CONSUMO_CHOICE, null=True, blank=True)
     producto_no_maderable = models.IntegerField(choices=SINO_CHOICE)
     tipo_producto = models.ManyToManyField(TipoProducto)
     procesos_industriales = models.ManyToManyField(ProcesoIndustrialBosque)
@@ -202,11 +209,17 @@ class PropietarioBosques(models.Model):
     codigo_umf = models.CharField('Código de la UMF (INAFOR)', max_length=200)
     periodo_vigencia = models.IntegerField('Periodo de vigencia (años)')
     poas_umf = models.IntegerField('POAS en la UMF')
-    bosques_umf = model.ManyToManyField(TipoBosqueUmf)
+    bosques_umf = models.ManyToManyField(TipoBosqueUmf)
     extraccion = models.ManyToManyField(MetodoExtraccion)
     secado_horno = models.FloatField('Capacidad de secado del horno')
     codigo_certificado = models.CharField(max_length=200, null=True, blank=True)
     area_certificada = models.FloatField(null=True, blank=True)
+
+    def __unicode__(self):
+        return self.nombre_propietario
+
+    class Meta:
+        verbose_name_plural = "Ficha 1 Dueños de bosques"
     
     
     
