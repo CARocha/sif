@@ -105,6 +105,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'lugar',
     'bosques',
+    'smart_selects',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -135,3 +136,8 @@ LOGGING = {
         },
     }
 }
+
+ADMIN_MEDIA_PREFIX = ''
+
+USE_DJANGO_JQUERY = False
+JQUERY_URL = "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"

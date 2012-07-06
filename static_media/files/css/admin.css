@@ -52,6 +52,10 @@
     display: none;
 }
 
+.field-tipo_producto {
+    display: none;
+}
+
 .field-tipo_producto ul li {
     float: left;
     list-style: none;

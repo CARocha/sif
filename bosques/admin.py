@@ -5,11 +5,12 @@ from bosques.models import *
 from django.forms import CheckboxSelectMultiple
 from django import forms
 from bosques.forms import *
+from autocomplete.widgets import *
 
 class PropietarioBosqueAdmin(admin.ModelAdmin):
-	formfield_overrides = {
-        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
-    }
+    # formfield_overrides = {
+    #     models.ManyToManyField: {'widget': CheckboxSelectMultiple},
+    # }
 #    field_formfield_overrides = { 
 #        'tipo_propiedad': { 'widget':CheckboxSelectMultiple}, 
 #    }
@@ -17,7 +18,8 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
 #        if db_field.name == 'tipo_propiedad':
 #            kwargs['widget'] = CheckboxSelectMultiple
 #        return super(PropietarioBosqueAdmin, self).formfield_for_dbfield(db_field, **kwargs) 
-	fieldsets = (
+    form = PropietarioBosquesForm
+    fieldsets = (
         (None, {
             'fields': ('fecha', ('encuestador', 'empresa'))
         }),
@@ -40,7 +42,7 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
         }),
         ('Parte 2', {
             'classes': ('prueba2',),
-            'fields': ('gobierno_gti','nombre_gti','naturales', 'introducida',('madera','madera_procesada','consumo'),
+            'fields': ('gobierno_gti','nombre_gti',('naturales', 'introducida'),('madera','madera_procesada','consumo'),
             	       'producto_no_maderable','tipo_producto','procesos_industriales','secado','buenas_practicas',
             	       'proveedores')
         }),
@@ -50,10 +52,11 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
             	       )
         }),
     )
-	class Media:
-		css = {
-            'screen': ('/files/css/admin.css', ),
+    class Media:
+        css = {
+            'all': ('/files/css/admin.css',),
         }
+        js = ('/files/js/adminficha1.js',)
 
 
 admin.site.register(Encuestador)
@@ -85,7 +88,11 @@ class DatosAdminInline(admin.StackedInline):
     extra = 1
 
 
-class SeguimientoAdmin(admin.ModelAdmin):
+class SeguimientoAdmin(AutocompleteModelAdmin):
+    related_search_fields = { 
+
+                'propietario': ('nombre_propietario',),
+        }
     inlines = [DatosAdminInline]
 
 admin.site.register(Seguimiento, SeguimientoAdmin)

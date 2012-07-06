@@ -3,6 +3,7 @@
 from django.db import models
 from lugar.models import *
 import datetime
+from smart_selects.db_fields import ChainedForeignKey
 
 # Create your models here.
 
@@ -186,9 +187,25 @@ class PropietarioBosques(models.Model):
     direccion = models.CharField('Dirección', max_length=200, null=True, blank=True)
     latitud = models.FloatField(null=True, blank=True)
     longitud = models.FloatField(null=True, blank=True)
+    
     departamento = models.ForeignKey(Departamento)
-    municipio = models.ForeignKey(Municipio)
-    comunidad = models.ForeignKey(Comunidad)
+    #municipio = models.ForeignKey(Municipio)
+    municipio = ChainedForeignKey(
+        Municipio,
+        chained_field="departamento",
+        chained_model_field="departamento",
+        show_all=False,
+        auto_choose=True
+    )
+    #comunidad = models.ForeignKey(Comunidad)
+    comunidad = ChainedForeignKey(
+        Comunidad,
+        chained_field="municipio",
+        chained_model_field="municipio",
+        show_all=False,
+        auto_choose=True
+    )
+    
     organizado = models.ManyToManyField(Organizado)
     organizacion = models.ManyToManyField(Organizacion)
     desde = models.DateField()
@@ -200,7 +217,7 @@ class PropietarioBosques(models.Model):
     madera_procesada = models.IntegerField(choices=MADERA_PROCESADAS_CHOICE, null=True, blank=True)
     consumo = models.IntegerField(choices=CONSUMO_CHOICE, null=True, blank=True)
     producto_no_maderable = models.IntegerField(choices=SINO_CHOICE)
-    tipo_producto = models.ManyToManyField(TipoProducto)
+    tipo_producto = models.ManyToManyField(TipoProducto, null=True, blank=True)
     procesos_industriales = models.ManyToManyField(ProcesoIndustrialBosque)
     secado = models.ManyToManyField(TipoSecados)
     buenas_practicas = models.ManyToManyField(BuenasPracticas)
