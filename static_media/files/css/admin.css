@@ -1,10 +1,33 @@
-.prueba h2 {
-    background-color: #ccc;
+.pruebabosque h2 {
+    background-color: #8fb1c6;
     background-image: none;
-    
-    color: #000;
-    
-    
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+}
+
+.pruebaubicacion h2 {
+    background-color: #e47d7e;
+    background-image: none;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
+}
+
+.pruebagti h2 {
+    background-color: #a0bc98;
+    background-image: none; 
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000; 
+}
+
+.pruebaumf h2 {
+    background-color: #e1d15a;
+    background-image: none;
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;  
 }
 
 .field-tipo_propiedad ul li {

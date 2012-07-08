@@ -29,3 +29,18 @@ class PropietarioBosquesForm(ModelForm):
     class Meta:
         #widgets = {'tipo_propiedad': forms.CheckboxSelectMultiple}
     	model = PropietarioBosques
+
+SINO_CHOICE = (
+    (1, 'Si'),
+    (2, 'No')
+)
+
+class FiltroBosques(forms.Form):
+    tipo_propiedad = forms.ModelChoiceField(queryset=TipoPropiedadBosque.objects.all(), 
+                                            label=u'Tipo de propiedad',
+                                            required=False)
+    area_total = forms.FloatField(label=u'Area total', required=False)
+    organizado = forms.ModelChoiceField(queryset=Organizado.objects.all(),
+                                        label=u'Organizado', required=False)
+    gti = forms.ChoiceField(choices=SINO_CHOICE, label=u'Gobierno GTI', required=False)
+    uso_tierra = forms.

@@ -23,14 +23,15 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
         (None, {
             'fields': ('fecha', ('encuestador', 'empresa'))
         }),
-        ('Parte 1', {
-            'classes': ('prueba',),
+        ('Datos generales del bosque', {
+            'classes': ('pruebabosque',),
             'fields': ('nombre_propietario', ('sexo_propietario', 'cedula_propietario','propietario_ruc'),
             	       'representante_tecnico', ('sexo_tecnico','cedula_tecnico','tecnico_ruc'),'nombre_propiedad',
             	       'registro_catastral','tipo_propiedad','area_propiedad',('tel_convencional','tel_celular'),
             	       ('email','web'),'direccion')
         }),
-        ('', {
+        ('Ubicación geografica', {
+            'classes': ('pruebaubicacion',),
             'fields': (('latitud', 'longitud'),
             	       ('departamento','municipio','comunidad'),
             	       )
@@ -40,13 +41,14 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
             	       ('organizacion','desde'),
             	       )
         }),
-        ('Parte 2', {
-            'classes': ('prueba2',),
+        ('Datos varios y GTI', {
+            'classes': ('pruebagti',),
             'fields': ('gobierno_gti','nombre_gti',('naturales', 'introducida'),('madera','madera_procesada','consumo'),
             	       'producto_no_maderable','tipo_producto','procesos_industriales','secado','buenas_practicas',
             	       'proveedores')
         }),
-         ('', {
+         ('Datos de unidad de manejo', {
+            'classes': ('pruebaumf',),
             'fields': (('nombre_umf','area_umf'),('codigo_umf','periodo_vigencia'),'poas_umf','bosques_umf',
             			'extraccion','secado_horno',('codigo_certificado','area_certificada')
             	       )
