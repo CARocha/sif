@@ -1,0 +1,34 @@
+{%extends "base.html"%}
+
+{%block contenido%}
+
+    <form method="POST" action="." id="consultar-form">{% csrf_token %}
+        <div class="general">
+            <div class="titulo">Generales</div>
+            <div class="label">{{form.fecha.label}}</div>
+            <div class="filtros">{{form.fecha}}<br>{{form.fecha.errors}}</div>
+            <div class="clean"></div>
+
+            <div class="label">{{form.tipo_propiedad.label}}</div>
+            <div class="filtros">{{form.tipo_propiedad}}<br>{{form.tipo_propiedad.errors}}</div>
+            <div class="clean"></div>
+            <div class="label">{{form.area_total.label}}</div>
+            <div class="filtros">{{form.area_total}}<br>{{form.area_total.errors}}</div>
+            <div class="clean"></div>
+            <div class="label">{{form.organizado.label}}</div>
+            <div class="filtros">{{form.organizado}}<br>{{form.organizado.errors}}</div>
+            <div class="clean"></div>
+            <div class="label">{{form.gti.label}}</div>
+            <div class="filtros">{{form.gti}}<br>{{form.gti.errors}}</div>
+            <div class="clean"></div>
+            <div class="label">{{form.tipo_bosque_umf.label}}</div>
+            <div class="filtros">{{form.tipo_bosque_umf}}<br>{{form.tipo_bosque_umf.errors}}</div>
+            <div class="clean"></div>
+            <div class="label">{{form.certificacion.label}}</div>
+            <div class="filtros">{{form.certificacion}}<br>{{form.certificacion.errors}}</div>
+            <div class="clean"></div>
+		</div>
+	 	<button class="consultar">consultar</button>
+    </form>
+<div class="clean"></div>
+{%endblock%}

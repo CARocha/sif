@@ -35,7 +35,17 @@ SINO_CHOICE = (
     (2, 'No')
 )
 
-class FiltroBosques(forms.Form):
+def get_anios():
+    choices = []
+    years = []
+    for en in PropietarioBosques.objects.all().order_by('fecha'):
+        years.append(en.fecha.year)
+    for year in list(set(years)):
+        choices.append((year, year))
+    return choices
+
+class FiltroBosquesForm(forms.Form):
+    fecha = forms.ChoiceField(choices=get_anios())
     tipo_propiedad = forms.ModelChoiceField(queryset=TipoPropiedadBosque.objects.all(), 
                                             label=u'Tipo de propiedad',
                                             required=False)
@@ -43,4 +53,7 @@ class FiltroBosques(forms.Form):
     organizado = forms.ModelChoiceField(queryset=Organizado.objects.all(),
                                         label=u'Organizado', required=False)
     gti = forms.ChoiceField(choices=SINO_CHOICE, label=u'Gobierno GTI', required=False)
-    uso_tierra = forms.
+    tipo_bosque_umf = forms.ModelChoiceField(queryset=TipoBosqueUmf.objects.all(),
+                                             label=u'Tipo de Bosques UMF', required=False)
+    #certificacion = forms.ModelChoiceField(queryset=TipoCertificacion.objects.all(),
+    #                                       label=u'Certificación', required=False)

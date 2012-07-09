@@ -233,6 +233,12 @@ class PropietarioBosques(models.Model):
     codigo_certificado = models.CharField(max_length=200, null=True, blank=True)
     area_certificada = models.FloatField(null=True, blank=True)
 
+    year = models.IntegerField(editable=False)
+    
+    def save(self):
+        self.year = self.fecha.year
+        super(PropietarioBosques, self).save()
+
     def __unicode__(self):
         return self.nombre_propietario
 
@@ -275,22 +281,23 @@ ESTADO_CERTIFICADO_CHOICE = (
                 
 class Datos(models.Model):
     fecha_seguimiento = models.DateField()
-    hombre = models.IntegerField()
-    mujeres = models.IntegerField()
-    uso_agricola = models.FloatField()
-    uso_pecuario = models.FloatField()
-    uso_foretal = models.FloatField()
-    bosque_bajo_manejo = models.FloatField()
-    uso_agroforestal = models.FloatField()
-    otros_usos = models.FloatField()
-    poa_ejecucion = models.IntegerField()
-    area_poa = models.FloatField()
-    permiso_poa = models.CharField(max_length=200)
-    volumen_cosecha = models.FloatField()
-    segui_plantaciones = models.FloatField()
-    registro_orfn = models.CharField(max_length=200)
+    hombre = models.IntegerField('Número de hombres')
+    mujeres = models.IntegerField('Número de mujeres')
+    uso_agricola = models.FloatField('Uso agrícola (ha)')
+    uso_pecuario = models.FloatField('Uso pecuario (ha)')
+    uso_foretal = models.FloatField('Uso forestal total (ha)')
+    bosque_bajo_manejo = models.FloatField('Bosques bajo manejo (ha)')
+    uso_agroforestal = models.FloatField('Uso agroforestal (ha)')
+    otros_usos = models.FloatField('Otros usos (ha)')
+    poa_ejecucion = models.CharField('No. POA en ejecución', max_length=200)
+    area_poa = models.FloatField('Área del POA (ha)')
+    permiso_poa = models.CharField('No. de permiso del POA', max_length=200)
+    volumen_cosecha = models.FloatField('Volumen total disponible por cosecha anual (m3)')
+    segui_plantaciones = models.FloatField('Plantaciones (ha)')
+    registro_orfn = models.CharField('Registro ORFN', max_length=200)
     certificado = models.IntegerField(choices=CERTIFICADO_CHOICE)
-    tipo_certificacion = models.ManyToManyField(TipoCertificacion)
+    tipo_certificacion = models.ManyToManyField(TipoCertificacion, 
+                        verbose_name="Tipo de certificación")
     estado_certificado = models.IntegerField(choices=ESTADO_CERTIFICADO_CHOICE)
     
     sequimiento = models.ForeignKey(Seguimiento)
