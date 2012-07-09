@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.utils import simplejson
 from models import *
 from forms import *
 
@@ -16,8 +17,8 @@ def _queryset_filtrado(request):
 		params['year'] = request.session['fecha']
 	if 'tipo_propiedad' in request.session:
 		params['tipo_propiedad'] = request.session['tipo_propiedad']
-	if 'area_total' in request.session:
-		params['area_total'] = request.session['area_total']
+	# if 'area_total' in request.session:
+	# 	params['area_total'] = request.session['area_total']
 	if 'organizado' in request.session:
 		params['organizado'] = request.session['organizado']
 	if 'gti' in request.session:
@@ -43,7 +44,7 @@ def consultar(request):
         if form.is_valid():
             request.session['fecha'] = form.cleaned_data['fecha']            
             request.session['tipo_propiedad'] = form.cleaned_data['tipo_propiedad']
-            request.session['area_total'] = form.cleaned_data['area_total']
+            #request.session['area_total'] = form.cleaned_data['area_total']
             request.session['organizado'] = form.cleaned_data['organizado']
             request.session['gti'] = form.cleaned_data['gti']
             request.session['tipo_bosque_umf'] = form.cleaned_data['tipo_bosque_umf']
@@ -59,5 +60,17 @@ def indicadores(request):
 	prueba = _queryset_filtrado(request).count()
 	return render_to_response('bosques/indicadores.html', locals(),
     	                      context_instance=RequestContext(request))
-	
+
+def obtener_mapa(request):
+    if request.is_ajax():
+        lista = []
+        params = _queryset_filtrado(request.session)
+        for objeto in PropietarioBosques.objects.filter(** params).distinct():
+            if objeto.latitud and objeto.longitud:
+                dicc = dict(nombre=objeto.nombre_propietario, id=objeto.id,
+                            lon=float(objeto.longitud) , lat=float(objeto.latitud),)
+            lista.append(dicc)
+
+        serializado = simplejson.dumps(lista)
+        return HttpResponse(serializado, mimetype='application/json')	
 

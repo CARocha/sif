@@ -13,7 +13,7 @@ class PropietarioBosquesForm(ModelForm):
     organizacion = forms.ModelMultipleChoiceField(queryset = Organizacion.objects.order_by('nombre'),
                                                     widget = forms.CheckboxSelectMultiple())
     tipo_producto = forms.ModelMultipleChoiceField(queryset = TipoProducto.objects.order_by('nombre'),
-                                                    widget = forms.CheckboxSelectMultiple())
+                                                    widget = forms.CheckboxSelectMultiple(), required=False)
     procesos_industriales = forms.ModelMultipleChoiceField(queryset = ProcesoIndustrialBosque.objects.order_by('nombre'),
                                                     widget = forms.CheckboxSelectMultiple())
     secado = forms.ModelMultipleChoiceField(queryset = TipoSecados.objects.order_by('nombre'),
@@ -31,6 +31,7 @@ class PropietarioBosquesForm(ModelForm):
     	model = PropietarioBosques
 
 SINO_CHOICE = (
+    ('', '-----'),
     (1, 'Si'),
     (2, 'No')
 )
@@ -38,7 +39,7 @@ SINO_CHOICE = (
 def get_anios():
     choices = []
     years = []
-    for en in PropietarioBosques.objects.all().order_by('fecha'):
+    for en in PropietarioBosques.objects.all().order_by('year'):
         years.append(en.fecha.year)
     for year in list(set(years)):
         choices.append((year, year))
@@ -49,7 +50,7 @@ class FiltroBosquesForm(forms.Form):
     tipo_propiedad = forms.ModelChoiceField(queryset=TipoPropiedadBosque.objects.all(), 
                                             label=u'Tipo de propiedad',
                                             required=False)
-    area_total = forms.FloatField(label=u'Area total', required=False)
+    #area_total = forms.FloatField(label=u'Area total', required=False)
     organizado = forms.ModelChoiceField(queryset=Organizado.objects.all(),
                                         label=u'Organizado', required=False)
     gti = forms.ChoiceField(choices=SINO_CHOICE, label=u'Gobierno GTI', required=False)

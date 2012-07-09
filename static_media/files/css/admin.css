@@ -74,10 +74,15 @@
 .field-introducida .help {
     display: none;
 }
-
+/* datos que se ocultan */
 .field-tipo_producto {
     display: none;
 }
+
+.field-nombre_gti {
+    display: none;
+}
+/*----------------------*/
 
 .field-tipo_producto ul li {
     float: left;
