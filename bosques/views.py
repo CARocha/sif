@@ -39,21 +39,21 @@ def _queryset_filtrado(request):
 	return PropietarioBosques.objects.filter(**params)
 
 def consultar(request):
-    if request.method == 'POST':
-        form = FiltroBosquesForm(request.POST)
-        if form.is_valid():
-            request.session['fecha'] = form.cleaned_data['fecha']            
-            request.session['tipo_propiedad'] = form.cleaned_data['tipo_propiedad']
-            #request.session['area_total'] = form.cleaned_data['area_total']
-            request.session['organizado'] = form.cleaned_data['organizado']
-            request.session['gti'] = form.cleaned_data['gti']
-            request.session['tipo_bosque_umf'] = form.cleaned_data['tipo_bosque_umf']
-            #request.session['certificacion'] = form.cleaned_data['certificacion']
-            #request.session['centinel'] = 1
-            return HttpResponseRedirect('/indicadores/')
-        else:
-		form = FiltroBosquesForm()       
-    return render_to_response('bosques/consultar.html', locals(),
+	if request.method == 'POST':
+		form = FiltroBosquesForm(request.POST)
+		if form.is_valid():
+			request.session['fecha'] = form.cleaned_data['fecha']            
+			request.session['tipo_propiedad'] = form.cleaned_data['tipo_propiedad']
+			#request.session['area_total'] = form.cleaned_data['area_total']
+			request.session['organizado'] = form.cleaned_data['organizado']
+			request.session['gti'] = form.cleaned_data['gti']
+			request.session['tipo_bosque_umf'] = form.cleaned_data['tipo_bosque_umf']
+			#request.session['certificacion'] = form.cleaned_data['certificacion']
+			#request.session['centinel'] = 1
+			return HttpResponseRedirect('/indicadores/')
+		else:
+			form = FiltroBosquesForm()      
+	return render_to_response('bosques/consultar.html', locals(),
     	                      context_instance=RequestContext(request))
 
 def indicadores(request):
@@ -69,7 +69,7 @@ def obtener_mapa(request):
             if objeto.latitud and objeto.longitud:
                 dicc = dict(nombre=objeto.nombre_propietario, id=objeto.id,
                             lon=float(objeto.longitud) , lat=float(objeto.latitud),
-                            propiedad=objeto.nombre_propiedad,)
+                            propiedad=objeto.nombre_propiedad)
             lista.append(dicc)
 
         serializado = simplejson.dumps(lista)
