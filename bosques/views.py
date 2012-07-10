@@ -64,11 +64,12 @@ def indicadores(request):
 def obtener_mapa(request):
     if request.is_ajax():
         lista = []
-        params = _queryset_filtrado(request.session)
-        for objeto in PropietarioBosques.objects.filter(** params).distinct():
+        params = _queryset_filtrado(request)
+        for objeto in params.distinct():
             if objeto.latitud and objeto.longitud:
                 dicc = dict(nombre=objeto.nombre_propietario, id=objeto.id,
-                            lon=float(objeto.longitud) , lat=float(objeto.latitud),)
+                            lon=float(objeto.longitud) , lat=float(objeto.latitud),
+                            propiedad=objeto.nombre_propiedad,)
             lista.append(dicc)
 
         serializado = simplejson.dumps(lista)
