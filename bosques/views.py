@@ -51,8 +51,8 @@ def consultar(request):
 			#request.session['certificacion'] = form.cleaned_data['certificacion']
 			#request.session['centinel'] = 1
 			return HttpResponseRedirect('/indicadores/')
-		else:
-			form = FiltroBosquesForm()      
+	else:
+		form = FiltroBosquesForm()      
 	return render_to_response('bosques/consultar.html', locals(),
     	                      context_instance=RequestContext(request))
 
