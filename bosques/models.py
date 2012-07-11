@@ -210,7 +210,7 @@ class PropietarioBosques(models.Model):
     organizacion = models.ManyToManyField(Organizacion)
     desde = models.DateField()
     gobierno_gti = models.IntegerField('Gobierno territorial indigena (GTI)', choices=SINO_CHOICE)
-    nombre_gti = models.ForeignKey(GobiernoGti)
+    nombre_gti = models.ForeignKey(GobiernoGti, null=True, blank=True)
     naturales = models.ManyToManyField(EspeciesNaturales, verbose_name='Especies naturales')
     introducida = models.ManyToManyField(EspeciesIntroducidas, verbose_name='Especies introducidas')
     madera = models.ForeignKey(Madera, null=True, blank=True)
