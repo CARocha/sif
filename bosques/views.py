@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.utils import simplejson
@@ -75,3 +75,23 @@ def obtener_mapa(request):
         serializado = simplejson.dumps(lista)
         return HttpResponse(serializado, mimetype='application/json')	
 
+def obtener_lista(request):
+	lista = []
+	consulta = _queryset_filtrado(request)
+	for obj in consulta:
+		lista.append([obj.nombre_propietario,
+			          obj.get_sexo_propietario_display(),
+			          obj.area_propiedad,
+			          obj.departamento,
+			          obj.municipio,
+			          obj.bosques_umf,
+			          obj.id
+			        ])
+	return render_to_response('bosques/lista_actores.html', locals(),
+		                      context_instance=RequestContext(request))
+
+def ficha_propierario(request, id):
+	datos = get_object_or_404(PropietarioBosques, id=id)
+
+	return render_to_response('bosques/ficha.html', locals(),
+							  context_instance=RequestContext(request))
