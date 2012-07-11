@@ -23,19 +23,31 @@
 			</div>
 			<div class="grid_7">
 				<nav id="menu">
-					<a href="" class="homeicon">Inicio</a>
-					<a href="" class="actoresicon">Actores</a>
-					<a href="" class="last estadisticasicon">Estadisticas Generales</a>
+					<a href="/" class="homeicon">Inicio</a>
+					<a href="/#lista-actores" class="actoresicon">Actores</a>
+					<a href="/#estadisticas" class="last estadisticasicon">Estadisticas Generales</a>
 				</nav>
 			</div>
 			<div class="grid_2 logo">
-				<a href="/"><img src="/files/img/headerconicefv.png"></a>
+				<a href="/"><img style="float:right;margin-top:15px;" src="/files/img/headerconicefv.png"></a>
 			</div>
 		</div>
 	</header>
 	{%block contenido%}{%endblock%}
 	{%block footer%}
-		<div id="footer"></div>
+		<footer id="footer">
+			<div class="container_12">
+				<div class="grid_12">
+					<div class="footertext1">
+						CONICEFV - FSC 
+					</div>
+					<div class="footertext2">
+						Desarrollado por <a href="http://www.simas.org.ni">SIMAS</a> bajo plataforma <a href="http://www.djangoproject.com">Django</a> 
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</footer>
 	{%endblock%}
 </body>	
 </html>

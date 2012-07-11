@@ -114,6 +114,33 @@ p{
 			}
 		}
 	}
+	.fullindex{
+		display: none;
+		.texto img{
+			margin-left: 10px;
+			.box-shadow(0px,0px,5px,#222);
+		}
+		.texto p{
+			font-size: 12px;
+		}
+		.conicefv{
+			background: #005640;
+			border: #008260 1px solid;
+			.rounded-corners(3px);
+			float: left;
+			margin-right: 20px;
+			width: 295px;
+			height: 455px;
+			padding:15px;
+			img{margin-bottom:10px;}
+			p{
+				font-size: 12px;
+				color:#00d19c;
+				text-align: left;
+				font-family: @mako;
+			}
+		}
+	}
 }
 
 #lista-actores{
@@ -147,7 +174,7 @@ p{
 		a{
 			display: block;
 			width: 100%;
-			height: 33px;
+			height: 30px;
 			padding-top: 15px;
 			color:#4f4f4f;
 			font-family: @mako;
@@ -178,12 +205,52 @@ p{
 
 #estadisticas{
 	height: 320px;
-	background: #c9d788;
+	background: #c9d788 url(/files/img/estadisticasback.jpg) no-repeat center;
 	border-top:#f3f8a8 1px solid;
+	.grafobox{
+		background: #fff;
+		.rounded-corners(5px);
+		height: 265px;
+		.box-shadow(0px,3px,0px,#8b8f3e);
+		margin-top: 15px;
+		.titulo{
+			background: #f3f3f2;
+			border-bottom: #dfdfdf 1px solid;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			.rounded-corners-top(5px);
+			font-family: @mako;
+			font-size: 15px;
+			.text-shadow(0px,1px,0px,#fff);
+			color:#4f4f4f;
+		}
+		.grafo-index{
+			padding:20px;
+		}
+	}
 }
+
 
 //Footer
 #footer{
-	background:#1c5e50;
-	height: 52px
+	background:#1c5e50 url(/files/img/shadowfooter.png) no-repeat center top;
+	height: 52px;
+	.footertext1,.footertext2{
+		font-family: @mako;
+		line-height: 52px;
+		color:#fff;
+		font-size: 12px;
+		color:#eeeeec;
+		a{
+			color:#fce94f;
+		}
+	}
+	.footertext1{
+		float:left;
+	}
+	.footertext2{
+		float: right;
+	}
+
 }
