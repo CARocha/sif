@@ -1,0 +1,189 @@
+@import "lib_style.less";
+
+//Variables
+
+@mako:'Mako', sans-serif;
+
+// General
+
+body{
+	font-family: Arial,
+}
+a{
+	text-decoration: none;
+}
+p{
+	margin-bottom: 15px;
+}
+// Header
+
+#header{
+	background: #fff;
+	border-bottom: #54584f 1px solid;
+	height: 70px;
+	.box-shadow(0px,2px,4px,#b1b1b1);
+	position: relative;
+	z-index: 100;
+
+}
+
+.logo {
+	a{
+		display: block;
+		line-height: 70px;
+	}
+}
+
+#menu{
+	a{
+		font-family: @mako;
+		display: block;
+		font-size: 13px;
+		color:#888a85;
+		float: left;
+		padding:45px 30px 0px 30px;
+		height: 25px;
+		border-left: #d7dcde 1px solid;
+		&:hover{
+			color:#333;
+			.box-shadow(0, 6px, 5px,-5px,#b3ad12);
+		}
+	}
+	.last{
+		border-right: #d7dcde 1px solid;
+	}
+	.homeicon{
+		background: url(/files/img/homeheader.png) no-repeat center 20px;
+	}
+	.actoresicon{
+		background: url(/files/img/actoresicon.png) no-repeat center 20px;
+	}
+	.estadisticasicon{
+		background: url(/files/img/estadisticasicon.png) no-repeat center 20px;
+	}
+}
+
+//homepage
+
+#feature{
+	height: 550px;
+	width: 100%;
+	background: url(/files/img/index1.jpg) no-repeat center;
+	padding-top:50px;
+}
+
+#bienvenida{
+	width: 580px;
+	height: 184px;
+	.linear-gradient(#393939,#505050,25%);
+	padding:40px;
+	.rounded-corners(6px);
+	border:#928d88 1px solid;
+	-moz-box-shadow: inset 0 -1px 5px #111;
+	-webkit-box-shadow: inset 0 -1px 5px #111;
+	box-shadow: inset 0 -1px 5px #111;
+	.titulo{
+		font-family: Georgia;
+		font-size: 18px;
+		color:#faed9c;
+		font-style: italic;
+		margin-bottom: 15px;
+	}
+	.texto{
+		p{
+			text-align: left;
+			font-family: @mako;
+			font-size: 14px;
+			color:#cacac5;
+			a{
+				display: block;
+				width: 80px;
+				color:#fff;
+				padding:10px;
+				.linear-gradient(#080808,#353535,25%);
+				border:#5c5c5c 1px solid;
+				.rounded-corners(4px);
+				.box-shadow(0px,2px,4px,#2b2b2b);
+				&:hover{
+					.linear-gradient(#080808,#353535,0%);
+					.box-shadow(0px,2px,4px,#222222);
+				}
+				img{
+					margin-left: 10px;
+				}
+			}
+		}
+	}
+}
+
+#lista-actores{
+	background: url(/files/img/actoresback2.png) repeat-x;
+	border-bottom: #72644f 9px solid;
+	width: 100%;
+	margin-top:-250px;
+	border-top:#fbf9ec 1px solid;
+	.box-shadow(0px,-4px,6px,#2b2b2b);
+	.titulo-bloque{
+		font-family: @mako;
+		font-size: 13px;
+		color:#000;
+		text-align: center;
+		margin-top: 20px;
+		margin-bottom: 10px;
+		img{
+			margin-right: 8px;
+		}
+
+	}
+	.bloque_actor_externo{
+		clear:both;
+		border:#bcbcbc 2px solid;
+		padding:8px;
+		background: #f8f7f5 url(/files/img/bloque_externo.png);
+	}
+	.bloque_actor_interno{
+		background: #fff;
+		border:#ebebeb 1px solid;
+		a{
+			display: block;
+			width: 100%;
+			height: 33px;
+			padding-top: 15px;
+			color:#4f4f4f;
+			font-family: @mako;
+			border-bottom: #ebebeb 1px solid;
+			&:hover{
+				color:#000;
+				-moz-box-shadow: inset 0 -1px 5px #eee;
+				-webkit-box-shadow: inset 0 -1px 5px #eee;
+				box-shadow: inset 0 -1px 5px #eee;
+				background: #fdfffa;
+				// border-bottom: #aec6bd 1px solid;
+			}
+			.conteo{
+				float: left;
+				margin-left:10px;
+				margin-right: 10px;
+				.rounded-corners(2px);
+				background: #c3bb2f;
+				text-align: center;
+				font-size: 11px;
+				color:#fff;
+				height: 16px;
+				width:20px;
+			}
+		}
+	}
+}
+
+#estadisticas{
+	height: 320px;
+	background: #c9d788;
+	border-top:#f3f8a8 1px solid;
+}
+
+//Footer
+#footer{
+	background:#1c5e50;
+	height: 52px
+}

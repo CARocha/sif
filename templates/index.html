@@ -1,7 +1,70 @@
 {%extends "base.html"%}
 
 {%block contenido%}
+<div id="feature">
+	<center>
+		<div id="bienvenida">
+			<div class="titulo">
+				Acerca del Sistema
+			</div>
+			<div class="texto">
+				<p>
+					Bienvenidos a este interesante sitio de interacción virtual e información sobre el desempeño y oportunidades que brinda el sector forestal nicaragüense, cómo avanza la certificación forestal, quiénes y cómo se relacionan los que participan en los negocios forestales establecidos en el país.
+				</p>
+				<p>
+					<a href="#">Leer mas <img src="/files/img/leermasicon.png"></a>
+				</p>
+			</div>
+		</div>
+	</center>
+</div>
 
-{{bosques}}
-
+<div id="lista-actores">
+	<div class="container_12">
+		<div class="grid_3">
+			<div class="titulo-bloque"><img src="/files/img/operadoresicon.png">OPERADORES</div>
+			<div class="bloque_actor_externo">
+				<div class="bloque_actor_interno">
+					<a href=""><div class="conteo">{{bosques}}</div>Dueños de Bosques</a>
+					<a href=""><div class="conteo">34</div>Empresas Maderables</a>
+					<a href=""><div class="conteo">133</div>PYMES Madera Muebles</a>
+				</div>
+			</div>
+		</div>
+		<div class="grid_3">
+			<div class="titulo-bloque"><img src="/files/img/prestadoresicon.png">PRESTADORES DE SERVICIO</div>
+			<div class="bloque_actor_externo">
+				<div class="bloque_actor_interno">
+					<a href=""><div class="conteo">45</div>Regentes Forestales</a>
+					<a href=""><div class="conteo">34</div>Asistencia Tecnica</a>
+					<a href=""><div class="conteo">133</div>PYMES Madera</a>
+				</div>
+			</div>
+		</div>
+		<div class="grid_3">
+			<div class="titulo-bloque"><img src="/files/img/serviciosicon.png">SERVICIOS OPERACIONALES</div>
+			<div class="bloque_actor_externo">
+				<div class="bloque_actor_interno">
+					<a href=""><div class="conteo">2</div>Servicios de extracción</a>
+					<a href=""><div class="conteo">34</div>Comercializadora</a>
+					<a href=""><div class="conteo">133</div>Plantaciones Forestales</a>
+					<a href=""><div class="conteo">133</div>Empresas de Insumos</a>
+					<a href=""><div class="conteo">133</div>Servicios Financieros</a>
+				</div>
+			</div>
+		</div>
+		<div class="grid_3">
+			<div class="titulo-bloque"><img src="/files/img/reguladoresicon.png">REGULADORES</div>
+			<div class="bloque_actor_externo">
+				<div class="bloque_actor_interno">
+					<a href=""><div class="conteo">5</div>Organizaciones Publicas</a>
+					<a href=""><div class="conteo">34</div>Auditores Forestales</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<bR>
+</div>
+<div id="estadisticas">
+</div>
 {%endblock%}

@@ -1,13 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
-<title>SIF :: Sistema de Información Forestal</title>
-	{%block extra_js%} {%endblock%}
+	<meta charset="utf-8" />
+	<title>SIF :: Sistema de Información Forestal</title>
+	<!--[if lt IE 9]>
+	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Mako' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link type="text/css" rel="stylesheet"  href="/files/css/reset.css">
+	<link type="text/css" rel="stylesheet"  href="/files/css/960_12_col.css">
+	<link type="text/css" rel="stylesheet"  href="/files/css/sif.css">
+		{%block extra_js%} {%endblock%}
 </head>
 
 <body>
-	{%block contenido%}The content of the document...... {%endblock%}
-	{%block footer%} The footer of the site......{%endblock%}
+	<header id="header">
+		<div class="container_12">
+			<div class="grid_3 logo">
+				<a href="/"><img src="/files/img/logoheader.png"></a>
+			</div>
+			<div class="grid_7">
+				<nav id="menu">
+					<a href="" class="homeicon">Inicio</a>
+					<a href="" class="actoresicon">Actores</a>
+					<a href="" class="last estadisticasicon">Estadisticas Generales</a>
+				</nav>
+			</div>
+			<div class="grid_2 logo">
+				<a href="/"><img src="/files/img/headerconicefv.png"></a>
+			</div>
+		</div>
+	</header>
+	{%block contenido%}{%endblock%}
+	{%block footer%}
+		<div id="footer"></div>
+	{%endblock%}
 </body>	
 </html>
