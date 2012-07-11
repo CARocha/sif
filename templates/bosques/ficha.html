@@ -1,0 +1,27 @@
+{%extends "base.html"%}
+
+{%block contenido%}
+	{{datos.nombre_propietario}}<br>
+	{{datos.get_sexo_propietario_display}}<br>
+	{{datos.registro_catastral}}<br>
+	{{datos.nombre_propiedad}}<br>
+	{%for propiedad in datos.tipo_propiedad.all%}
+		{{propiedad}}<br>
+	{%endfor%}
+	{{datos.area_propiedad}}<br>
+	{%if datos.tel_convencional%}
+		{{datos.tel_convencional}}<br>
+	{%endif%}
+	{%if datos.tel_celular%}
+		{{datos.tel_celular}}<br>
+	{%endif%}
+	{%if datos.email%}
+		{{datos.email}}<br>
+	{%endif%}
+	{%if datos.direccion%}
+		{{datos.direccion}}<br>
+	{%endif%}
+	{{datos.municipio}}<br>
+	etc...<br>
+
+{%endblock%}
