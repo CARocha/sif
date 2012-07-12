@@ -1,7 +1,6 @@
 {%extends "base.html"%}
 
 {%block extra_js%}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript">
      $(document).ready(function () {
@@ -39,37 +38,50 @@
 {%endblock%}
 
 {%block contenido%}
+<div class="interna">
+    <div class="container_12">
+        <div class="grid_2">
+            <img src="/files/img/duenobosque.jpg">
+        </div>
+        <div class="grid_10">
+            Personas naturales o jurídicas  que tienen dominio y posesión de una superficie de tierra, la que se encuentra total o parcialmente cubierta de bosques naturales o plantados, y pueden estar sometidos a un régimen de manejo forestal sostenible. La propiedad de la tierra del bosque puede ser individual, colectiva asociativa, y de comunidades indígenas y no indígenas.
+        </div>
+        <div class="clear"></div>
+        <div class="grid_12">
+            <form action="." method="POST">
+              {% csrf_token %}
+                <div class="general">
+                    <div class="titulo">Generales</div>
+                    <div class="label">{{form.fecha.label}}</div>
+                    <div class="filtros">{{form.fecha}}<br>{{form.fecha.errors}}</div>
+                    <div class="clean"></div>
 
-    <form action="." method="POST">
-      {% csrf_token %}
-        <div class="general">
-            <div class="titulo">Generales</div>
-            <div class="label">{{form.fecha.label}}</div>
-            <div class="filtros">{{form.fecha}}<br>{{form.fecha.errors}}</div>
-            <div class="clean"></div>
+                    <div class="label">{{form.tipo_propiedad.label}}</div>
+                    <div class="filtros">{{form.tipo_propiedad}}<br>{{form.tipo_propiedad.errors}}</div>
+                    <div class="clean"></div>
+                    <!-- <div class="label">{{form.area_total.label}}</div>
+                    <div class="filtros">{{form.area_total}}<br>{{form.area_total.errors}}</div>
+                    <div class="clean"></div> -->
+                    <div class="label">{{form.organizado.label}}</div>
+                    <div class="filtros">{{form.organizado}}<br>{{form.organizado.errors}}</div>
+                    <div class="clean"></div>
+                    <div class="label">{{form.gti.label}}</div>
+                    <div class="filtros">{{form.gti}}<br>{{form.gti.errors}}</div>
+                    <div class="clean"></div>
+                    <div class="label">{{form.tipo_bosque_umf.label}}</div>
+                    <div class="filtros">{{form.tipo_bosque_umf}}<br>{{form.tipo_bosque_umf.errors}}</div>
+                    <div class="clean"></div>
+                    <div class="label">{{form.certificacion.label}}</div>
+                    <div class="filtros">{{form.certificacion}}<br>{{form.certificacion.errors}}</div>
+                    <div class="clean"></div>
 
-            <div class="label">{{form.tipo_propiedad.label}}</div>
-            <div class="filtros">{{form.tipo_propiedad}}<br>{{form.tipo_propiedad.errors}}</div>
-            <div class="clean"></div>
-            <!-- <div class="label">{{form.area_total.label}}</div>
-            <div class="filtros">{{form.area_total}}<br>{{form.area_total.errors}}</div>
-            <div class="clean"></div> -->
-            <div class="label">{{form.organizado.label}}</div>
-            <div class="filtros">{{form.organizado}}<br>{{form.organizado.errors}}</div>
-            <div class="clean"></div>
-            <div class="label">{{form.gti.label}}</div>
-            <div class="filtros">{{form.gti}}<br>{{form.gti.errors}}</div>
-            <div class="clean"></div>
-            <div class="label">{{form.tipo_bosque_umf.label}}</div>
-            <div class="filtros">{{form.tipo_bosque_umf}}<br>{{form.tipo_bosque_umf.errors}}</div>
-            <div class="clean"></div>
-            <div class="label">{{form.certificacion.label}}</div>
-            <div class="filtros">{{form.certificacion}}<br>{{form.certificacion.errors}}</div>
-            <div class="clean"></div>
-
-            <button class="consultar">consultar</button>
-	  </div>
-    </form>
-    
-    <div id="map" style="width: 500px; height: 300px"></div>
+                    <button class="consultar">consultar</button>
+              </div>
+            </form>
+        </div>
+        <div class="grid_12">
+            <div id="map" style="width: 500px; height: 300px"></div>
+        </div>
+    </div>
+</div>
 {%endblock%}
