@@ -32,6 +32,8 @@
                   });                     
                 });
             });
+            /* Initialise datatables */
+    var oTable = $('#example').dataTable();
     }); //fin del initialize
 
 </script>
@@ -102,6 +104,43 @@
             <div class="alert alert-success conteo"><b>45</b> Dueños de Bosques encontrados</div>
             <div class="clear"></div>
             <div id="map" style="width: 100%; height: 500px"></div>
+                <table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+    <thead>
+        <tr>
+            <th>Nombre Propietario</th>
+            <th>Sexo</th>
+            <th>Area total (ha)</th>
+            <th>Departamento</th>
+            <th>Municipio</th>
+            <th>Tipo bosque UMF</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in lista %}
+        <tr class="gradeA">
+            <td><a href="/ficha/{{obj.6}}">{{obj.0}}</a></td>
+            <td>{{obj.1}}</td>
+            <td>{{obj.2}}</td>
+            <td>{{obj.3}}</td>
+            <td>{{obj.4}}</td>
+            <td>{%for b in obj.5.all%}
+                {{b}},
+                {%endfor%}
+            </td> 
+        </tr>
+        {% endfor %}    
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Nombre Propietario</th>
+            <th>Sexo</th>
+            <th>Area total (ha)</th>
+            <th>Departamento</th>
+            <th>Municipio</th>
+            <th>Tipo bosque UMF</th>
+        </tr>
+    </tfoot>
+</table>
         </div>
     </div>
 </div>

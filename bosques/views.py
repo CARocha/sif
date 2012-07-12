@@ -52,7 +52,18 @@ def consultar(request):
 			#request.session['centinel'] = 1
 			return HttpResponseRedirect('/indicadores/')
 	else:
-		form = FiltroBosquesForm()      
+		form = FiltroBosquesForm()
+		lista = []
+		consulta = _queryset_filtrado(request)
+		for obj in consulta:
+			lista.append([obj.nombre_propietario,
+				          obj.get_sexo_propietario_display(),
+				          obj.area_propiedad,
+				          obj.departamento,
+				          obj.municipio,
+				          obj.bosques_umf,
+				          obj.id
+				        ])      
 	return render_to_response('bosques/consultar.html', locals(),
     	                      context_instance=RequestContext(request))
 
