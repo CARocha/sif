@@ -6,9 +6,9 @@
      $(document).ready(function () {
       var latlng = new google.maps.LatLng(12.877, -85.001);
       var options = {
-        zoom: 7,
+        zoom: 8,
         center: latlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.TERRAIN
       }
       var map = new google.maps.Map(document.getElementById("map"), options);
       var image = '/files/img/mapicon.png';
@@ -41,47 +41,67 @@
 {%block contenido%}
 <div class="interna">
     <div class="container_12">
+        <br>
         <div class="grid_2">
-            <img src="/files/img/duenobosque.jpg">
+            <img class="fotoactor" src="/files/img/duenobosque.jpg">
         </div>
-        <div class="grid_10">
-            Personas naturales o jurídicas  que tienen dominio y posesión de una superficie de tierra, la que se encuentra total o parcialmente cubierta de bosques naturales o plantados, y pueden estar sometidos a un régimen de manejo forestal sostenible. La propiedad de la tierra del bosque puede ser individual, colectiva asociativa, y de comunidades indígenas y no indígenas.
+        <div class="grid_10 despactor">
+            <div class="titulo-actor">Dueños de bosque</div>
+            <p>
+                Personas naturales o jurídicas  que tienen dominio y posesión de una superficie de tierra, la que se encuentra total o parcialmente cubierta de bosques naturales o plantados, y pueden estar sometidos a un régimen de manejo forestal sostenible. La propiedad de la tierra del bosque puede ser individual, colectiva asociativa, y de comunidades indígenas y no indígenas.
+            </p>
         </div>
         <div class="clear"></div>
         <div class="grid_12">
             <form action="." method="POST">
               {% csrf_token %}
-                <div class="general">
-                    <div class="titulo">Generales</div>
-                    <div class="label">{{form.fecha.label}}</div>
-                    <div class="filtros">{{form.fecha}}<br>{{form.fecha.errors}}</div>
-                    <div class="clean"></div>
-
-                    <div class="label">{{form.tipo_propiedad.label}}</div>
-                    <div class="filtros">{{form.tipo_propiedad}}<br>{{form.tipo_propiedad.errors}}</div>
-                    <div class="clean"></div>
+                <div class="generalform">
+                    <div class="formelement">
+                        <div class="labelform">{{form.fecha.label}}</div>
+                        <div class="filtros">{{form.fecha}}<br>{{form.fecha.errors}}</div>
+                    </div>
+                    <div class="formelement">
+                        <div class="labelform">{{form.tipo_propiedad.label}}</div>
+                        <div class="filtros">{{form.tipo_propiedad}}<br>{{form.tipo_propiedad.errors}}</div>
+                    </div>
                     <!-- <div class="label">{{form.area_total.label}}</div>
                     <div class="filtros">{{form.area_total}}<br>{{form.area_total.errors}}</div>
                     <div class="clean"></div> -->
-                    <div class="label">{{form.organizado.label}}</div>
-                    <div class="filtros">{{form.organizado}}<br>{{form.organizado.errors}}</div>
-                    <div class="clean"></div>
-                    <div class="label">{{form.gti.label}}</div>
-                    <div class="filtros">{{form.gti}}<br>{{form.gti.errors}}</div>
-                    <div class="clean"></div>
-                    <div class="label">{{form.tipo_bosque_umf.label}}</div>
-                    <div class="filtros">{{form.tipo_bosque_umf}}<br>{{form.tipo_bosque_umf.errors}}</div>
-                    <div class="clean"></div>
-                    <div class="label">{{form.certificacion.label}}</div>
-                    <div class="filtros">{{form.certificacion}}<br>{{form.certificacion.errors}}</div>
-                    <div class="clean"></div>
+                    <div class="formelement">
+                        <div class="labelform">{{form.organizado.label}}</div>
+                        <div class="filtros">{{form.organizado}}<br>{{form.organizado.errors}}</div>
+                    </div>
 
-                    <button class="consultar">consultar</button>
-              </div>
+                    <div class="formelement">
+                        <div class="labelform">{{form.gti.label}}</div>
+                        <div class="filtros">{{form.gti}}<br>{{form.gti.errors}}</div>
+                    </div>
+
+                    <div class="formelement">
+                        <div class="labelform">{{form.tipo_bosque_umf.label}}</div>
+                        <div class="filtros">{{form.tipo_bosque_umf}}<br>{{form.tipo_bosque_umf.errors}}</div>
+                    </div>
+
+                    <div class="formelement">
+                        <div class="labelform">{{form.certificacion.label}}</div>
+                        <div class="filtros">{{form.certificacion}}<br>{{form.certificacion.errors}}</div>
+                    </div>
+
+                    <button class="consultar btn btn-warning"><i class="icon-refresh icon-white"></i> Actualizar Mapa</button>
+                    <div class="clear"></div>
+                </div>
             </form>
         </div>
         <div class="grid_12">
-            <div id="map" style="width: 500px; height: 300px"></div>
+            <div class="maptabs">
+                <div class="btn-group">
+                <a href="#" class="btn  btn-large active"><i class="icon-globe"></i>  Ver Mapa</a>
+                <a href="#" class="btn  btn-large"><i class="icon-list-alt"></i>  Ver lista de Datos</a>
+                </div>
+            </div>
+            <div class="alert alert-success conteo"><b>45</b> Dueños de Bosques encontrados</div>
+            <div class="clear"></div>
+            <div id="map" style="width: 100%; height: 500px"></div>
         </div>
     </div>
 </div>

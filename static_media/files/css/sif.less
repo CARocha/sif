@@ -236,8 +236,69 @@ p{
 .interna{
 	background:#fff url(/files/img/groovepaper.jpg);
 }
+.fotoactor{
+	padding:3px;
+	background: #fff;
+	border:#dedede 1px solid;
+}
+.titulo-actor{
+	font-size:26px;
+	font-family: @mako
+}
 
+.despactor{
+	p{
+		font-family: @mako;
+		font-size: 13px;
+	}
+}
+.generalform{
+	padding:8px;
+	border:#c9c8c4 1px solid;
+	background: #fff;
+	.rounded-corners(5px);
+	margin-top:20px;
+	.box-shadow(0px, 1px, 2px, #e4e0db);
+	margin-bottom: 20px
+}
+.formelement{
+	width:120px;
+	float: left;
+	margin-right: 15px;
+	.labelform{
+		font-size: 12px;
+		font-family: @mako;
+		color:#6c6d68;
+	}
+	select{
+		width: 100%;
+	}
+}
+.consultar{
+	float: right;
+	margin-top:-10px;
+}
 
+.maptabs{
+	margin-bottom: -2px;
+	width: 300px;
+	float:left;
+	a{
+		// display: block;
+		// float: right;
+		// padding:10px;
+	}
+}
+#map{
+	z-index: 99;
+	margin-bottom: 20px;
+	border-top:#666666 3px solid;
+	.box-shadow(0px, 1px, 2px, #adaba9);
+}
+.conteo{
+	float:right;
+	width:195px;
+}
 //Footer
 #footer{
 	background:#1c5e50 url(/files/img/shadowfooter.png) no-repeat center top;
