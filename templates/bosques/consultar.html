@@ -33,7 +33,13 @@
                 });
             });
             /* Initialise datatables */
-    var oTable = $('#example').dataTable();
+             var oTable = $('#example').dataTable();
+        $('#vermapa').click(function(){
+            $('#map').show();
+        });
+        $('#vertabla').click(function(){
+            $('#map').hide();
+        });
     }); //fin del initialize
 
 </script>
@@ -97,8 +103,8 @@
         <div class="grid_12">
             <div class="maptabs">
                 <div class="btn-group">
-                <a href="#" class="btn  btn-large active"><i class="icon-globe"></i>  Ver Mapa</a>
-                <a href="#" class="btn  btn-large"><i class="icon-list-alt"></i>  Ver lista de Datos</a>
+                <a href="#" id="vermapa"class="btn  btn-large active"><i class="icon-globe"></i>  Ver Mapa</a>
+                <a href="#" id="vertabla"class="btn  btn-large"><i class="icon-list-alt"></i>  Ver lista de Datos</a>
                 </div>
             </div>
             <div class="alert alert-success conteo"><b>45</b> Dueños de Bosques encontrados</div>
