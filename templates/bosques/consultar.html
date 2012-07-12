@@ -11,7 +11,7 @@
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
       var map = new google.maps.Map(document.getElementById("map"), options);
-
+      var image = '/files/img/mapicon.png';
       //var infowindow;
 
             $.getJSON('/ver/todo/', function(data){
@@ -21,7 +21,8 @@
                         position: latlng,
                         map: map,
                         name: elemento.nombre,
-                        desc: elemento.propiedad                        
+                        desc: elemento.propiedad,
+                        icon: image                        
                     });
                     google.maps.event.addListener(marker, "click", function() {
                         var html = '<b>' + unescape(elemento.nombre) + '</b><br>' + unescape(elemento.propiedad) + '<br>';
