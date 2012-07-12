@@ -73,7 +73,7 @@ def obtener_mapa(request):
             lista.append(dicc)
 
         serializado = simplejson.dumps(lista)
-        return HttpResponse(serializado, mimetype='application/json')	
+    	return HttpResponse(serializado, mimetype='application/json')	
 
 def obtener_lista(request):
 	lista = []
@@ -95,3 +95,16 @@ def ficha_propierario(request, id):
 
 	return render_to_response('bosques/ficha.html', locals(),
 							  context_instance=RequestContext(request))
+
+def obtener_todo_mapa(request):
+	if request.is_ajax():
+		lista = []
+        for objeto in PropietarioBosques.objects.all():
+            if objeto.latitud and objeto.longitud:
+                dicc = dict(nombre=objeto.nombre_propietario, id=objeto.id,
+                            lon=float(objeto.longitud) , lat=float(objeto.latitud),
+                            propiedad=objeto.nombre_propiedad)
+            lista.append(dicc)
+
+        serializado = simplejson.dumps(lista)
+        return HttpResponse(serializado, mimetype='application/json')
