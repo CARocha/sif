@@ -53,8 +53,18 @@ def consultar(request):
 	else:
 		form = FiltroBosquesForm()
 		centinel = 0
+
 	lista = []
-	consulta = _queryset_filtrado(request)
+	if centinel == 1:
+		consulta = _queryset_filtrado(request)
+	else:
+		request.session['fecha'] = None          
+		request.session['tipo_propiedad'] = None 
+		#request.session['area_total'] = None 
+		request.session['organizado'] = None 
+		request.session['gti'] = None 
+		request.session['tipo_bosque_umf'] = None 
+		consulta = PropietarioBosques.objects.all()
 	for obj in consulta:
 		lista.append([obj.nombre_propietario,
 			          obj.get_sexo_propietario_display(),
@@ -65,11 +75,6 @@ def consultar(request):
 			          obj.id
 			        ]) 
 	return render_to_response('bosques/consultar.html', locals(),
-    	                      context_instance=RequestContext(request))
-
-def indicadores(request):
-	prueba = _queryset_filtrado(request).count()
-	return render_to_response('bosques/indicadores.html', locals(),
     	                      context_instance=RequestContext(request))
 
 def obtener_mapa(request):
@@ -85,21 +90,6 @@ def obtener_mapa(request):
 
         serializado = simplejson.dumps(lista)
     	return HttpResponse(serializado, mimetype='application/json')	
-
-def obtener_lista(request):
-	lista = []
-	consulta = _queryset_filtrado(request)
-	for obj in consulta:
-		lista.append([obj.nombre_propietario,
-			          obj.get_sexo_propietario_display(),
-			          obj.area_propiedad,
-			          obj.departamento,
-			          obj.municipio,
-			          obj.bosques_umf,
-			          obj.id
-			        ])
-	return render_to_response('bosques/lista_actores.html', locals(),
-		                      context_instance=RequestContext(request))
 
 def ficha_propierario(request, id):
 	datos = get_object_or_404(PropietarioBosques, id=id)

@@ -72,6 +72,25 @@
             $('#vermapa').removeClass('active');
 
         });
+
+        //Agergar a combobox las variables seleccionadas
+
+        {% if request.session.organizado %}
+            $('#id_organizado').val({{request.session.organizado.id}});
+        {% endif %}
+        {% if request.session.fecha %}
+            $('#id_fecha').val({{request.session.fecha.id}});
+        {% endif %}
+        {% if request.session.tipo_propiedad %}
+            $('#id_tipo_propiedad').val({{request.session.tipo_propiedad.id}});
+        {% endif %}
+        {% if request.session.gti %}
+            $('#id_gti').val({{request.session.gti.id}});
+        {% endif %}
+        {% if request.session.tipo_bosque_umf %}
+            $('#id_tipo_bosque_umf').val({{request.session.tipo_bosque_umf.id}});
+        {% endif %}
+
     }); //fin del initialize
 
 </script>
@@ -144,7 +163,7 @@
                 <a href="#" id="vertabla"class="btn  btn-large"><i class="icon-list-alt"></i>  Ver lista de Datos</a>
                 </div>
             </div>
-            <div class="alert alert-success conteo"><b>45</b> Dueños de Bosques encontrados</div>
+            <div class="alert alert-success conteo"><b>{{consulta.count}}</b> Dueños de Bosques encontrados</div>
             <div class="clear"></div>
 
             <div id="map" style="width: 100%; height: 500px"></div>
