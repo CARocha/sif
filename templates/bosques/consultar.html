@@ -12,12 +12,14 @@
       }
       var map = new google.maps.Map(document.getElementById("map"), options);
       var image = '/files/img/mapicon.png';
-      //var infowindow;
-            {%if request.session.centinel%}
-                $.getJSON('/ver/', function(data){
-            {% else %}
-                $.getJSON('/ver/todo/', function(data){
-            {% endif %}
+      
+
+            if ({{centinel}} == 1){
+                var ruta = '/ver/';
+            }else{
+                var ruta = '/ver/todo/';
+            }
+                $.getJSON(ruta, function(data){
                 $.each(data, function(i, elemento){
                     var latlng = new google.maps.LatLng(elemento.lat, elemento.lon);
                     var marker = new google.maps.Marker({
@@ -96,6 +98,7 @@
         </div>
         <div class="clear"></div>
         <div class="grid_12">
+            {{centinel}}
             <form action="." method="POST">
               {% csrf_token %}
                 <div class="generalform">
@@ -138,7 +141,7 @@
         <div class="grid_12">
             <div class="maptabs">
                 <div class="btn-group">
-                <a href="#" id="vermapa"class="btn  btn-large active mapafiltrado"><i class="icon-globe"></i>  Ver Mapa</a>
+                <a href="#" id="vermapa"class="btn  btn-large active"><i class="icon-globe"></i>  Ver Mapa</a>
                 <a href="#" id="vertabla"class="btn  btn-large"><i class="icon-list-alt"></i>  Ver lista de Datos</a>
                 </div>
             </div>
@@ -146,7 +149,6 @@
             <div class="clear"></div>
 
             <div id="map" style="width: 100%; height: 500px"></div>
-            <div id="map_canvas" style="width: 100%; height: 500px"></div>
 
             <div id="tabladatos">
                 <table class="table table-striped table-bordered table-condensed" id="actortable">
