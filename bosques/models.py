@@ -248,7 +248,7 @@ class PropietarioBosques(models.Model):
 #--------------------- modelo de seguimiento -----------------------------------
 
 class Seguimiento(models.Model):
-    propietario = models.ForeignKey(PropietarioBosques)
+    propietario = models.ForeignKey(PropietarioBosques, unique=True)
     
     def __unicode__(self):
         return self.propietario.nombre_propietario

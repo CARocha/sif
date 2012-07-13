@@ -10,8 +10,8 @@ class PropietarioBosquesForm(ModelForm):
                                                     widget = forms.CheckboxSelectMultiple())
     organizado = forms.ModelMultipleChoiceField(queryset = Organizado.objects.order_by('nombre'),
                                                     widget = forms.CheckboxSelectMultiple())
-    organizacion = forms.ModelMultipleChoiceField(queryset = Organizacion.objects.order_by('nombre'),
-                                                    widget = forms.CheckboxSelectMultiple())
+    #organizacion = forms.ModelMultipleChoiceField(queryset = Organizacion.objects.order_by('nombre'),
+                                                 #   widget = forms.CheckboxSelectMultiple())
     tipo_producto = forms.ModelMultipleChoiceField(queryset = TipoProducto.objects.order_by('nombre'),
                                                     widget = forms.CheckboxSelectMultiple(), required=False)
     procesos_industriales = forms.ModelMultipleChoiceField(queryset = ProcesoIndustrialBosque.objects.order_by('nombre'),
