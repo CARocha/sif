@@ -364,7 +364,7 @@ table.display tr.odd.row_selected td {
  * Sorting classes for columns
  */
 /* For the standard odd/even */
-tr.odd td.sorting_1 {
+/*tr.odd td.sorting_1 {
 	background-color: #D3D6FF;
 }
 
@@ -387,7 +387,7 @@ tr.even td.sorting_2 {
 tr.even td.sorting_3 {
 	background-color: #F9F9FF;
 }
-
+*/
 
 /* For the Conditional-CSS grading rows */
 /*
@@ -399,7 +399,7 @@ tr.even td.sorting_3 {
 	  dd > d1
 	  ee > e2
  */
-tr.odd.gradeA td.sorting_1 {
+/*tr.odd.gradeA td.sorting_1 {
 	background-color: #c4ffc4;
 }
 
@@ -494,7 +494,7 @@ tr.even.gradeU td.sorting_2 {
 tr.even.gradeU td.sorting_3 {
 	background-color: #e2e2e2;
 }
-
+*/
 
 /*
  * Row highlighting example
