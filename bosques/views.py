@@ -49,13 +49,11 @@ def consultar(request):
 			request.session['gti'] = form.cleaned_data['gti']
 			request.session['tipo_bosque_umf'] = form.cleaned_data['tipo_bosque_umf']
 			#request.session['certificacion'] = form.cleaned_data['certificacion']
-			centinel = 1
-			print centinel
+			#request.session['centinel'] = 1
 			return HttpResponseRedirect('/consultar/')
 	else:
 		form = FiltroBosquesForm()
 		lista = []
-		centinel = 0
 		consulta = _queryset_filtrado(request)
 		for obj in consulta:
 			lista.append([obj.nombre_propietario,
