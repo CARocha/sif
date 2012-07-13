@@ -38,7 +38,7 @@ def _queryset_filtrado(request):
     
 	return PropietarioBosques.objects.filter(**params)
 
-def consultar(request):
+def consultar(request):    
 	if request.method == 'POST':
 		form = FiltroBosquesForm(request.POST)
 		if form.is_valid():
@@ -50,22 +50,20 @@ def consultar(request):
 			request.session['tipo_bosque_umf'] = form.cleaned_data['tipo_bosque_umf']
 			#request.session['certificacion'] = form.cleaned_data['certificacion']
 			centinel = 1
-			print centinel
-			return HttpResponseRedirect('/consultar/')
 	else:
 		form = FiltroBosquesForm()
-		lista = []
 		centinel = 0
-		consulta = _queryset_filtrado(request)
-		for obj in consulta:
-			lista.append([obj.nombre_propietario,
+	lista = []
+	consulta = _queryset_filtrado(request)
+	for obj in consulta:
+		lista.append([obj.nombre_propietario,
 			          obj.get_sexo_propietario_display(),
 			          obj.area_propiedad,
 			          obj.departamento,
 			          obj.municipio,
 			          obj.bosques_umf,
 			          obj.id
-			        ])     
+			        ]) 
 	return render_to_response('bosques/consultar.html', locals(),
     	                      context_instance=RequestContext(request))
 
