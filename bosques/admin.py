@@ -84,12 +84,11 @@ admin.site.register(PropietarioBosques, PropietarioBosqueAdmin)
 
 class DatosAdminInline(admin.StackedInline):
     model = Datos
-
+    filter_horizontal = ('tipo_certificacion',)
     fields = ['fecha_seguimiento',('hombre','mujeres'),('uso_agricola','uso_pecuario','uso_foretal'),
              ('bosque_bajo_manejo','uso_agroforestal','otros_usos'),('poa_ejecucion','area_poa','permiso_poa'),
              ('volumen_cosecha','segui_plantaciones','registro_orfn'),('certificado','tipo_certificacion',
              'estado_certificado')]
-    #filter_horizontal = ('tipo_certificacion',)
     extra = 1
 
 

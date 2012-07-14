@@ -207,8 +207,8 @@ class PropietarioBosques(models.Model):
     )
     
     organizado = models.ManyToManyField(Organizado)
-    organizacion = models.ManyToManyField(Organizacion)
-    desde = models.DateField()
+    organizacion = models.ManyToManyField(Organizacion, verbose_name="Nombre organizacion", blank=True)
+    desde = models.DateField('Desde cuando', blank=True)
     gobierno_gti = models.IntegerField('Gobierno territorial indigena (GTI)', choices=SINO_CHOICE)
     nombre_gti = models.ForeignKey(GobiernoGti, null=True, blank=True)
     naturales = models.ManyToManyField(EspeciesNaturales, verbose_name='Especies naturales')
@@ -297,7 +297,7 @@ class Datos(models.Model):
     registro_orfn = models.CharField('Registro ORFN', max_length=200)
     certificado = models.IntegerField(choices=CERTIFICADO_CHOICE)
     tipo_certificacion = models.ManyToManyField(TipoCertificacion, 
-                        verbose_name="Tipo de certificación")
+                        verbose_name="Tipo de certificacion")
     estado_certificado = models.IntegerField(choices=ESTADO_CERTIFICADO_CHOICE)
     
     sequimiento = models.ForeignKey(Seguimiento)
