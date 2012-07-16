@@ -30,7 +30,7 @@
                         icon: image                        
                     });
                     google.maps.event.addListener(marker, "click", function() {
-                        var html = '<b>' + unescape(elemento.nombre) + '</b><br>' + unescape(elemento.propiedad) + '<br>';
+                        var html = '<b>' + unescape(elemento.nombre) + '</b><br>' + unescape(elemento.propiedad) + '<br><a href="/ficha/'+unescape(elemento.id)+'" class="btn btn-mini" style="margin-right:5px; float:right;"><i class="icon-zoom-in"></i> Ver mas</a>';
                        infowindow = new google.maps.InfoWindow({
                                     content: html});
                   infowindow.open(map, this);
