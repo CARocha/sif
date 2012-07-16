@@ -26,6 +26,12 @@ class PropietarioBosquesForm(ModelForm):
                                                     widget = forms.CheckboxSelectMultiple())
     extraccion = forms.ModelMultipleChoiceField(queryset = MetodoExtraccion.objects.order_by('nombre'),
                                                     widget = forms.CheckboxSelectMultiple())
+
+    # def __init__(self, *args, **kwargs):
+    #     super(PropietarioBosquesForm, self).__init__(*args, **kwargs)
+    #     rel = ManyToOneRel(self.instance.tipo_producto.model, 'id') 
+    #     self.fields['tipo_producto'].widget = RelatedFieldWidgetWrapper(self.fields['tipo_producto'].widget, rel, self.admin_site)
+    
     class Meta:
         #widgets = {'tipo_propiedad': forms.CheckboxSelectMultiple}
     	model = PropietarioBosques
