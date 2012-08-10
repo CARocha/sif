@@ -207,8 +207,8 @@ class PropietarioBosques(models.Model):
     )
     
     organizado = models.ManyToManyField(Organizado)
-    organizacion = models.ManyToManyField(Organizacion, verbose_name="Nombre organizacion", blank=True)
-    desde = models.DateField('Desde cuando', blank=True)
+    organizacion = models.ManyToManyField(Organizacion, verbose_name="Nombre organizacion", null=True, blank=True)
+    desde = models.DateField('Desde cuando', null=True, blank=True)
     gobierno_gti = models.IntegerField('Gobierno territorial indigena (GTI)', choices=SINO_CHOICE)
     nombre_gti = models.ForeignKey(GobiernoGti, null=True, blank=True)
     naturales = models.ManyToManyField(EspeciesNaturales, verbose_name='Especies naturales')
@@ -234,6 +234,12 @@ class PropietarioBosques(models.Model):
     area_certificada = models.FloatField(null=True, blank=True)
 
     year = models.IntegerField(editable=False)
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+    # Don't allow draft entries to have a pub_date.
+        if self.area_umf > self.area_propiedad:
+            raise ValidationError('El area de la UMF no puede ser Mayor al Area total de la propiedad')
     
     def save(self):
         self.year = self.fecha.year
@@ -244,17 +250,19 @@ class PropietarioBosques(models.Model):
 
     class Meta:
         verbose_name_plural = "Ficha 1 Dueños de bosques"
+        unique_together = ('nombre_propietario',)
     
 #--------------------- modelo de seguimiento -----------------------------------
 
 class Seguimiento(models.Model):
-    propietario = models.ForeignKey(PropietarioBosques, unique=True)
+    propietario = models.ForeignKey(PropietarioBosques)
     
     def __unicode__(self):
         return self.propietario.nombre_propietario
         
     class Meta:
         verbose_name_plural = "Datos para seguimiento"
+        unique_together = ('propietario',)
 
 CERTIFICADO_CHOICE = (
     (1, 'Si'),
