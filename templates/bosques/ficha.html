@@ -15,29 +15,232 @@
             <div class="titulo-actor">Ficha Tecnica de Propietario de Bosque</div>
             <div class="clear"></div>
         </div>
-			{{datos.nombre_propietario}}<br>
-			{{datos.get_sexo_propietario_display}}<br>
-			{{datos.registro_catastral}}<br>
-			{{datos.nombre_propiedad}}<br>
-			{%for propiedad in datos.tipo_propiedad.all%}
-				{{propiedad}}<br>
-			{%endfor%}
-			{{datos.area_propiedad}}<br>
-			{%if datos.tel_convencional%}
-				{{datos.tel_convencional}}<br>
-			{%endif%}
-			{%if datos.tel_celular%}
-				{{datos.tel_celular}}<br>
-			{%endif%}
-			{%if datos.email%}
-				{{datos.email}}<br>
-			{%endif%}
-			{%if datos.direccion%}
-				{{datos.direccion}}<br>
-			{%endif%}
-			{{datos.municipio}}<br>
-			etc...<br>
+        <div class="clear"></div>
+        <div class="ficha">
+        	<div class="grid_3">
+        		<div class="labelficha">
+        			Nombre del propietario
+        		</div>
+        		<div class="valor">
+        			{{datos.nombre_propietario}}
+        		</div>
+
+        		<div class="labelficha">
+        			No. Registro Catastral
+        		</div>
+        		<div class="valor">
+        			{{datos.registro_catastral}}
+        		</div>
+
+				<div class="labelficha">
+        			Tipo de Propiedad
+        		</div>
+        		<div class="valor">
+					{%for propiedad in datos.tipo_propiedad.all%}
+						{{propiedad}}<br>
+					{%endfor%}
+        		</div>
+
+
+
+				{%if datos.tel_convencional%}
+	 				<div class="labelficha">
+	        			Telefono
+	        		</div>
+	        		<div class="valor">
+						{{datos.tel_convencional}}
+	        		</div>
+				{%endif%}
+
+				{%if datos.tel_celular%}
+	 				<div class="labelficha">
+	        			Celular
+	        		</div>
+	        		<div class="valor">
+						{{datos.tel_celular}}
+	        		</div>
+				{%endif%}
+				{%if datos.email%}
+	 				<div class="labelficha">
+	        			Email
+	        		</div>
+	        		<div class="valor">
+						{{datos.email}}
+	        		</div>
+				{%endif%}
+				{%if datos.direccion%}
+	 				<div class="labelficha">
+	        			Direccion
+	        		</div>
+	        		<div class="valor">
+						{{datos.direccion}}
+	        		</div>
+				{%endif%}
+			</div>
+			<div class="grid_3">
+				<div class="labelficha">
+        			Sexo
+        		</div>
+        		<div class="valor">
+					{{datos.get_sexo_propietario_display}}
+				</div>
+
+				<div class="labelficha">
+        			Nombre de Propiedad
+        		</div>
+        		<div class="valor">
+        			{{datos.nombre_propiedad}}
+        		</div>
+
+ 				<div class="labelficha">
+        			Area Total
+        		</div>
+        		<div class="valor">
+					{{datos.area_propiedad}} ha
+        		</div>
+				
+
+ 				<div class="labelficha">
+        			Municipio
+        		</div>
+        		<div class="valor">
+					{{datos.municipio}}
+        		</div>
+
+			</div>
+			<div class="grid_6">
+				<img src="/files/img/poligono.png">
+			</div>
+			<div class="clear"></div>
+			<div class="grid_6">
+
+				<div class="fichabox">
+					<div class="labelfichabox">
+						Organizado
+					</div>
+					<div class="valuefichabox">
+						{%for org in datos.organizado.all%}
+							{{org}},
+						{%endfor%}
+					</div>
+					<div class="clear"></div>
+					{%if datos.organizacion.count > 0%}
+						<div class="labelfichabox">
+							Organziacion
+						</div>
+						<div class="valuefichabox">
+							
+							{%for orga in datos.organizacion.all%}
+								{{orga}},
+							{%endfor%}
+						</div>
+					{%endif%}
+					{%if datos.desde%}
+						<div class="labelfichabox">
+							Desde
+						</div>
+						<div class="valuefichabox">
+							{{datos.desde}}
+						</div>
+					{%endif%}
+					<div class="clear"></div>
+				</div>
+
+				<div class="fichabox">
+					<div class="labelfichabox">
+						Tipo de Bosque
+					</div>
+					<div class="valuefichabox">
+						{%for bosq in datos.bosques_umf.all%}
+							{{bosq}},
+						{%endfor%}
+					</div>
+					<div class="clear"></div>	
+				</div>	
+
+				{%if datos.tipo_producto.count > 0%}
+				<div class="fichabox">
+					<div class="labelfichabox">
+						Tipo de Producto
+					</div>
+					<div class="valuefichabox">
+						{%for tipo_p in datos.tipo_producto.all%}
+							{{tipo_p}},
+						{%endfor%}
+					</div>
+					<div class="clear"></div>	
+				</div>
+				{%endif%}	
+
+				{%if datos.secado.count > 0%}
+				<div class="fichabox">
+					<div class="labelfichabox">
+						Tipo de Secado
+					</div>
+					<div class="valuefichabox">
+						{%for tipo_s in datos.secado.all%}
+							{{tipo_s}},
+						{%endfor%}
+					</div>
+					<div class="clear"></div>	
+				</div>
+				{%endif%}
+
+				<br><br><br>
+			</div>
+			<div class="grid_6">
+
+				{%if datos.gobierno_gti%}
+				<div class="fichabox">
+					<div class="labelfichabox">
+						Gobierno Territorial
+					</div>
+					<div class="valuefichabox">
+						{{datos.get_gobierno_gti_display}}
+					</div>
+					<div class="clear"></div>	
+				
+				{%if datos.nombre_gti%}
+					<div class="labelfichabox">
+						Nombre del GTI
+					</div>
+					<div class="valuefichabox">
+						{{datos.nombre_gti}}
+					</div>
+					<div class="clear"></div>
+				{%endif%}	
+				</div>
+				{%endif%}
+
+				
+				<div class="fichabox">
+					{%if datos.naturales.count > 0%}
+					<div class="labelfichabox">
+						Especies Naturales
+					</div>
+					<div class="valuefichabox">
+						{%for nat in datos.naturales.all%}
+							{{nat}},
+						{%endfor%}
+					</div>
+					<div class="clear"></div>	
+					{%endif%}
+
+					{%if datos.introducida.count > 0%}
+					<div class="labelfichabox">
+						Especies Introducidas
+					</div>
+					<div class="valuefichabox">
+						{%for int in datos.introducida.all%}
+							{{int}},
+						{%endfor%}
+					</div>
+					<div class="clear"></div>	
+					{%endif%}
+				</div>
+				
+			</div>
 		</div>
 	</div>
-
+</div>
 {%endblock%}
