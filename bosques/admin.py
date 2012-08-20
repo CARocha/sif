@@ -106,7 +106,10 @@ class DatosAdminInline(admin.StackedInline):
             'classes': ('datoseguimiento',),
             'fields': (('poa_ejecucion','area_poa','permiso_poa'),
                        ('volumen_cosecha','segui_plantaciones','registro_orfn'),
-                       ('certificado','tipo_certificacion','estado_certificado'),)
+                       ('visita_auditoria','auditor'),
+                       ('certificado','tipo_certificacion',),
+                       ('estado_certificado','entidad_certificadora')
+                       )
         }),
     )
     # fields = ['fecha_seguimiento',('hombre','mujeres'),('uso_agricola','uso_pecuario','uso_foretal'),
@@ -130,4 +133,6 @@ class SeguimientoAdmin(AutocompleteModelAdmin):
 
 admin.site.register(Seguimiento, SeguimientoAdmin)
 admin.site.register(TipoCertificacion)
+admin.site.register(Auditor)
+admin.site.register(EntidadCertificadora)
 

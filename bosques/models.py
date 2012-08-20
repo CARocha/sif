@@ -287,9 +287,27 @@ ESTADO_CERTIFICADO_CHOICE = (
     (3, 'Renovado'),
     (4, 'Cancelado')
 )
+
+class Auditor(models.Model):
+    nombre = models.CharField(max_length=200)
+    
+    def __unicode__(self):
+        return self.nombre
+        
+    class Meta:
+        verbose_name_plural = "Auditores"
+        
+class EntidadCertificadora(models.Model):
+    nombre = models.CharField(max_length=200)
+    
+    def __unicode__(self):
+        return self.nombre
+        
+    class Meta:
+        verbose_name_plural = "Entidades certificadoras"
                 
 class Datos(models.Model):
-    fecha_seguimiento = models.DateField()
+    fecha_seguimiento = models.DateField('Fecha')
     hombre = models.IntegerField('Número de hombres')
     mujeres = models.IntegerField('Número de mujeres')
     uso_agricola = models.FloatField('Uso agrícola (ha)')
@@ -308,9 +326,12 @@ class Datos(models.Model):
     tipo_certificacion = models.ManyToManyField(TipoCertificacion, 
                         verbose_name="Tipo de certificacion")
     estado_certificado = models.IntegerField(choices=ESTADO_CERTIFICADO_CHOICE)
+    visita_auditoria = models.DateField(null=True, blank=True)
+    auditor = models.ForeignKey(Auditor, null=True, blank=True)
+    entidad_certificadora = models.ForeignKey(EntidadCertificadora, null=True, blank=True)
     
     sequimiento = models.ForeignKey(Seguimiento)
         
     class Meta:
-        verbose_name_plural = "Datos para el seguimiento de monitoreo"
+        verbose_name_plural = "Datos para el seguimiento del monitoreo"
 
