@@ -167,7 +167,7 @@ class PropietarioBosques(models.Model):
     sexo_propietario = models.IntegerField(choices=SEXO_CHOICE)
     cedula_propietario = models.CharField('Cédula', max_length=200, 
                                            help_text='Cédula del propietario ó representante legal')
-    propietario_ruc = models.CharField('RUC', max_length=200, help_text='Registro RUC del propietario')
+    #propietario_ruc = models.CharField('RUC', max_length=200, help_text='Registro RUC del propietario') #se va
     representante_tecnico = models.CharField('Nombre del técnico', 
                                            max_length=200, 
                                            help_text='Nombre del representante técnico')
@@ -177,14 +177,14 @@ class PropietarioBosques(models.Model):
     nombre_propiedad = models.CharField('Nombre de la propiedad', 
                                            max_length=200, 
                                            help_text='Nombre de la propiedad')
-    registro_catastral = models.CharField(max_length=200, help_text='No. registro catrastal')
+    #registro_catastral = models.CharField(max_length=200, help_text='No. registro catrastal') #se va
     tipo_propiedad = models.ManyToManyField(TipoPropiedadBosque)
     area_propiedad = models.FloatField('Área total de la propiedad en ha', help_text='área total en ha')
     tel_convencional = models.CharField('Teléfono convencional', max_length=15, null=True, blank=True)
     tel_celular = models.CharField('Teléfono celular', max_length=15, null=True, blank=True)
     email = models.EmailField('Correo electrónico', null=True, blank=True)
     web = models.URLField('Página web', null=True, blank=True)
-    direccion = models.CharField('Dirección', max_length=200, null=True, blank=True)
+    direccion = models.CharField('Dirección del propietario', max_length=200, null=True, blank=True)
     latitud = models.FloatField(null=True, blank=True)
     longitud = models.FloatField(null=True, blank=True)
     
@@ -212,16 +212,17 @@ class PropietarioBosques(models.Model):
     gobierno_gti = models.IntegerField('Gobierno territorial indigena (GTI)', choices=SINO_CHOICE)
     nombre_gti = models.ForeignKey(GobiernoGti, null=True, blank=True)
     naturales = models.ManyToManyField(EspeciesNaturales, verbose_name='Especies naturales')
-    introducida = models.ManyToManyField(EspeciesIntroducidas, verbose_name='Especies introducidas')
+    #introducida = models.ManyToManyField(EspeciesIntroducidas, verbose_name='Especies introducidas')
     madera = models.ForeignKey(Madera, null=True, blank=True)
     madera_procesada = models.IntegerField(choices=MADERA_PROCESADAS_CHOICE, null=True, blank=True)
     consumo = models.IntegerField(choices=CONSUMO_CHOICE, null=True, blank=True)
     producto_no_maderable = models.IntegerField(choices=SINO_CHOICE)
     tipo_producto = models.ManyToManyField(TipoProducto, null=True, blank=True)
     procesos_industriales = models.ManyToManyField(ProcesoIndustrialBosque)
-    secado = models.ManyToManyField(TipoSecados)
+    #secado = models.ManyToManyField(TipoSecados)
     buenas_practicas = models.ManyToManyField(BuenasPracticas)
-    proveedores = models.ManyToManyField(ProveedoresSuministros)
+    #proveedores = models.ManyToManyField(ProveedoresSuministros)
+    coordenadas_umf = models.TextField(null=True, blank=True)
     nombre_umf = models.CharField('Nombre de la UMF', max_length=200)
     area_umf = models.FloatField('Área de la UMF (ha)')
     codigo_umf = models.CharField('Código de la UMF (INAFOR)', max_length=200)
@@ -249,7 +250,7 @@ class PropietarioBosques(models.Model):
         return self.nombre_propietario
 
     class Meta:
-        verbose_name_plural = "Ficha 1 Dueños de bosques"
+        verbose_name_plural = "Empresa de manejo de bosques"
         unique_together = ('nombre_propietario',)
     
 #--------------------- modelo de seguimiento -----------------------------------

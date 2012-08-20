@@ -1,0 +1,576 @@
+[
+    {
+        "pk": 1, 
+        "model": "bosques.encuestador", 
+        "fields": {
+            "nombre": "Martha Olivera"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.encuestador", 
+        "fields": {
+            "nombre": "Byron Corrales"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.empresa", 
+        "fields": {
+            "nombre": "SIMAS"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.empresa", 
+        "fields": {
+            "nombre": "Los Pinos"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.tipopropiedadbosque", 
+        "fields": {
+            "nombre": "Privada individual"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.tipopropiedadbosque", 
+        "fields": {
+            "nombre": "Privada sociedad empresarial"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bosques.tipopropiedadbosque", 
+        "fields": {
+            "nombre": "Colectiva ind\u00edgena"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bosques.tipopropiedadbosque", 
+        "fields": {
+            "nombre": "Colectiva cooperativa"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.organizado", 
+        "fields": {
+            "nombre": "No organizado"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.organizado", 
+        "fields": {
+            "nombre": "Asociaci\u00f3n gremial"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bosques.organizado", 
+        "fields": {
+            "nombre": "Cooperativa"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bosques.organizado", 
+        "fields": {
+            "nombre": "Empresa rural"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.organizacion", 
+        "fields": {
+            "nombre": "prueba Organizacion"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Madero negro"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Marango"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Cedro"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Pochote"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Laurel"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Guanacaste"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Gen\u00edzaro"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Cedro macho"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Cedro real"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Caoba Atl\u00e1ntico"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Caoba Pac\u00edfico"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Nancit\u00f3n"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Guapinol"
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Coyote"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Pino"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "bosques.especiesnaturales", 
+        "fields": {
+            "nombre": "Ojoche"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.especiesintroducidas", 
+        "fields": {
+            "nombre": "Caoba africana"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.especiesintroducidas", 
+        "fields": {
+            "nombre": "Teca"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bosques.especiesintroducidas", 
+        "fields": {
+            "nombre": "Neen"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bosques.especiesintroducidas", 
+        "fields": {
+            "nombre": "Melina"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "bosques.especiesintroducidas", 
+        "fields": {
+            "nombre": "Eucalipto"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "bosques.especiesintroducidas", 
+        "fields": {
+            "nombre": "Acacia"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.madera", 
+        "fields": {
+            "nombre": "Madera en rollo"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.tipoproducto", 
+        "fields": {
+            "nombre": "Semillas forestales"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.tipoproducto", 
+        "fields": {
+            "nombre": "Bejuco mimbre"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bosques.tipoproducto", 
+        "fields": {
+            "nombre": "Palmas"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bosques.tipoproducto", 
+        "fields": {
+            "nombre": "Alimentos"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.procesoindustrialbosque", 
+        "fields": {
+            "nombre": "Aserrado"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.procesoindustrialbosque", 
+        "fields": {
+            "nombre": "Arrastre de la madera"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bosques.procesoindustrialbosque", 
+        "fields": {
+            "nombre": "Troceo"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bosques.procesoindustrialbosque", 
+        "fields": {
+            "nombre": "Transporte secado de la madera"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.tiposecados", 
+        "fields": {
+            "nombre": "Natural (al aire libre)"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.tiposecados", 
+        "fields": {
+            "nombre": "Horno solar"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bosques.tiposecados", 
+        "fields": {
+            "nombre": "Horno artesanal"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bosques.tiposecados", 
+        "fields": {
+            "nombre": "Horno convencional el\u00e9ctrico"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "bosques.tiposecados", 
+        "fields": {
+            "nombre": "Horno con residuo y desechos de madera"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "bosques.tiposecados", 
+        "fields": {
+            "nombre": "Otros"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.buenaspracticas", 
+        "fields": {
+            "nombre": "Planificaci\u00f3n forestal"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.buenaspracticas", 
+        "fields": {
+            "nombre": "Manejo silvicultura"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bosques.buenaspracticas", 
+        "fields": {
+            "nombre": "Aprovechamiento de bajo impacto"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bosques.buenaspracticas", 
+        "fields": {
+            "nombre": "Gesti\u00f3n de insumos y residuos"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "bosques.buenaspracticas", 
+        "fields": {
+            "nombre": "Protecci\u00f3n de biodiversidad"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "bosques.buenaspracticas", 
+        "fields": {
+            "nombre": "Planes de negocio"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "bosques.buenaspracticas", 
+        "fields": {
+            "nombre": "Agroforester\u00eda"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "bosques.buenaspracticas", 
+        "fields": {
+            "nombre": "Manejo de bosque"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "bosques.buenaspracticas", 
+        "fields": {
+            "nombre": "Manejo de plantaci\u00f3n"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.proveedoressuministros", 
+        "fields": {
+            "nombre": "Comunidades"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.proveedoressuministros", 
+        "fields": {
+            "nombre": "Finqueros"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bosques.proveedoressuministros", 
+        "fields": {
+            "nombre": "Estaciones de combustible y lubricantes"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bosques.proveedoressuministros", 
+        "fields": {
+            "nombre": "Distribuidoras de alimentos"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "bosques.proveedoressuministros", 
+        "fields": {
+            "nombre": "Distribuidores de maquinaria y equipos"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "bosques.proveedoressuministros", 
+        "fields": {
+            "nombre": "Librer\u00edas"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "bosques.proveedoressuministros", 
+        "fields": {
+            "nombre": "Ferreter\u00edas"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "bosques.proveedoressuministros", 
+        "fields": {
+            "nombre": "Tiendas especializadas en equipos y art\u00edculos forestales"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "bosques.proveedoressuministros", 
+        "fields": {
+            "nombre": "Ventas de repuestos"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "bosques.proveedoressuministros", 
+        "fields": {
+            "nombre": "Rentado de maquinaria pesada"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "bosques.proveedoressuministros", 
+        "fields": {
+            "nombre": "Regentes"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.tipobosqueumf", 
+        "fields": {
+            "nombre": "Bosque natural seco"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.tipobosqueumf", 
+        "fields": {
+            "nombre": "Bosque natural h\u00famedo"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bosques.tipobosqueumf", 
+        "fields": {
+            "nombre": "Plantaciones forestales"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bosques.tipobosqueumf", 
+        "fields": {
+            "nombre": "Bosque de manglares"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "bosques.metodoextraccion", 
+        "fields": {
+            "nombre": "Mecanizado"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.metodoextraccion", 
+        "fields": {
+            "nombre": "Tracci\u00f3n animal"
+        }
+    },  
+    {
+        "pk": 1, 
+        "model": "bosques.tipocertificacion", 
+        "fields": {
+            "nombre": "FSC"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "bosques.tipocertificacion", 
+        "fields": {
+            "nombre": "CW Full"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "bosques.tipocertificacion", 
+        "fields": {
+            "nombre": "SLIMF"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "bosques.tipocertificacion", 
+        "fields": {
+            "nombre": "Comercio justo"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "bosques.tipocertificacion", 
+        "fields": {
+            "nombre": "ISSO"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "bosques.tipocertificacion", 
+        "fields": {
+            "nombre": "Otras"
+        }
+    }
+]
