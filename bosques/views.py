@@ -25,8 +25,8 @@ def _queryset_filtrado(request):
 		params['gobierno_gti'] = request.session['gti']
 	if 'tipo_bosque_umf' in request.session:
 		params['bosques_umf'] = request.session['tipo_bosque_umf']
-	#if 'certificacion' in request.session:
-		#params['certificacion'] = request.session['certificacion']
+	if 'certificacion' in request.session:
+		params['seguimiento'] = request.session['certificacion']
 
 	unvalid_keys = []
 	for key in params:
@@ -48,7 +48,7 @@ def consultar(request):
 			request.session['organizado'] = form.cleaned_data['organizado']
 			request.session['gti'] = form.cleaned_data['gti']
 			request.session['tipo_bosque_umf'] = form.cleaned_data['tipo_bosque_umf']
-			#request.session['certificacion'] = form.cleaned_data['certificacion']
+			request.session['certificacion'] = form.cleaned_data['certificacion']
 			centinel = 1
 	else:
 		form = FiltroBosquesForm()
@@ -63,7 +63,8 @@ def consultar(request):
 		#request.session['area_total'] = None 
 		request.session['organizado'] = None 
 		request.session['gti'] = None 
-		request.session['tipo_bosque_umf'] = None 
+		request.session['tipo_bosque_umf'] = None
+		request.session['certificacion'] = None  
 		consulta = PropietarioBosques.objects.all()
 	for obj in consulta:
 		lista.append([obj.nombre_propietario,

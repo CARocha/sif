@@ -62,5 +62,5 @@ class FiltroBosquesForm(forms.Form):
     gti = forms.ChoiceField(choices=SINO_CHOICE, label=u'Gobierno GTI', required=False)
     tipo_bosque_umf = forms.ModelChoiceField(queryset=TipoBosqueUmf.objects.all(),
                                              label=u'Tipo de Bosques UMF', required=False)
-    #certificacion = forms.ModelChoiceField(queryset=TipoCertificacion.objects.all(),
-    #                                       label=u'Certificación', required=False)
+    certificacion = forms.ModelChoiceField(queryset=TipoCertificacion.objects.all(),
+                                           label=u'Certificación', required=False)
