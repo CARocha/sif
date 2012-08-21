@@ -257,12 +257,12 @@ class PropietarioBosques(models.Model):
     #      	lista.append(a.tipo_certificacion)
     #      return certo
          
-    # def cert(self):
-    #     cert = Datos.objects.filter(sequimiento__propietario__pk=self.id).order_by('-fecha_seguimiento')[:1]
-    #     if cert:
-    #         return cert[0].certificado
-    #     else:
-    #         return ""
+    def cert(self):
+        cert = Datos.objects.filter(sequimiento__propietario__pk=self.id).order_by('-fecha_seguimiento')[:1]
+        if cert:
+            return cert[0].certificado
+        else:
+            return ""
 
     class Meta:
         verbose_name_plural = "Empresa de manejo de bosques"

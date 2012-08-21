@@ -20,6 +20,7 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
 #        return super(PropietarioBosqueAdmin, self).formfield_for_dbfield(db_field, **kwargs) 
     form = PropietarioBosquesForm
     filter_horizontal = ('organizacion','naturales',)
+    date_hierarchy = 'fecha'
     fieldsets = (
         (None, {
             'fields': ('fecha', ('encuestador', 'empresa'))

@@ -14,19 +14,19 @@ def index(request):
 def _queryset_filtrado(request):
 	params = {}
 	if 'fecha' in  request.session:
-		params['year'] = request.session['fecha']
+		params['sequimiento__propietario__year'] = request.session['fecha']
 	if 'tipo_propiedad' in request.session:
-		params['tipo_propiedad'] = request.session['tipo_propiedad']
+		params['sequimiento__propietario__tipo_propiedad'] = request.session['tipo_propiedad']
 	# if 'area_total' in request.session:
 	# 	params['area_total'] = request.session['area_total']
 	if 'organizado' in request.session:
-		params['organizado'] = request.session['organizado']
+		params['sequimiento__propietario__organizado'] = request.session['organizado']
 	if 'gti' in request.session:
-		params['gobierno_gti'] = request.session['gti']
+		params['sequimiento__propietario__gobierno_gti'] = request.session['gti']
 	if 'tipo_bosque_umf' in request.session:
-		params['bosques_umf'] = request.session['tipo_bosque_umf']
+		params['sequimiento__propietario__bosques_umf'] = request.session['tipo_bosque_umf']
 	if 'certificacion' in request.session:
-		params['seguimiento'] = request.session['certificacion']
+		params['tipo_certificacion'] = request.session['certificacion']
 
 	unvalid_keys = []
 	for key in params:
@@ -36,7 +36,7 @@ def _queryset_filtrado(request):
 	for key in unvalid_keys:
 		del params[key]
     
-	return PropietarioBosques.objects.filter(**params)
+	return Datos.objects.filter(**params)
 
 def consultar(request):    
 	if request.method == 'POST':
@@ -66,15 +66,15 @@ def consultar(request):
 		request.session['tipo_bosque_umf'] = None
 		request.session['certificacion'] = None  
 		consulta = PropietarioBosques.objects.all()
-	for obj in consulta:
-		lista.append([obj.nombre_propietario,
-			          obj.get_sexo_propietario_display(),
-			          obj.area_propiedad,
-			          obj.departamento,
-			          obj.municipio,
-			          obj.bosques_umf,
-			          obj.id
-			        ]) 
+	# for obj in consulta:
+	# 	lista.append([obj.nombre_propietario,
+	# 		          obj.get_sexo_propietario_display(),
+	# 		          obj.area_propiedad,
+	# 		          obj.departamento,
+	# 		          obj.municipio,
+	# 		          obj.bosques_umf,
+	# 		          obj.id
+	# 		        ]) 
 	return render_to_response('bosques/consultar.html', locals(),
     	                      context_instance=RequestContext(request))
 
@@ -82,11 +82,16 @@ def obtener_mapa(request):
     if request.is_ajax():
         lista = []
         params = _queryset_filtrado(request)
+        print params
         for objeto in params.distinct():
-            if objeto.latitud and objeto.longitud:
-                dicc = dict(nombre=objeto.nombre_propietario, id=objeto.id,
-                            lon=float(objeto.longitud) , lat=float(objeto.latitud),
-                            propiedad=objeto.nombre_propiedad,cert=objeto.seguimiento_set.all(),
+            if objeto.sequimiento.propietario.latitud and objeto.sequimiento.propietario.longitud:
+                dicc = dict(nombre=objeto.sequimiento.propietario.nombre_propietario, 
+                	        id=objeto.sequimiento.propietario.id,
+                            lon=float(objeto.sequimiento.propietario.longitud) , 
+                            lat=float(objeto.sequimiento.propietario.latitud),
+                            propiedad=objeto.sequimiento.propietario.nombre_propiedad,
+                            cert=objeto.certificado,
+                            tipo=[a.nombre for a in objeto.tipo_certificacion.all()],
                             )
             lista.append(dicc)
 
@@ -94,6 +99,7 @@ def obtener_mapa(request):
     	return HttpResponse(serializado, mimetype='application/json')	
 
 def ficha_propierario(request, id):
+	params = _queryset_filtrado(request)
 	datos = get_object_or_404(PropietarioBosques, id=id)
 
 	return render_to_response('bosques/ficha.html', locals(),
@@ -109,7 +115,8 @@ def obtener_todo_mapa(request):
                             lon=float(objeto.sequimiento.propietario.longitud) , 
                             lat=float(objeto.sequimiento.propietario.latitud),
                             propiedad=objeto.sequimiento.propietario.nombre_propiedad,
-                            cert=objeto.certificado,tipo=[a.nombre for a in objeto.tipo_certificacion.all()],
+                            cert=objeto.certificado,
+                            tipo=[a.nombre for a in objeto.tipo_certificacion.all()],
                             )
             lista.append(dicc)
 
