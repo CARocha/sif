@@ -104,7 +104,7 @@ def obtener_todo_mapa(request):
             if objeto.latitud and objeto.longitud:
                 dicc = dict(nombre=objeto.nombre_propietario, id=objeto.id,
                             lon=float(objeto.longitud) , lat=float(objeto.latitud),
-                            propiedad=objeto.nombre_propiedad)
+                            propiedad=objeto.nombre_propiedad,cert=objeto.cert(),)
             lista.append(dicc)
 
         serializado = simplejson.dumps(lista)

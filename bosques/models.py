@@ -248,10 +248,27 @@ class PropietarioBosques(models.Model):
     def __unicode__(self):
         return self.nombre_propietario
 
+    #esto ta malo aun le falta 
+    #def certificacion_actual(self):
+    #     cert = Datos.objects.filter(sequimiento__propietario__pk=self.id)[:1]
+    #     if cert:
+    #         lista=()
+    #         for c in cert[0].tipo_certificacion
+    #         return lista
+    #     else:
+    #         return ""
+    def cert(self):
+        cert = Datos.objects.filter(sequimiento__propietario__pk=self.id).order_by('-fecha_seguimiento')[:1]
+        if cert:
+            return cert[0].certificado
+        else:
+            return ""
+
     class Meta:
         verbose_name_plural = "Ficha 1 Dueños de bosques"
         unique_together = ('nombre_propietario',)
-    
+
+
 #--------------------- modelo de seguimiento -----------------------------------
 
 class Seguimiento(models.Model):
