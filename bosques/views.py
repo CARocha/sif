@@ -86,7 +86,7 @@ def obtener_mapa(request):
             if objeto.latitud and objeto.longitud:
                 dicc = dict(nombre=objeto.nombre_propietario, id=objeto.id,
                             lon=float(objeto.longitud) , lat=float(objeto.latitud),
-                            propiedad=objeto.nombre_propiedad,cert=objeto.cert(),
+                            propiedad=objeto.nombre_propiedad,cert=objeto.seguimiento_set.all(),
                             )
             lista.append(dicc)
 
@@ -102,11 +102,14 @@ def ficha_propierario(request, id):
 def obtener_todo_mapa(request):
 	if request.is_ajax():
 		lista = []
-        for objeto in PropietarioBosques.objects.all():
-            if objeto.latitud and objeto.longitud:
-                dicc = dict(nombre=objeto.nombre_propietario, id=objeto.id,
-                            lon=float(objeto.longitud) , lat=float(objeto.latitud),
-                            propiedad=objeto.nombre_propiedad,cert=objeto.cert(),
+        for objeto in Datos.objects.all():
+            if objeto.sequimiento.propietario.latitud and objeto.sequimiento.propietario.longitud:
+                dicc = dict(nombre=objeto.sequimiento.propietario.nombre_propietario, 
+                	        id=objeto.sequimiento.propietario.id,
+                            lon=float(objeto.sequimiento.propietario.longitud) , 
+                            lat=float(objeto.sequimiento.propietario.latitud),
+                            propiedad=objeto.sequimiento.propietario.nombre_propiedad,
+                            cert=objeto.certificado,tipo=[a.nombre for a in objeto.tipo_certificacion.all()],
                             )
             lista.append(dicc)
 
