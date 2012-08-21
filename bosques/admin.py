@@ -39,7 +39,7 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
                        )
         }),
         ('Datos de unidad de manejo (UMF)', {
-            'classes': ('pruebaumf',),
+            'classes': ('coordenadas_umf','pruebaumf',),
             'fields': (('nombre_umf','area_umf'),('codigo_umf','periodo_vigencia'),'poas_umf',
                         ('codigo_certificado','area_certificada'),'bosques_umf'
                        )
@@ -53,7 +53,7 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
             'classes': ('pruebagti',),
             'fields': (('naturales',),('madera','madera_procesada','consumo'),'extraccion',
             	       'producto_no_maderable','tipo_producto','procesos_industriales',
-                       'secado','buenas_practicas'
+                       'buenas_practicas'
             	       )
         }),
          
@@ -61,7 +61,7 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
     class Media:
         css = {
             'all': ('/files/css/admin.css',),
-        }
+       }
         js = ('/files/js/adminficha1.js',)
 
 

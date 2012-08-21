@@ -230,7 +230,7 @@ class PropietarioBosques(models.Model):
     poas_umf = models.IntegerField('POAS en la UMF')
     bosques_umf = models.ManyToManyField(TipoBosqueUmf)
     extraccion = models.ManyToManyField(MetodoExtraccion)
-    secado_horno = models.FloatField('Capacidad de secado del horno')
+    #secado_horno = models.FloatField('Capacidad de secado del horno')
     codigo_certificado = models.CharField(max_length=200, null=True, blank=True)
     area_certificada = models.FloatField(null=True, blank=True)
 
@@ -238,7 +238,7 @@ class PropietarioBosques(models.Model):
 
     def clean(self):
         from django.core.exceptions import ValidationError
-    # Don't allow draft entries to have a pub_date.
+    
         if self.area_umf > self.area_propiedad:
             raise ValidationError('El area de la UMF no puede ser Mayor al Area total de la propiedad')
     
