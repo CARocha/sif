@@ -65,15 +65,15 @@ def consultar(request):
 		request.session['gti'] = None 
 		request.session['tipo_bosque_umf'] = None
 		request.session['certificacion'] = None  
-		consulta = PropietarioBosques.objects.all()
+		consulta = Datos.objects.all()
 	for obj in consulta:
-		lista.append([obj.nombre_propietario,
-			          obj.get_sexo_propietario_display(),
-			          obj.area_propiedad,
-			          obj.departamento,
-			          obj.municipio,
-			          obj.bosques_umf,
-			          obj.id
+		lista.append([obj.sequimiento.propietario.nombre_propietario,
+			          obj.sequimiento.propietario.get_sexo_propietario_display(),
+			          obj.sequimiento.propietario.area_propiedad,
+			          obj.sequimiento.propietario.departamento,
+			          obj.sequimiento.propietario.municipio,
+			          obj.sequimiento.propietario.bosques_umf,
+			          obj.sequimiento.propietario.id
 			        ]) 
 	return render_to_response('bosques/consultar.html', locals(),
     	                      context_instance=RequestContext(request))
@@ -82,7 +82,6 @@ def obtener_mapa(request):
     if request.is_ajax():
         lista = []
         params = _queryset_filtrado(request)
-        print params
         for objeto in params.distinct():
             if objeto.sequimiento.propietario.latitud and objeto.sequimiento.propietario.longitud:
                 dicc = dict(nombre=objeto.sequimiento.propietario.nombre_propietario, 
