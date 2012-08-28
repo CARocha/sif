@@ -242,27 +242,19 @@ class PropietarioBosques(models.Model):
         if self.area_umf > self.area_propiedad:
             raise ValidationError('El area de la UMF no puede ser Mayor al Area total de la propiedad')
     
-    def save(self):
+    #def save(self):
+    #    self.year = self.fecha.year
+    #    super(PropietarioBosques, self).save()
+    def save(self, *args, **kwargs):
         self.year = self.fecha.year
-        super(PropietarioBosques, self).save()
+
+        super(PropietarioBosques, self).save(*args, **kwargs)
+        seguimiento = Seguimiento()
+        seguimiento.propietario = self
+        seguimiento.save()
 
     def __unicode__(self):
         return self.nombre_propietario
-
-    #esto ta malo aun le falta 
-    # def certo(self):
-    #      certo = Datos.objects.filter(sequimiento__propietario__pk=self.id)
-    #      lista =[]
-    #      for a in certo:
-    #      	lista.append(a.tipo_certificacion)
-    #      return certo
-         
-    def cert(self):
-        cert = Datos.objects.filter(sequimiento__propietario__pk=self.id).order_by('-fecha_seguimiento')[:1]
-        if cert:
-            return cert[0].certificado
-        else:
-            return ""
 
     class Meta:
         verbose_name_plural = "Empresa de manejo de bosques"
