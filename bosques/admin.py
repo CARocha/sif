@@ -40,8 +40,9 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
                        )
         }),
         ('Datos de unidad de manejo (UMF)', {
-            'classes': ('coordenadas_umf','pruebaumf',),
-            'fields': (('nombre_umf','area_umf'),('codigo_umf','periodo_vigencia'),'poas_umf',
+            'classes': ('pruebaumf',),
+            'fields': (('coordenadas_umf','nombre_umf','area_umf'),
+                       ('codigo_umf','periodo_vigencia'),'poas_umf',
                         ('codigo_certificado','area_certificada'),'bosques_umf'
                        )
         }),
