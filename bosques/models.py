@@ -249,9 +249,10 @@ class PropietarioBosques(models.Model):
         self.year = self.fecha.year
 
         super(PropietarioBosques, self).save(*args, **kwargs)
-        seguimiento = Seguimiento()
-        seguimiento.propietario = self
-        seguimiento.save()
+        if not Seguimiento.objects.filter(propietario=self):
+            seguimiento = Seguimiento()
+            seguimiento.propietario = self
+            seguimiento.save()
 
     def __unicode__(self):
         return self.nombre_propietario
