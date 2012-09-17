@@ -90,7 +90,7 @@ def obtener_mapa(request):
                             lat=float(objeto.sequimiento.propietario.latitud),
                             propiedad=objeto.sequimiento.propietario.nombre_propiedad,
                             cert=objeto.certificado,
-                            tipo=[a.nombre for a in objeto.tipo_certificacion.all()],
+                            tipo=[a.nombre+'<br>' for a in objeto.tipo_certificacion.all()],
                             )
             lista.append(dicc)
 
