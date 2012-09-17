@@ -242,9 +242,6 @@ class PropietarioBosques(models.Model):
         if self.area_umf > self.area_propiedad:
             raise ValidationError('El area de la UMF no puede ser Mayor al Area total de la propiedad')
     
-    #def save(self):
-    #    self.year = self.fecha.year
-    #    super(PropietarioBosques, self).save()
     def save(self, *args, **kwargs):
         self.year = self.fecha.year
 
@@ -259,8 +256,7 @@ class PropietarioBosques(models.Model):
     class Meta:
         verbose_name_plural = "Empresa de manejo de bosques"
         unique_together = ('nombre_propietario',)
-
-
+    
 #--------------------- modelo de seguimiento -----------------------------------
 
 class Seguimiento(models.Model):
