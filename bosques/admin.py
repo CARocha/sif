@@ -55,7 +55,7 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
             'classes': ('pruebagti',),
             'fields': (('naturales',),('madera','madera_procesada','consumo'),'extraccion',
             	       'producto_no_maderable','tipo_producto','procesos_industriales',
-                       'buenas_practicas'
+                       'buenas_practicas','otro_social', 'otro_ambiental','tipo_certificacion'
             	       )
         }),
          
@@ -109,7 +109,7 @@ class DatosAdminInline(admin.StackedInline):
             'fields': (('poa_ejecucion','area_poa','permiso_poa'),
                        ('volumen_cosecha','segui_plantaciones','registro_orfn'),
                        ('visita_auditoria','auditor'),
-                       ('certificado','tipo_certificacion',),
+                       ('tipo_certificacion',),
                        ('estado_certificado','entidad_certificadora')
                        )
         }),
@@ -137,4 +137,5 @@ admin.site.register(Seguimiento, SeguimientoAdmin)
 admin.site.register(TipoCertificacion)
 admin.site.register(Auditor)
 admin.site.register(EntidadCertificadora)
-
+admin.site.register(SocialesEconomico)
+admin.site.register(Ambientales)

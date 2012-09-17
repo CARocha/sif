@@ -89,7 +89,7 @@ def obtener_mapa(request):
                             lon=float(objeto.sequimiento.propietario.longitud) , 
                             lat=float(objeto.sequimiento.propietario.latitud),
                             propiedad=objeto.sequimiento.propietario.nombre_propiedad,
-                            cert=objeto.certificado,
+                            #cert=objeto.certificado,
                             tipo=[a.nombre for a in objeto.tipo_certificacion.all()],
                             )
             lista.append(dicc)
@@ -113,7 +113,7 @@ def obtener_todo_mapa(request):
                             lon=float(objeto.sequimiento.propietario.longitud) , 
                             lat=float(objeto.sequimiento.propietario.latitud),
                             propiedad=objeto.sequimiento.propietario.nombre_propiedad,
-                            cert=objeto.certificado,
+                            #cert=objeto.certificado,
                             tipo=[a.nombre for a in objeto.tipo_certificacion.all()],
                             )
             lista.append(dicc)
