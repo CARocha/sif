@@ -110,6 +110,8 @@ def obtener_mapa(request):
                             comer_justo=certificado_comer_justo,
                             iso=certificado_iso,
                             otro=certificado_otro,
+                            no=certificado_no,
+                            proceso=certificado_proceso,
                             )
             lista.append(dicc)
 
@@ -153,6 +155,8 @@ def obtener_todo_mapa(request):
                             comer_justo=certificado_comer_justo,
                             iso=certificado_iso,
                             otro=certificado_otro,
+                            no=certificado_no,
+                            proceso=certificado_proceso,
                             )
             lista.append(dicc)
 
