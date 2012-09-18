@@ -155,7 +155,34 @@ class MetodoExtraccion(models.Model):
         return self.nombre
     class Meta:
         verbose_name_plural = "Método de extracción de la madera"
+
+class TipoCertificacion(models.Model):
+    nombre = models.CharField(max_length=200)
+    
+    def __unicode__(self):
+        return self.nombre
         
+    class Meta:
+        verbose_name_plural = "Tipos de certificación"
+
+class SocialesEconomico(models.Model):
+    nombre = models.CharField('Nombre', max_length=200)
+    class Meta:
+        verbose_name = ('Sociales y económico')
+        verbose_name_plural = ('Sociales y económicos')
+
+    def __unicode__(self):
+        return self.nombre
+
+class Ambientales(models.Model):
+    nombre = models.CharField(max_length=200)
+    class Meta:
+        verbose_name = ('Ambientales')
+        verbose_name_plural = ('Ambientales')
+
+    def __unicode__(self):
+        return self.nombre
+    
 #--------------- Ficha principal -----------------------------------------------                
 class PropietarioBosques(models.Model):
     fecha = models.DateField()
@@ -233,6 +260,10 @@ class PropietarioBosques(models.Model):
     #secado_horno = models.FloatField('Capacidad de secado del horno')
     codigo_certificado = models.CharField(max_length=200, null=True, blank=True)
     area_certificada = models.FloatField(null=True, blank=True)
+    otro_social = models.ManyToManyField(SocialesEconomico, null=True, blank=True)
+    otro_ambiental = models.ManyToManyField(Ambientales, null=True, blank=True)
+    tipo_certificacion = models.ManyToManyField(TipoCertificacion, 
+                        verbose_name="Tipo de certificacion")
 
     year = models.IntegerField(editable=False)
 
@@ -276,16 +307,6 @@ CERTIFICADO_CHOICE = (
     (3, 'En proceso')
 )
 
-class TipoCertificacion(models.Model):
-    nombre = models.CharField(max_length=200)
-    
-    def __unicode__(self):
-        return self.nombre
-        
-    class Meta:
-        verbose_name_plural = "Tipos de certificación"
-
-
 ESTADO_CERTIFICADO_CHOICE = (
     (1, 'Vigente'),
     (2, 'Suspendido'),
@@ -327,7 +348,7 @@ class Datos(models.Model):
     volumen_cosecha = models.FloatField('Volumen total disponible por cosecha anual (m3)')
     segui_plantaciones = models.FloatField('Plantaciones (ha)')
     registro_orfn = models.CharField('Registro ORFN', max_length=200)
-    certificado = models.IntegerField(choices=CERTIFICADO_CHOICE)
+    #certificado = models.IntegerField(choices=CERTIFICADO_CHOICE)
     tipo_certificacion = models.ManyToManyField(TipoCertificacion, 
                         verbose_name="Tipo de certificacion")
     estado_certificado = models.IntegerField(choices=ESTADO_CERTIFICADO_CHOICE)

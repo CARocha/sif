@@ -84,13 +84,32 @@ def obtener_mapa(request):
         params = _queryset_filtrado(request)
         for objeto in params.distinct():
             if objeto.sequimiento.propietario.latitud and objeto.sequimiento.propietario.longitud:
+            	certificado_no=[a.nombre for a in objeto.tipo_certificacion.filter(id=1)]
+            	certificado_proceso=[a.nombre for a in objeto.tipo_certificacion.filter(id=2)]
+            	certificado_fsc=[a.nombre  for a in objeto.tipo_certificacion.filter(id=3)]
+            	certificado_fsc_slimf=[a.nombre for a in objeto.tipo_certificacion.filter(id=4)]
+            	certificado_fsc_cw=[a.nombre for a in objeto.tipo_certificacion.filter(id=5)]
+            	certificado_comer_justo=[a.nombre for a in objeto.tipo_certificacion.filter(id=6)]
+            	certificado_iso=[a.nombre for a in objeto.tipo_certificacion.filter(id=7)]
+            	certificado_otro=[a.nombre for a in objeto.tipo_certificacion.filter(id=8)]
+            	if certificado_no:
+            		color=1
+            	if certificado_proceso:
+            		color=2
+            	if certificado_fsc or certificado_fsc_slimf or certificado_fsc_cw or certificado_comer_justo or certificado_iso or certificado_otro:
+                	color=3
                 dicc = dict(nombre=objeto.sequimiento.propietario.nombre_propietario, 
                 	        id=objeto.sequimiento.propietario.id,
                             lon=float(objeto.sequimiento.propietario.longitud) , 
                             lat=float(objeto.sequimiento.propietario.latitud),
                             propiedad=objeto.sequimiento.propietario.nombre_propiedad,
-                            cert=objeto.certificado,
-                            tipo=[a.nombre+'<br>' for a in objeto.tipo_certificacion.all()],
+                            coloricon=color,
+                            fsc=certificado_fsc,
+                            fsc_slimf=certificado_fsc_slimf,
+                            fsc_cw=certificado_fsc_cw,
+                            comer_justo=certificado_comer_justo,
+                            iso=certificado_iso,
+                            otro=certificado_otro,
                             )
             lista.append(dicc)
 
@@ -108,13 +127,32 @@ def obtener_todo_mapa(request):
 		lista = []
         for objeto in Datos.objects.all():
             if objeto.sequimiento.propietario.latitud and objeto.sequimiento.propietario.longitud:
+            	certificado_no=[a.nombre for a in objeto.tipo_certificacion.filter(id=1)]
+            	certificado_proceso=[a.nombre for a in objeto.tipo_certificacion.filter(id=2)]
+            	certificado_fsc=[a.nombre  for a in objeto.tipo_certificacion.filter(id=3)]
+            	certificado_fsc_slimf=[a.nombre for a in objeto.tipo_certificacion.filter(id=4)]
+            	certificado_fsc_cw=[a.nombre for a in objeto.tipo_certificacion.filter(id=5)]
+            	certificado_comer_justo=[a.nombre for a in objeto.tipo_certificacion.filter(id=6)]
+            	certificado_iso=[a.nombre for a in objeto.tipo_certificacion.filter(id=7)]
+            	certificado_otro=[a.nombre for a in objeto.tipo_certificacion.filter(id=8)]
+            	if certificado_no:
+            		color=1
+            	if certificado_proceso:
+            		color=2
+            	if certificado_fsc or certificado_fsc_slimf or certificado_fsc_cw or certificado_comer_justo or certificado_iso or certificado_otro:
+                	color=3
                 dicc = dict(nombre=objeto.sequimiento.propietario.nombre_propietario, 
                 	        id=objeto.sequimiento.propietario.id,
                             lon=float(objeto.sequimiento.propietario.longitud) , 
                             lat=float(objeto.sequimiento.propietario.latitud),
                             propiedad=objeto.sequimiento.propietario.nombre_propiedad,
-                            cert=objeto.certificado,
-                            tipo=[a.nombre for a in objeto.tipo_certificacion.all()],
+                            coloricon=color,
+                            fsc=certificado_fsc,
+                            fsc_slimf=certificado_fsc_slimf,
+                            fsc_cw=certificado_fsc_cw,
+                            comer_justo=certificado_comer_justo,
+                            iso=certificado_iso,
+                            otro=certificado_otro,
                             )
             lista.append(dicc)
 
