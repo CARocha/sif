@@ -98,11 +98,11 @@ def obtener_mapa(request):
             		color=2
             	if certificado_fsc or certificado_fsc_slimf or certificado_fsc_cw or certificado_comer_justo or certificado_iso or certificado_otro:
                 	color=3
-                dicc = dict(nombre=objeto.sequimiento.propietario.nombre_propietario, 
-                	        id=objeto.sequimiento.propietario.id,
-                            lon=float(objeto.sequimiento.propietario.longitud) , 
-                            lat=float(objeto.sequimiento.propietario.latitud),
-                            propiedad=objeto.sequimiento.propietario.nombre_propiedad,
+                dicc = dict(nombre=objeto.nombre_propietario, 
+                	        id=objeto.id,
+                            lon=float(objeto.longitud) , 
+                            lat=float(objeto.latitud),
+                            propiedad=objeto.nombre_propiedad,
                             coloricon=color,
                             fsc=certificado_fsc,
                             fsc_slimf=certificado_fsc_slimf,
@@ -127,8 +127,8 @@ def ficha_propierario(request, id):
 def obtener_todo_mapa(request):
 	if request.is_ajax():
 		lista = []
-        for objeto in Datos.objects.all():
-            if objeto.sequimiento.propietario.latitud and objeto.sequimiento.propietario.longitud:
+        for objeto in PropietarioBosques.objects.all():
+            if objeto.latitud and objeto.longitud:
             	certificado_no=[a.nombre for a in objeto.tipo_certificacion.filter(id=1)]
             	certificado_proceso=[a.nombre for a in objeto.tipo_certificacion.filter(id=2)]
             	certificado_fsc=[a.nombre  for a in objeto.tipo_certificacion.filter(id=3)]
@@ -143,11 +143,11 @@ def obtener_todo_mapa(request):
             		color=2
             	if certificado_fsc or certificado_fsc_slimf or certificado_fsc_cw or certificado_comer_justo or certificado_iso or certificado_otro:
                 	color=3
-                dicc = dict(nombre=objeto.sequimiento.propietario.nombre_propietario, 
-                	        id=objeto.sequimiento.propietario.id,
-                            lon=float(objeto.sequimiento.propietario.longitud) , 
-                            lat=float(objeto.sequimiento.propietario.latitud),
-                            propiedad=objeto.sequimiento.propietario.nombre_propiedad,
+                dicc = dict(nombre=objeto.nombre_propietario, 
+                	        id=objeto.id,
+                            lon=float(objeto.longitud) , 
+                            lat=float(objeto.latitud),
+                            propiedad=objeto.nombre_propiedad,
                             coloricon=color,
                             fsc=certificado_fsc,
                             fsc_slimf=certificado_fsc_slimf,
