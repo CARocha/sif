@@ -19,7 +19,7 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
 #            kwargs['widget'] = CheckboxSelectMultiple
 #        return super(PropietarioBosqueAdmin, self).formfield_for_dbfield(db_field, **kwargs) 
     form = PropietarioBosquesForm
-    filter_horizontal = ('organizacion','naturales',)
+    filter_horizontal = ('organizacion','naturales','tipo_certificacion')
     date_hierarchy = 'fecha'
     fieldsets = (
         (None, {
@@ -28,9 +28,9 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
         ('Datos generales del bosque', {
             'classes': ('pruebabosque',),
             'fields': ('nombre_propietario', ('sexo_propietario', 'cedula_propietario'),
-            	       'representante_tecnico', ('sexo_tecnico','cedula_tecnico','tecnico_ruc'),'nombre_propiedad',
-            	       'tipo_propiedad','area_propiedad',('tel_convencional','tel_celular'),
-            	       ('email','web'),'direccion')
+                       'representante_tecnico', ('sexo_tecnico','cedula_tecnico','tecnico_ruc'),'nombre_propiedad',
+                       'tipo_propiedad','area_propiedad',('tel_convencional','tel_celular'),
+                       ('email','web'),'direccion')
         }),
         ('Ubicación geografica (coordenadas de punto de referencia) de la propiedad', {
             'classes': ('pruebaubicacion',),
@@ -114,10 +114,7 @@ class DatosAdminInline(admin.StackedInline):
                        )
         }),
     )
-    # fields = ['fecha_seguimiento',('hombre','mujeres'),('uso_agricola','uso_pecuario','uso_foretal'),
-    #          ('bosque_bajo_manejo','uso_agroforestal','otros_usos'),('poa_ejecucion','area_poa','permiso_poa'),
-    #          ('volumen_cosecha','segui_plantaciones','registro_orfn'),('certificado','tipo_certificacion',
-    #          'estado_certificado')]
+    
     extra = 1
 
     class Media:
@@ -139,3 +136,176 @@ admin.site.register(Auditor)
 admin.site.register(EntidadCertificadora)
 admin.site.register(SocialesEconomico)
 admin.site.register(Ambientales)
+
+#------------------------  Regente foresal  -------------------------------
+
+class RegenteAdmin(admin.ModelAdmin):
+    filter_horizontal = ('organizado','organizacion','area_trabajo')
+    date_hierarchy = 'llenado'
+    fieldsets = (
+        (None, {
+            'fields': ('llenado', ('encuestador'))
+        }),
+        ('Datos generales regente forestal', {
+            'classes': ('pruebabosque',),
+            'fields': ('nombre_regente', ('codigo_regente','no_cedula'),
+                       'org_publica', ('tel_convencional','tel_celular'),('correo','pagina_web'),
+                       'direccion', ('departamento','municipio','comunidad'),
+                       ('fecha_acreditacion', 'experiencia'), 'organizado','organizacion','desde',
+                       'area_trabajo','perfil')
+        }),
+
+    )
+
+admin.site.register(RegenteForestal, RegenteAdmin)
+admin.site.register(OrganizacionPublica)
+admin.site.register(AreaTrabajo)
+
+#------------------------ admin seguimiento regente -------------------------------
+
+class SeguimientoRegenteAdminInline(admin.StackedInline):
+    model = DatosSeguimientoRegente
+    fieldsets = (
+        (None, {
+            'fields': ('fecha_seguimiento',)
+        }),
+        ('Datos seguimiento para monitoreo', {
+            'fields': (('hombre', 'mujeres',),('no_pgmf_regencia','area_pgmf'),
+                       ('codigo_pgmf','fecha_ingreso'),('no_poa_regencia','area_total_poa'),
+                       ('codigo_poa','volumenes_totales'))
+        }),
+    )
+    extra = 1
+
+class RegenteSeguimientoAdmin(AutocompleteModelAdmin):
+    related_search_fields = { 
+
+                'regente': ('nombre_regente',),
+        }
+    inlines = [SeguimientoRegenteAdminInline]
+
+admin.site.register(SeguimientoRegente, RegenteSeguimientoAdmin)
+
+#---------------------------admin primera tranformacion --------------------------------
+class PrimeraTransformacionAdmin(admin.ModelAdmin):
+    #filter_horizontal = ('organizado','organizacion','area_trabajo')
+    date_hierarchy = 'fecha_llenado'
+    fieldsets = (
+        (None, {
+            'fields': ('fecha_llenado', ('encuestador','empresa'))
+        }),
+        ('Datos generales primera tranformación', {
+            'classes': ('pruebabosque',),
+            'fields': ('nombre_empresa_forestal', ('nombre_corto','fecha_creacion'),
+                       'org_empresarial', ('nombre_director','cedula'),'alianza',
+                       ('organizado','desde'),('tel_convencional','tel_celular'),
+                       ('correo','pagina_web'),'direccion', 
+                       ('departamento','municipio','comunidad'),
+                       ('latitud', 'longitud'), 'gobierno_gti','nombre_gti',
+                       'area_trabajo','servicio_secado','capasidad_horno',
+                       'productos_venden','otro_social','otro_ambiental')
+        }),
+
+    )
+
+admin.site.register(OrganizacionEmpresarial)
+admin.site.register(AlianzaNegocio)
+admin.site.register(TrabajoTranformacion)
+admin.site.register(ServicioSecado)
+admin.site.register(ProductosVenden)
+admin.site.register(EmpresaPrimeraTransformacion,PrimeraTransformacionAdmin)
+
+#-------------------------- Seguimiento primera transformacion ---------------------
+
+class DatosPrimeroTransformacionInline(admin.StackedInline):
+    model = DatosPrimeraTransforma
+    fieldsets = (
+        (None, {
+            'fields': ('fecha',)
+        }),
+        ('Datos seguimiento para primera transformacion', {
+            'fields': (('hombres', 'mujeres',),'tipo_certificacion','codigo_certificacion',
+                       ('estado_certificado','entidad_certificadora'),
+                       ('status','regente'),('asistencia','servicio_extraccion'),
+                       ('empresa','relacion'),('producto_vende','desde'),
+                       ('volumen_madera_rollo','volumen_madera_aserrada'),
+                       ('volumen_carbon','volumen_lena'))
+        }),
+    )
+    extra = 1
+
+class SeguimientoPrimeraTransformacionAdmin(AutocompleteModelAdmin):
+    related_search_fields = { 
+
+                'nombre_empresa': ('nombre_empresa_forestal',),
+        }
+    inlines = [DatosPrimeroTransformacionInline]
+
+admin.site.register(AsistenciaTecnica)
+admin.site.register(ServicioExtraccion)
+admin.site.register(EmpresaComercializadora)
+admin.site.register(RelacionComercial)
+admin.site.register(ProductoVenden)
+admin.site.register(SeguimientoPrimeraTransformacion,SeguimientoPrimeraTransformacionAdmin)
+
+#-------------------------- Admin segunda tranformación ------------------------------
+
+class SegundaTranformacionAdmin(admin.ModelAdmin):
+    #filter_horizontal = ('organizado','organizacion','area_trabajo')
+    date_hierarchy = 'fecha'
+    fieldsets = (
+        (None, {
+            'fields': ('fecha', ('encuestador','empresa'))
+        }),
+        ('Datos generales segunda tranformación', {
+            'classes': ('pruebabosque',),
+            'fields': ('nombre_comercial', ('nombre_corto','creacion','funcionando'),
+                       'org_empresarial', ('nombre_director','cedula'),
+                       ('organizado','desde'),('tel_convencional','tel_celular'),
+                       ('correo','pagina_web'),'direccion', 
+                       ('departamento','municipio','comunidad'),
+                       ('latitud', 'longitud'), 'gobierno_gti','nombre_gti',
+                       'area_trabajo','apoyo_produccion','madera',
+                       'producto_vende','no_maderable','nivel_tecnologico',
+                       'propia_secado','volumen_anual','promedio','otro_social',
+                       'otro_ambiental','vision_empresarial')
+        }),
+
+    )
+
+admin.site.register(AreaTrabajoSegunda)
+admin.site.register(ApoyoProduccion)
+admin.site.register(ProductosVendenSegunda)
+admin.site.register(NoMaderable)
+admin.site.register(NivelTecnologico)
+admin.site.register(VisionEmpresarial)
+
+#------------------------ seguimiento segunda tranformacion ------------------------------
+
+class DatosSegundaTransformacionInline(admin.StackedInline):
+    model = DatosSegundaTranformacion
+    fieldsets = (
+        (None, {
+            'fields': ('fecha',)
+        }),
+        ('Datos seguimiento para primera transformacion', {
+            'fields': (('alianza','hombres', 'mujeres',),'tipo_certificacion',
+                        'codigo',
+                       ('estado_certificado','entidad_certificadora'),
+                       ('fecha_status','proveedores'),('servicio_operacionales'),
+                       ('empresa','tipo_producto'),('desde_cuando','volumen_promedio')
+                      )
+        }),
+    )
+    extra = 1
+
+class SeguimientoPrimeraTransformacionAdmin(AutocompleteModelAdmin):
+    related_search_fields = { 
+
+                'nombre': ('nombre_comercial',),
+        }
+    inlines = [DatosSegundaTransformacionInline]
+
+admin.site.register(AlianzaNegocion)
+admin.site.register(PrestadoresServicioOperacionales)
+admin.site.register(SeguimientoSegundaTranformacion, SeguimientoPrimeraTransformacionAdmin)
