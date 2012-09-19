@@ -757,6 +757,8 @@ class EmpresaSegundaTransformacion(models.Model):
     def __unicode__(self):
         return self.nombre_director
 
+    class Meta:
+        verbose_name_plural = "Empresas forestal de segunda tranformación"
 #----------------------- seguimiento de la segunda tranformacion --------------------
 
 class SeguimientoSegundaTranformacion(models.Model):
@@ -797,7 +799,7 @@ class DatosSegundaTranformacion(models.Model):
     fecha_status = models.DateField()
     proveedores = models.ManyToManyField(ProveedoresSuministros)
     servicio_operacionales = models.ManyToManyField(PrestadoresServicioOperacionales)
-    empresa = models.ForeignKey(EmpresaComercializadora)
+    #empresa = models.ForeignKey(EmpresaComercializadora)
     relacion = models.ForeignKey(RelacionComercial)
     tipo_producto = models.ManyToManyField(TipoProducto, null=True, blank=True)
     desde_cuando = models.DateField()

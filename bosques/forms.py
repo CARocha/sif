@@ -52,7 +52,7 @@ def get_anios():
     return choices
 
 class FiltroBosquesForm(forms.Form):
-    fecha = forms.ChoiceField(choices=get_anios())
+    fecha = forms.ChoiceField(choices=get_anios(),required=False)
     tipo_propiedad = forms.ModelChoiceField(queryset=TipoPropiedadBosque.objects.all(), 
                                             label=u'Tipo de propiedad',
                                             required=False)
@@ -62,5 +62,5 @@ class FiltroBosquesForm(forms.Form):
     gti = forms.ChoiceField(choices=SINO_CHOICE, label=u'Gobierno GTI', required=False)
     tipo_bosque_umf = forms.ModelChoiceField(queryset=TipoBosqueUmf.objects.all(),
                                              label=u'Tipo de Bosques UMF', required=False)
-    certificacion = forms.ModelChoiceField(queryset=TipoCertificacion.objects.all(),
+    tipo_certificacion = forms.ModelChoiceField(queryset=TipoCertificacion.objects.all(),
                                            label=u'Certificación', required=False)
