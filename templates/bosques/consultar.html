@@ -10,6 +10,11 @@
         center: latlng,
         mapTypeId: google.maps.MapTypeId.TERRAIN
       }
+      function ocultar(exist){
+        if (exist==""){
+            return "hide";
+        }
+      }
       var map = new google.maps.Map(document.getElementById("map"), options);
 
             if ({{centinel}} == 1){
@@ -25,13 +30,22 @@
                         map: map,
                         name: elemento.nombre,
                         desc: elemento.propiedad,
-                        //icon: '/files/img/mapicon'+elemento.cert+'.png'                        
+                        icon: '/files/img/mapicon'+elemento.coloricon+'.png'                        
                     });
+                    //for each (var item in elemento.tipo) alert(item);
                     google.maps.event.addListener(marker, "click", function() {
                         var html = '<b>' + unescape(elemento.propiedad) + 
                                    '</b><br>' + unescape(elemento.nombre) +
-                                   '</b><br>' + unescape(elemento.tipo) + 
-                                   '<br><a href="/ficha/'+unescape(elemento.id)+'" class="btn btn-mini" style="margin-right:5px; float:right;"><i class="icon-zoom-in"></i> Ver mas</a>';
+                                   '</b><br><br><div class="well"><b>Certificaciones</b><br>' + 
+                                   '<div class="cert fsc '+ocultar(elemento.fsc)+'">'+unescape(elemento.fsc) +'<img src="/files/img/badgefsc.png"></div>'+ 
+                                   '<div class="cert fsc '+ocultar(elemento.fsc_slimf)+'">' + unescape(elemento.fsc_slimf) +'<img src="/files/img/badgefsc.png"></div>'+ 
+                                   '<div class="cert fsc '+ocultar(elemento.fsc_cw)+'">' + unescape(elemento.fsc_cw) +'<img src="/files/img/badgefsc.png"></div>'+ 
+                                   '<div class="cert comer_justo '+ocultar(elemento.comer_justo)+'">' + unescape(elemento.comer_justo) +'<img src="/files/img/badgefsc.png"></div>'+ 
+                                   '<div class="cert iso '+ocultar(elemento.iso)+'">' + unescape(elemento.iso) +'<img src="/files/img/badgeiso.png"></div>'+ 
+                                   '<div class="cert fsc '+ocultar(elemento.otro)+'">' + unescape(elemento.otro) +'<img src="/files/img/badgeotro.png"></div>'+ 
+                                    '<div class="cert notiene '+ocultar(elemento.no)+'">' + unescape(elemento.no) +'</div>'+ 
+                                    '<div class="cert enproceso '+ocultar(elemento.proceso)+'">' + unescape(elemento.proceso) +'</div>'+ 
+                                   '</div><a href="/ficha/'+unescape(elemento.id)+'" class="btn btn-mini" style="margin-right:5px; float:right;"><i class="icon-zoom-in"></i> Ver mas</a>';
                        infowindow = new google.maps.InfoWindow({
                                     content: html});
                   infowindow.open(map, this);
@@ -121,10 +135,12 @@ Persona natural o jurídica que tiene dominio y posesión de una superficie de t
             <form action="." method="POST">
               {% csrf_token %}
                 <div class="generalform">
+                    <!-- 
                     <div class="formelement">
                         <div class="labelform">{{form.fecha.label}}</div>
                         <div class="filtros">{{form.fecha}}<br>{{form.fecha.errors}}</div>
                     </div>
+                    -->
                     <div class="formelement">
                         <div class="labelform">{{form.tipo_propiedad.label}}</div>
                         <div class="filtros">{{form.tipo_propiedad}}<br>{{form.tipo_propiedad.errors}}</div>
