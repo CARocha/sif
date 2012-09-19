@@ -34,7 +34,7 @@
                     });
                     //for each (var item in elemento.tipo) alert(item);
                     google.maps.event.addListener(marker, "click", function() {
-                        var html = '<b>' + unescape(elemento.propiedad) + 
+                        var html = '<div class="infobox"><b>' + unescape(elemento.propiedad) + 
                                    '</b><br>' + unescape(elemento.nombre) +
                                    '</b><br><br><div class="well"><b>Certificaciones</b><br>' + 
                                    '<div class="cert fsc '+ocultar(elemento.fsc)+'">'+unescape(elemento.fsc) +'<img src="/files/img/badgefsc.png"></div>'+ 
@@ -45,9 +45,11 @@
                                    '<div class="cert fsc '+ocultar(elemento.otro)+'">' + unescape(elemento.otro) +'<img src="/files/img/badgeotro.png"></div>'+ 
                                     '<div class="cert notiene '+ocultar(elemento.no)+'">' + unescape(elemento.no) +'</div>'+ 
                                     '<div class="cert enproceso '+ocultar(elemento.proceso)+'">' + unescape(elemento.proceso) +'</div>'+ 
-                                   '</div><a href="/ficha/'+unescape(elemento.id)+'" class="btn btn-mini" style="margin-right:5px; float:right;"><i class="icon-zoom-in"></i> Ver mas</a>';
+                                   '</div><a href="/ficha/'+unescape(elemento.id)+'" class="btn btn-mini" style="margin-right:5px; float:right;"><i class="icon-zoom-in"></i> Ver mas</a></div>';
                        infowindow = new google.maps.InfoWindow({
-                                    content: html});
+                                    content: html,
+                                    zIndex: 999,
+                                });
                   infowindow.open(map, this);
                   });                     
                 });
