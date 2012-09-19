@@ -14,19 +14,19 @@ def index(request):
 def _queryset_filtrado(request):
 	params = {}
 	if 'fecha' in  request.session:
-		params['sequimiento__propietario__year'] = request.session['fecha']
+		params['year'] = request.session['fecha']
 	if 'tipo_propiedad' in request.session:
-		params['sequimiento__propietario__tipo_propiedad'] = request.session['tipo_propiedad']
+		params['tipo_propiedad'] = request.session['tipo_propiedad']
 	# if 'area_total' in request.session:
 	# 	params['area_total'] = request.session['area_total']
 	if 'organizado' in request.session:
-		params['sequimiento__propietario__organizado'] = request.session['organizado']
+		params['organizado'] = request.session['organizado']
 	if 'gti' in request.session:
-		params['sequimiento__propietario__gobierno_gti'] = request.session['gti']
+		params['gobierno_gti'] = request.session['gti']
 	if 'tipo_bosque_umf' in request.session:
-		params['sequimiento__propietario__bosques_umf'] = request.session['tipo_bosque_umf']
-	if 'certificacion' in request.session:
-		params['tipo_certificacion'] = request.session['certificacion']
+		params['bosques_umf'] = request.session['tipo_bosque_umf']
+	if 'tipo_certificacion' in request.session:
+		params['tipo_certificacion'] = request.session['tipo_certificacion']
 
 	unvalid_keys = []
 	for key in params:
@@ -36,7 +36,7 @@ def _queryset_filtrado(request):
 	for key in unvalid_keys:
 		del params[key]
     
-	return Datos.objects.filter(**params)
+	return PropietarioBosques.objects.filter(**params)
 
 def consultar(request):    
 	if request.method == 'POST':
@@ -48,7 +48,7 @@ def consultar(request):
 			request.session['organizado'] = form.cleaned_data['organizado']
 			request.session['gti'] = form.cleaned_data['gti']
 			request.session['tipo_bosque_umf'] = form.cleaned_data['tipo_bosque_umf']
-			request.session['certificacion'] = form.cleaned_data['certificacion']
+			request.session['tipo_certificacion'] = form.cleaned_data['tipo_certificacion']
 			centinel = 1
 	else:
 		form = FiltroBosquesForm()
@@ -65,15 +65,15 @@ def consultar(request):
 		request.session['gti'] = None 
 		request.session['tipo_bosque_umf'] = None
 		request.session['certificacion'] = None  
-		consulta = Datos.objects.all()
+		consulta = PropietarioBosques.objects.all()
 	for obj in consulta:
-		lista.append([obj.sequimiento.propietario.nombre_propietario,
-			          obj.sequimiento.propietario.get_sexo_propietario_display(),
-			          obj.sequimiento.propietario.area_propiedad,
-			          obj.sequimiento.propietario.departamento,
-			          obj.sequimiento.propietario.municipio,
-			          obj.sequimiento.propietario.bosques_umf,
-			          obj.sequimiento.propietario.id
+		lista.append([obj.nombre_propietario,
+			          obj.get_sexo_propietario_display(),
+			          obj.area_propiedad,
+			          obj.departamento,
+			          obj.municipio,
+			          obj.bosques_umf,
+			          obj.id
 			        ]) 
 	return render_to_response('bosques/consultar.html', locals(),
     	                      context_instance=RequestContext(request))

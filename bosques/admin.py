@@ -279,7 +279,7 @@ admin.site.register(ProductosVendenSegunda)
 admin.site.register(NoMaderable)
 admin.site.register(NivelTecnologico)
 admin.site.register(VisionEmpresarial)
-
+admin.site.register(EmpresaSegundaTransformacion, SegundaTranformacionAdmin)
 #------------------------ seguimiento segunda tranformacion ------------------------------
 
 class DatosSegundaTransformacionInline(admin.StackedInline):
@@ -293,7 +293,7 @@ class DatosSegundaTransformacionInline(admin.StackedInline):
                         'codigo',
                        ('estado_certificado','entidad_certificadora'),
                        ('fecha_status','proveedores'),('servicio_operacionales'),
-                       ('empresa','tipo_producto'),('desde_cuando','volumen_promedio')
+                       ('tipo_producto'),('desde_cuando','volumen_promedio')
                       )
         }),
     )
