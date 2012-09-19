@@ -83,7 +83,7 @@ def obtener_mapa(request):
         lista = []
         params = _queryset_filtrado(request)
         for objeto in params.distinct():
-            if objeto.sequimiento.propietario.latitud and objeto.sequimiento.propietario.longitud:
+            if objeto.latitud and objeto.longitud:
             	certificado_no=[a.nombre for a in objeto.tipo_certificacion.filter(id=1)]
             	certificado_proceso=[a.nombre for a in objeto.tipo_certificacion.filter(id=2)]
             	certificado_fsc=[a.nombre  for a in objeto.tipo_certificacion.filter(id=3)]
