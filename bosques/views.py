@@ -119,9 +119,13 @@ def obtener_mapa(request):
     	return HttpResponse(serializado, mimetype='application/json')	
 
 def ficha_propierario(request, id):
-	datos = get_object_or_404(PropietarioBosques, id=id)
+    datos = get_object_or_404(PropietarioBosques, id=id)
+    lista_coordenadas = datos.coordenadas_umf
+    
+    lista_coordenadas = lista_coordenadas[1:-1].split('&')
+    punto = max(lista_coordenadas)
 
-	return render_to_response('bosques/ficha.html', locals(),
+    return render_to_response('bosques/ficha.html', locals(),
 							  context_instance=RequestContext(request))
 
 def obtener_todo_mapa(request):
