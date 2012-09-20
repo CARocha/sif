@@ -162,3 +162,99 @@ def obtener_todo_mapa(request):
 
         serializado = simplejson.dumps(lista)
         return HttpResponse(serializado, mimetype='application/json')
+
+
+#######################################################
+#	Vistas para empresa de primera trasnformacion     #
+#                    ficha 3                          #
+#######################################################
+
+def _queryset_filtrado_primera(request):
+	params = {}
+	if 'tipo_propiedad' in request.session:
+		params['tipo_propiedad'] = request.session['tipo_propiedad']
+	# if 'area_total' in request.session:
+	# 	params['area_total'] = request.session['area_total']
+	if 'organizado' in request.session:
+		params['organizado'] = request.session['organizado']
+	if 'gti' in request.session:
+		params['gobierno_gti'] = request.session['gti']
+	if 'tipo_bosque_umf' in request.session:
+		params['bosques_umf'] = request.session['tipo_bosque_umf']
+	if 'tipo_certificacion' in request.session:
+		params['tipo_certificacion'] = request.session['tipo_certificacion']
+
+	unvalid_keys = []
+	for key in params:
+		if not params[key]:
+			unvalid_keys.append(key)
+    
+	for key in unvalid_keys:
+		del params[key]
+    
+	return PropietarioBosques.objects.filter(**params)
+
+def consultar_primera(request):    
+	if request.method == 'POST':
+		form = PrimeraTransformacionForm(request.POST)
+		if form.is_valid():
+			request.session['organizacion'] = form.cleaned_data['organizacion']
+			centinel = 1
+	else:
+		form = PrimeraTransformacionForm()
+		centinel = 0
+
+	lista = []
+	if centinel == 1:
+		consulta = _queryset_filtrado(request)
+	else:
+		request.session['organizacion'] = None
+		consulta = EmpresaPrimeraTransformacion.objects.all()
+	for obj in consulta:
+		lista.append([obj.nombre_empresa,
+			          obj.departamento,
+			          obj.municipio,
+			        ]) 
+	return render_to_response('primera_transformacion/consultar_primera.html', locals(),
+    	                      context_instance=RequestContext(request))
+
+def obtener_mapa_primera(request):
+    if request.is_ajax():
+        lista = []
+        params = _queryset_filtrado(request)
+        for objeto in params.distinct():
+            if objeto.latitud and objeto.longitud:
+                dicc = dict(nombre=objeto.nombre_empresa_forestal, 
+                	        id=objeto.id,
+                            lon=float(objeto.longitud) , 
+                            lat=float(objeto.latitud),
+                            director=objeto.nombre_director,
+                            )
+            lista.append(dicc)
+
+        serializado = simplejson.dumps(lista)
+    	return HttpResponse(serializado, mimetype='application/json')	
+
+def ficha_primera(request, id):
+	datos = get_object_or_404(EmpresaPrimeraTransformacion, id=id)
+
+	return render_to_response('primera_transformacion/ficha_primera.html', locals(),
+							  context_instance=RequestContext(request))
+
+def obtener_todo_mapa_primera(request):
+	if request.is_ajax():
+		lista = []
+        for objeto in EmpresaPrimeraTransformacion.objects.all():
+            if objeto.latitud and objeto.longitud:
+                dicc = dict(nombre=objeto.nombre_empresa_forestal, 
+                	        id=objeto.id,
+                            lon=float(objeto.longitud) , 
+                            lat=float(objeto.latitud),
+                            director=objeto.nombre_director,
+                            )
+            lista.append(dicc)
+
+        serializado = simplejson.dumps(lista)
+        return HttpResponse(serializado, mimetype='application/json')
+
+

@@ -64,3 +64,8 @@ class FiltroBosquesForm(forms.Form):
                                              label=u'Tipo de Bosques UMF', required=False)
     tipo_certificacion = forms.ModelChoiceField(queryset=TipoCertificacion.objects.all(),
                                            label=u'Certificación', required=False)
+
+class PrimeraTransformacionForm(forms.Form):
+    org_empresarial = forms.ModelChoiceField(queryset=OrganizacionEmpresarial.objects.all(), 
+                                            label=u'Organizacion',
+                                            required=False)

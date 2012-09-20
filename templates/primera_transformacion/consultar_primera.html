@@ -1,0 +1,217 @@
+{%extends "base.html"%}
+
+{%block extra_js%}
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+     $(document).ready(function () {
+      var latlng = new google.maps.LatLng(12.877, -85.001);
+      var options = {
+        zoom: 8,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.TERRAIN
+      }
+      function ocultar(exist){
+        if (exist==""){
+            return "hide";
+        }
+      }
+      var map = new google.maps.Map(document.getElementById("map"), options);
+
+            if ({{centinel}} == 1){
+                var ruta = '/primera/ver/';
+            }else{
+                var ruta = '/primera/ver/todo/';
+            }
+                $.getJSON(ruta, function(data){
+                $.each(data, function(i, elemento){
+                    var latlng = new google.maps.LatLng(elemento.lat, elemento.lon);
+                    var marker = new google.maps.Marker({
+                        position: latlng,
+                        map: map,
+                        name: elemento.nombre,
+                        desc: elemento.propiedad,
+                        icon: '/files/img/primera_icon.png'                        
+                    });
+                    //for each (var item in elemento.tipo) alert(item);
+                    google.maps.event.addListener(marker, "click", function() {
+                        var html = '<div class="infobox"><b>' + unescape(elemento.nombre) + 
+                                   '</b><br>' + unescape(elemento.nombre_director) + 
+                                   '</div><a href="/primera/ficha/'+unescape(elemento.id)+'" class="btn btn-mini" style="margin-right:5px; float:right;"><i class="icon-zoom-in"></i> Ver mas</a></div>';
+                       infowindow = new google.maps.InfoWindow({
+                                    content: html,
+                                    zIndex: 999,
+                                });
+                  infowindow.open(map, this);
+                  });                     
+                });
+            });
+            /* Initialise datatables */
+         var oTable = $('#actortable').dataTable({
+               
+                "oLanguage": {
+                            "sProcessing":   "Procesando...",
+                            "sLengthMenu":   "Mostrar _MENU_ registros",
+                            "sZeroRecords":  "No se encontraron resultados",
+                            "sInfo":         "Mostrando desde _START_ hasta _END_ de _TOTAL_ registros",
+                            "sInfoEmpty":    "Mostrando desde 0 hasta 0 de 0 registros",
+                            "sInfoFiltered": "(filtrado de _MAX_ registros en total)",
+                            "sInfoPostFix":  "",
+                            "sSearch":       "Buscar:",
+                            "sUrl":          "",
+                            "oPaginate": {
+                                "sFirst":    "Primero",
+                                "sPrevious": "Anterior",
+                                "sNext":     "Siguiente",
+                                "sLast":     "Último"
+                            }
+                    }
+         });
+        $('#tabladatos').hide();
+        $('#vermapa').click(function(){
+            $('#tabladatos').fadeOut();
+            $('#contenedor_mapa').fadeIn();
+            $('#vermapa').addClass('active');
+            $('#vertabla').removeClass('active');
+        });
+        $('#vertabla').click(function(){
+            $('#contenedor_mapa').fadeOut();
+            $('#tabladatos').fadeIn();
+            $('#vertabla').addClass('active');
+            $('#vermapa').removeClass('active');
+
+        });
+
+        //Agergar a combobox las variables seleccionadas
+
+        {% if request.session.organizado %}
+            $('#id_organizado').val({{request.session.organizado.id}});
+        {% endif %}
+        {% if request.session.fecha %}
+            $('#id_fecha').val({{request.session.fecha.id}});
+        {% endif %}
+        {% if request.session.tipo_propiedad %}
+            $('#id_tipo_propiedad').val({{request.session.tipo_propiedad.id}});
+        {% endif %}
+        {% if request.session.gti %}
+            $('#id_gti').val({{request.session.gti.id}});
+        {% endif %}
+        {% if request.session.tipo_bosque_umf %}
+            $('#id_tipo_bosque_umf').val({{request.session.tipo_bosque_umf.id}});
+        {% endif %}
+
+    }); //fin del initialize
+
+</script>
+
+{%endblock%}
+
+{%block contenido%}
+<style type="text/css">
+      #map_canvas {
+            display: none;
+      }
+</style>
+<div class="interna">
+    <div class="container_12">
+        <br>
+        <div class="grid_2">
+            <img class="fotoactor" src="/files/img/primera_transformacion.jpg">
+        </div>
+        <div class="grid_10 despactor">
+            <div class="titulo-actor">Empresa de Primera Transformación</div>
+            <p>
+Persona natural o jurídica dedicada a desarrollar actividades en la producción, de primera  transformación y venta de los productos (rollo, aserrada, timber y tablones, entre otros). 
+            </p>
+        </div>
+        <div class="clear"></div>
+        <div class="grid_12">
+            <form action="." method="POST">
+              {% csrf_token %}
+                <div class="generalform">
+                    <!-- 
+                    <div class="formelement">
+                        <div class="labelform">{{form.fecha.label}}</div>
+                        <div class="filtros">{{form.fecha}}<br>{{form.fecha.errors}}</div>
+                    </div>
+                    -->
+                    <div class="formelement">
+                        <div class="labelform">{{form.tipo_propiedad.label}}</div>
+                        <div class="filtros">{{form.tipo_propiedad}}<br>{{form.tipo_propiedad.errors}}</div>
+                    </div>
+                    <!-- <div class="label">{{form.area_total.label}}</div>
+                    <div class="filtros">{{form.area_total}}<br>{{form.area_total.errors}}</div>
+                    <div class="clean"></div> -->
+                    <!-- 
+                    <div class="formelement">
+                        <div class="labelform">{{form.organizado.label}}</div>
+                        <div class="filtros">{{form.organizado}}<br>{{form.organizado.errors}}</div>
+                    </div> -->
+
+                    <div class="formelement">
+                        <div class="labelform">{{form.gti.label}}</div>
+                        <div class="filtros">{{form.gti}}<br>{{form.gti.errors}}</div>
+                    </div>
+
+                    <div class="formelement">
+                        <div class="labelform">{{form.tipo_bosque_umf.label}}</div>
+                        <div class="filtros">{{form.tipo_bosque_umf}}<br>{{form.tipo_bosque_umf.errors}}</div>
+                    </div>
+
+                    <div class="formelement">
+                        <div class="labelform">{{form.tipo_certificacion.label}}</div>
+                        <div class="filtros">{{form.tipo_certificacion}}<br>{{form.tipo_certificacion.errors}}</div>
+                    </div>
+
+                    <button id="actualizarmapa"class="consultar btn btn-warning mapafiltrado"><i class="icon-refresh icon-white"></i> Actualizar Mapa </button>
+                    <div class="clear"></div>
+                </div>
+            </form>
+        </div>
+        <div class="grid_12">
+            <div class="maptabs">
+                <div class="btn-group">
+                <a href="#" id="vermapa"class="btn  btn-large active"><i class="icon-globe"></i>  Ver Mapa</a>
+                <a href="#" id="vertabla"class="btn  btn-large"><i class="icon-list-alt"></i>  Ver lista de Datos</a>
+                </div>
+            </div>
+            <div class="alert alert-success conteo"><b>{{consulta.count}}</b> Dueños de Bosques encontrados</div>
+            <div class="clear"></div>
+            <div id="contenedor_mapa">
+                <div id="map" style="width: 100%; height: 500px">
+                    
+                </div>
+            </div>
+            
+            <div id="tabladatos">
+                <table class="table table-striped table-bordered table-condensed" id="actortable">
+                    <thead>
+                        <tr>
+                            <th>Nombre Propietario</th>
+                            <th>Sexo</th>
+                            <th>Area total (ha)</th>
+                            <th>Departamento</th>
+                            <th>Municipio</th>
+                            <th>Tipo bosque UMF</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for obj in lista %}
+                        <tr class="gradeA">
+                            <td><a href="/ficha/{{obj.6}}" class="btn btn-mini" style="margin-right:5px;"><i class="icon-zoom-in"></i> </a> <a href="/ficha/{{obj.6}}">{{obj.0}}</a></td>
+                            <td>{{obj.1}}</td>
+                            <td>{{obj.2}}</td>
+                            <td>{{obj.3}}</td>
+                            <td>{{obj.4}}</td>
+                            <td>{%for b in obj.5.all%}
+                                {{b}},
+                                {%endfor%}
+                            </td> 
+                        </tr>
+                        {% endfor %}    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
