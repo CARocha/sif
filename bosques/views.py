@@ -175,19 +175,11 @@ def obtener_todo_mapa(request):
 
 def _queryset_filtrado_primera(request):
 	params = {}
-	if 'tipo_propiedad' in request.session:
-		params['tipo_propiedad'] = request.session['tipo_propiedad']
-	# if 'area_total' in request.session:
-	# 	params['area_total'] = request.session['area_total']
-	if 'organizado' in request.session:
-		params['organizado'] = request.session['organizado']
-	if 'gti' in request.session:
-		params['gobierno_gti'] = request.session['gti']
-	if 'tipo_bosque_umf' in request.session:
-		params['bosques_umf'] = request.session['tipo_bosque_umf']
-	if 'tipo_certificacion' in request.session:
-		params['tipo_certificacion'] = request.session['tipo_certificacion']
-
+	if 'org_empresarial' in request.session:
+		params['org_empresarial'] = request.session['org_empresarial']
+		params['gobierno_gti'] = request.session['gobierno_gti']
+		params['area_trabajo'] = request.session['area_trabajo']
+		params['productos_venden'] = request.session['productos_venden']
 	unvalid_keys = []
 	for key in params:
 		if not params[key]:
@@ -196,13 +188,16 @@ def _queryset_filtrado_primera(request):
 	for key in unvalid_keys:
 		del params[key]
     
-	return PropietarioBosques.objects.filter(**params)
+	return EmpresaPrimeraTransformacion.objects.filter(**params)
 
 def consultar_primera(request):    
 	if request.method == 'POST':
 		form = PrimeraTransformacionForm(request.POST)
 		if form.is_valid():
-			request.session['organizacion'] = form.cleaned_data['organizacion']
+			request.session['org_empresarial'] = form.cleaned_data['org_empresarial']
+			request.session['gobierno_gti'] = form.cleaned_data['gobierno_gti']
+			request.session['area_trabajo'] = form.cleaned_data['area_trabajo']
+			request.session['productos_venden'] = form.cleaned_data['productos_venden']
 			centinel = 1
 	else:
 		form = PrimeraTransformacionForm()
@@ -210,14 +205,19 @@ def consultar_primera(request):
 
 	lista = []
 	if centinel == 1:
-		consulta = _queryset_filtrado(request)
+		consulta = _queryset_filtrado_primera(request)
 	else:
-		request.session['organizacion'] = None
+		request.session['org_empresarial'] = None
+		request.session['gobierno_gti'] = None
+		request.session['area_trabajo'] = None
+		request.session['productos_venden'] = None
 		consulta = EmpresaPrimeraTransformacion.objects.all()
 	for obj in consulta:
-		lista.append([obj.nombre_empresa,
+		lista.append([obj.nombre_empresa_forestal,
 			          obj.departamento,
 			          obj.municipio,
+			          obj.org_empresarial,
+			          obj.id,
 			        ]) 
 	return render_to_response('primera_transformacion/consultar_primera.html', locals(),
     	                      context_instance=RequestContext(request))
@@ -225,7 +225,7 @@ def consultar_primera(request):
 def obtener_mapa_primera(request):
     if request.is_ajax():
         lista = []
-        params = _queryset_filtrado(request)
+        params = _queryset_filtrado_primera(request)
         for objeto in params.distinct():
             if objeto.latitud and objeto.longitud:
                 dicc = dict(nombre=objeto.nombre_empresa_forestal, 

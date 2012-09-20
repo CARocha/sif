@@ -20,7 +20,7 @@
             if ({{centinel}} == 1){
                 var ruta = '/primera/ver/';
             }else{
-                var ruta = '/primera/ver/todo/';
+                var ruta = '/primera/todo/';
             }
                 $.getJSON(ruta, function(data){
                 $.each(data, function(i, elemento){
@@ -35,7 +35,7 @@
                     //for each (var item in elemento.tipo) alert(item);
                     google.maps.event.addListener(marker, "click", function() {
                         var html = '<div class="infobox"><b>' + unescape(elemento.nombre) + 
-                                   '</b><br>' + unescape(elemento.nombre_director) + 
+                                   '</b><br>Director: ' + unescape(elemento.director) + 
                                    '</div><a href="/primera/ficha/'+unescape(elemento.id)+'" class="btn btn-mini" style="margin-right:5px; float:right;"><i class="icon-zoom-in"></i> Ver mas</a></div>';
                        infowindow = new google.maps.InfoWindow({
                                     content: html,
@@ -84,19 +84,10 @@
         //Agergar a combobox las variables seleccionadas
 
         {% if request.session.organizado %}
-            $('#id_organizado').val({{request.session.organizado.id}});
-        {% endif %}
-        {% if request.session.fecha %}
-            $('#id_fecha').val({{request.session.fecha.id}});
-        {% endif %}
-        {% if request.session.tipo_propiedad %}
-            $('#id_tipo_propiedad').val({{request.session.tipo_propiedad.id}});
+            $('#id_org_empresarial').val({{request.session.org_empresarial.id}});
         {% endif %}
         {% if request.session.gti %}
             $('#id_gti').val({{request.session.gti.id}});
-        {% endif %}
-        {% if request.session.tipo_bosque_umf %}
-            $('#id_tipo_bosque_umf').val({{request.session.tipo_bosque_umf.id}});
         {% endif %}
 
     }); //fin del initialize
@@ -128,40 +119,22 @@ Persona natural o jurídica dedicada a desarrollar actividades en la producción
             <form action="." method="POST">
               {% csrf_token %}
                 <div class="generalform">
-                    <!-- 
                     <div class="formelement">
-                        <div class="labelform">{{form.fecha.label}}</div>
-                        <div class="filtros">{{form.fecha}}<br>{{form.fecha.errors}}</div>
+                        <div class="labelform">{{form.org_empresarial.label}}</div>
+                        <div class="filtros">{{form.org_empresarial}}<br>{{form.org_empresarial.errors}}</div>
                     </div>
-                    -->
                     <div class="formelement">
-                        <div class="labelform">{{form.tipo_propiedad.label}}</div>
-                        <div class="filtros">{{form.tipo_propiedad}}<br>{{form.tipo_propiedad.errors}}</div>
+                        <div class="labelform">{{form.gobierno_gti.label}}</div>
+                        <div class="filtros">{{form.gobierno_gti}}<br>{{form.gobierno_gti.errors}}</div>
                     </div>
-                    <!-- <div class="label">{{form.area_total.label}}</div>
-                    <div class="filtros">{{form.area_total}}<br>{{form.area_total.errors}}</div>
-                    <div class="clean"></div> -->
-                    <!-- 
                     <div class="formelement">
-                        <div class="labelform">{{form.organizado.label}}</div>
-                        <div class="filtros">{{form.organizado}}<br>{{form.organizado.errors}}</div>
-                    </div> -->
-
-                    <div class="formelement">
-                        <div class="labelform">{{form.gti.label}}</div>
-                        <div class="filtros">{{form.gti}}<br>{{form.gti.errors}}</div>
+                        <div class="labelform">{{form.area_trabajo.label}}</div>
+                        <div class="filtros">{{form.area_trabajo}}<br>{{form.area_trabajo.errors}}</div>
                     </div>
-
                     <div class="formelement">
-                        <div class="labelform">{{form.tipo_bosque_umf.label}}</div>
-                        <div class="filtros">{{form.tipo_bosque_umf}}<br>{{form.tipo_bosque_umf.errors}}</div>
+                        <div class="labelform">{{form.productos_venden.label}}</div>
+                        <div class="filtros">{{form.productos_venden}}<br>{{form.productos_venden.errors}}</div>
                     </div>
-
-                    <div class="formelement">
-                        <div class="labelform">{{form.tipo_certificacion.label}}</div>
-                        <div class="filtros">{{form.tipo_certificacion}}<br>{{form.tipo_certificacion.errors}}</div>
-                    </div>
-
                     <button id="actualizarmapa"class="consultar btn btn-warning mapafiltrado"><i class="icon-refresh icon-white"></i> Actualizar Mapa </button>
                     <div class="clear"></div>
                 </div>
@@ -186,23 +159,19 @@ Persona natural o jurídica dedicada a desarrollar actividades en la producción
                 <table class="table table-striped table-bordered table-condensed" id="actortable">
                     <thead>
                         <tr>
-                            <th>Nombre Propietario</th>
-                            <th>Sexo</th>
-                            <th>Area total (ha)</th>
+                            <th>Nombre de Empresa</th>
                             <th>Departamento</th>
                             <th>Municipio</th>
-                            <th>Tipo bosque UMF</th>
+                            <th>Tipo de Organización</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for obj in lista %}
                         <tr class="gradeA">
-                            <td><a href="/ficha/{{obj.6}}" class="btn btn-mini" style="margin-right:5px;"><i class="icon-zoom-in"></i> </a> <a href="/ficha/{{obj.6}}">{{obj.0}}</a></td>
+                            <td><a href="/primera/ficha/{{obj.4}}" class="btn btn-mini" style="margin-right:5px;"><i class="icon-zoom-in"></i> </a> <a href="/primera/ficha/{{obj.4}}">{{obj.0}}</a></td>
                             <td>{{obj.1}}</td>
                             <td>{{obj.2}}</td>
-                            <td>{{obj.3}}</td>
-                            <td>{{obj.4}}</td>
-                            <td>{%for b in obj.5.all%}
+                            <td>{%for b in obj.3.all%}
                                 {{b}},
                                 {%endfor%}
                             </td> 
