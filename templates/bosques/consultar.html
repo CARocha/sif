@@ -4,56 +4,108 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript">
      $(document).ready(function () {
-      var latlng = new google.maps.LatLng(12.877, -85.001);
-      var options = {
-        zoom: 8,
-        center: latlng,
-        mapTypeId: google.maps.MapTypeId.TERRAIN
-      }
-      function ocultar(exist){
-        if (exist==""){
-            return "hide";
-        }
-      }
-      var map = new google.maps.Map(document.getElementById("map"), options);
+        // Create an array of styles.
+        var styles = [
+          {
+            "featureType": "road",
+            "stylers": [
+              { "hue": "#00ddff" },
+              { "lightness": 45 },
+              { "visibility": "off" }
+            ]
+          },{
+            "stylers": [
+              { "weight": 0.3 }
+            ]
+          },{
+            "featureType": "water",
+            "stylers": [
+              { "hue": "#00d4ff" },
+              { "saturation": -33 },
+              { "lightness": 3 },
+              { "gamma": 1.11 }
+            ]
+          },{
+            "featureType": "landscape.natural",
+            "stylers": [
+              { "saturation": 12 },
+              { "hue": "#b2ff00" },
+              { "gamma": 0.97 }
+            ]
+          },{
+            "featureType": "administrative",
+            "elementType": "labels.text.fill",
+            "stylers": [
+              { "hue": "#ff9100" }
+            ]
+          },{
+          }
+        ];
 
-            if ({{centinel}} == 1){
-                var ruta = '/ver/';
-            }else{
-                var ruta = '/ver/todo/';
+        // Create a new StyledMapType object, passing it the array of styles,
+        // as well as the name to be displayed on the map type control.
+        var styledMap = new google.maps.StyledMapType(styles,
+        {name: "Styled Map"});
+
+        // Create a map object, and include the MapTypeId to add
+        // to the map type control.
+        var mapOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng(12.877, -85.001),
+            mapTypeControlOptions: {
+              mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
             }
-                $.getJSON(ruta, function(data){
-                $.each(data, function(i, elemento){
-                    var latlng = new google.maps.LatLng(elemento.lat, elemento.lon);
-                    var marker = new google.maps.Marker({
-                        position: latlng,
-                        map: map,
-                        name: elemento.nombre,
-                        desc: elemento.propiedad,
-                        icon: '/files/img/mapicon'+elemento.coloricon+'.png'                        
-                    });
-                    //for each (var item in elemento.tipo) alert(item);
-                    google.maps.event.addListener(marker, "click", function() {
-                        var html = '<div class="infobox"><b>' + unescape(elemento.propiedad) + 
-                                   '</b><br>' + unescape(elemento.nombre) +
-                                   '</b><br><br><div class="well"><b>Certificaciones</b><br>' + 
-                                   '<div class="cert fsc '+ocultar(elemento.fsc)+'">'+unescape(elemento.fsc) +'<img src="/files/img/badgefsc.png"></div>'+ 
-                                   '<div class="cert fsc '+ocultar(elemento.fsc_slimf)+'">' + unescape(elemento.fsc_slimf) +'<img src="/files/img/badgefsc.png"></div>'+ 
-                                   '<div class="cert fsc '+ocultar(elemento.fsc_cw)+'">' + unescape(elemento.fsc_cw) +'<img src="/files/img/badgefsc.png"></div>'+ 
-                                   '<div class="cert comer_justo '+ocultar(elemento.comer_justo)+'">' + unescape(elemento.comer_justo) +'<img src="/files/img/badgefsc.png"></div>'+ 
-                                   '<div class="cert iso '+ocultar(elemento.iso)+'">' + unescape(elemento.iso) +'<img src="/files/img/badgeiso.png"></div>'+ 
-                                   '<div class="cert fsc '+ocultar(elemento.otro)+'">' + unescape(elemento.otro) +'<img src="/files/img/badgeotro.png"></div>'+ 
-                                    '<div class="cert notiene '+ocultar(elemento.no)+'">' + unescape(elemento.no) +'</div>'+ 
-                                    '<div class="cert enproceso '+ocultar(elemento.proceso)+'">' + unescape(elemento.proceso) +'</div>'+ 
-                                   '</div><a href="/ficha/'+unescape(elemento.id)+'" class="btn btn-mini" style="margin-right:5px; float:right;"><i class="icon-zoom-in"></i> Ver mas</a></div>';
-                       infowindow = new google.maps.InfoWindow({
-                                    content: html,
-                                    zIndex: 999,
-                                });
-                  infowindow.open(map, this);
-                  });                     
+        };
+        var map = new google.maps.Map(document.getElementById('map'),
+        mapOptions);
+
+        //Associate the styled map with the MapTypeId and set it to display.
+        map.mapTypes.set('map_style', styledMap);
+        map.setMapTypeId('map_style');
+        
+        function ocultar(exist){
+            if (exist==""){
+                return "hide";
+            }
+        }
+
+        if ({{centinel}} == 1){
+            var ruta = '/ver/';
+        }else{
+            var ruta = '/ver/todo/';
+        }
+            $.getJSON(ruta, function(data){
+            $.each(data, function(i, elemento){
+                var latlng = new google.maps.LatLng(elemento.lat, elemento.lon);
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: map,
+                    name: elemento.nombre,
+                    desc: elemento.propiedad,
+                    icon: '/files/img/mapicon'+elemento.coloricon+'.png'                        
                 });
+                //for each (var item in elemento.tipo) alert(item);
+                google.maps.event.addListener(marker, "click", function() {
+                    var html = '<div class="infobox"><b>' + unescape(elemento.propiedad) + 
+                               '</b><br>' + unescape(elemento.nombre) +
+                               '</b><br><br><div class="well"><b>Certificaciones</b><br>' + 
+                               '<div class="cert fsc '+ocultar(elemento.fsc)+'">'+unescape(elemento.fsc) +'<img src="/files/img/badgefsc.png"></div>'+ 
+                               '<div class="cert fsc '+ocultar(elemento.fsc_slimf)+'">' + unescape(elemento.fsc_slimf) +'<img src="/files/img/badgefsc.png"></div>'+ 
+                               '<div class="cert fsc '+ocultar(elemento.fsc_cw)+'">' + unescape(elemento.fsc_cw) +'<img src="/files/img/badgefsc.png"></div>'+ 
+                               '<div class="cert comer_justo '+ocultar(elemento.comer_justo)+'">' + unescape(elemento.comer_justo) +'<img src="/files/img/badgefsc.png"></div>'+ 
+                               '<div class="cert iso '+ocultar(elemento.iso)+'">' + unescape(elemento.iso) +'<img src="/files/img/badgeiso.png"></div>'+ 
+                               '<div class="cert fsc '+ocultar(elemento.otro)+'">' + unescape(elemento.otro) +'<img src="/files/img/badgeotro.png"></div>'+ 
+                                '<div class="cert notiene '+ocultar(elemento.no)+'">' + unescape(elemento.no) +'</div>'+ 
+                                '<div class="cert enproceso '+ocultar(elemento.proceso)+'">' + unescape(elemento.proceso) +'</div>'+ 
+                               '</div><a href="/ficha/'+unescape(elemento.id)+'" class="btn btn-mini" style="margin-right:5px; float:right;"><i class="icon-zoom-in"></i> Ver mas</a></div>';
+                   infowindow = new google.maps.InfoWindow({
+                                content: html,
+                                zIndex: 999,
+                            });
+              infowindow.open(map, this);
+              });                     
             });
+        });
             /* Initialise datatables */
          var oTable = $('#actortable').dataTable({
                

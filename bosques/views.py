@@ -8,6 +8,7 @@ from forms import *
 # Create your views here.
 def index(request):
 	bosques = PropietarioBosques.objects.all().count()
+	empresa_primera = EmpresaPrimeraTransformacion.objects.all().count()
 
 	return render_to_response ('index.html', RequestContext(request, locals()))
 
