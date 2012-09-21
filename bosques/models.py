@@ -182,6 +182,15 @@ class Ambientales(models.Model):
 
     def __unicode__(self):
         return self.nombre
+
+class ProVendenBosque(models.Model):
+    nombre = models.CharField(max_length=200)
+    class Meta:
+        verbose_name = ('Tipo de producto que venden manejo de bosque')
+        verbose_name_plural = ('Tipo de producto que venden manejo de bosque')
+
+    def __unicode__(self):
+        return self.nombre
     
 #--------------- Ficha principal -----------------------------------------------                
 class PropietarioBosques(models.Model):
@@ -264,6 +273,11 @@ class PropietarioBosques(models.Model):
     otro_ambiental = models.ManyToManyField(Ambientales, null=True, blank=True)
     tipo_certificacion = models.ManyToManyField(TipoCertificacion, 
                         verbose_name="Tipo de certificacion")
+    primera_transformacion = models.ForeignKey('EmpresaPrimeraTransformacion',null=True, blank=True)
+    producto_venden = models.ManyToManyField(ProVendenBosque, 
+                                            verbose_name=u'Tipo de producto que venden',
+                                            null=True, blank=True)
+    regente = models.ForeignKey('RegenteForestal',null=True, blank=True)
 
     year = models.IntegerField(editable=False)
 

@@ -58,6 +58,11 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
                        'buenas_practicas','otro_social', 'otro_ambiental','tipo_certificacion'
             	       )
         }),
+        ('Relaciones con actores', {
+            'classes': ('actoresRela',),
+            'fields': (('primera_transformacion','producto_venden'), 'regente'
+                     )
+        }),
          
     )
     class Media:
@@ -83,6 +88,7 @@ admin.site.register(ProveedoresSuministros)
 admin.site.register(TipoBosqueUmf)
 admin.site.register(MetodoExtraccion)
 admin.site.register(Madera)
+admin.site.register(ProVendenBosque)
 admin.site.register(PropietarioBosques, PropietarioBosqueAdmin)
 
 #---------------- seguimiento -------------------------------
