@@ -449,7 +449,7 @@ class SeguimientoRegente(models.Model):
         verbose_name_plural = ('Seguimiento Regente forestal')
 
     def __unicode__(self):
-        pass
+        return self.regente
     
 class DatosSeguimientoRegente(models.Model):
     fecha_seguimiento = models.DateField()
@@ -467,7 +467,8 @@ class DatosSeguimientoRegente(models.Model):
     fkregente = models.ForeignKey(SeguimientoRegente)
     
     def __unicode__(self):
-        pass
+        return self.fecha_seguimiento
+        
     class Meta:
         verbose_name = ('Seguimiento Datos regente forestal')
         verbose_name_plural = ('Seguimiento Datos regente forestal')
@@ -500,7 +501,7 @@ class TrabajoTranformacion(models.Model):
         verbose_name_plural = ('Trabajo Tranformaciones')
 
     def __unicode__(self):
-        pass
+        return self.nombre
 
 class ServicioSecado(models.Model):
     nombre = models.CharField(max_length=200)
@@ -510,7 +511,7 @@ class ServicioSecado(models.Model):
         verbose_name_plural = ('Servicio secado de la maderas')
 
     def __unicode__(self):
-        pass
+        return self.nombre
 
 class ProductosVenden(models.Model):
     nombre = models.CharField(max_length=200)
@@ -520,7 +521,7 @@ class ProductosVenden(models.Model):
         verbose_name_plural = ('Productos que venden')
 
     def __unicode__(self):
-        pass
+        return self.nombre
 
 class EmpresaPrimeraTransformacion(models.Model):
     fecha_llenado = models.DateField()
@@ -583,7 +584,7 @@ class SeguimientoPrimeraTransformacion(models.Model):
         verbose_name_plural = ('Seguimiento Empresa forestal primera transformación')
             
     def __unicode__(self):
-        pass
+        return self.nombre_empresa
 
 class AsistenciaTecnica(models.Model):
     nombre = models.CharField(max_length=50)
@@ -657,7 +658,7 @@ class DatosPrimeraTransforma(models.Model):
     p_tranformacion = models.ForeignKey(SeguimientoPrimeraTransformacion)
 
     def __unicode__(self):
-        pass
+        return self.fecha
 
     class Meta:
         verbose_name_plural = "Datos de seguimiento primera transformacion"
