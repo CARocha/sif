@@ -1,5 +1,9 @@
 {%extends "base.html"%}
 
+{%block extra_js%} 
+
+{%endblock%}
+
 {%block contenido%}
 <div class="interna">
     <div class="container_12">
@@ -12,37 +16,32 @@
 	          	  <a href="#" id="" class="btn "><i class="icon-time"></i> Seguimiento</a>
 	            </div>
     		</div>
-            <div class="titulo-actor">Ficha Tecnica de Propietario de Bosque</div>
+            <div class="titulo-actor">Ficha Tecnica de Empresa Forestal de Primera Transformación</div>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
         <div class="ficha">
         	<div class="grid_3">
         		<div class="labelficha">
-        			Nombre del propietario
+        			Nombre empresa forestal
         		</div>
         		<div class="valor">
-        			{{datos.nombre_propietario}}
+        			{{datos.nombre_empresa_forestal}}
         		</div>
 
         		<div class="labelficha">
-        			No. Registro Catastral
+        			Año de creación
         		</div>
         		<div class="valor">
-        			{{datos.registro_catastral}}
+        			{{datos.fecha_creacion}}
         		</div>
 
 				<div class="labelficha">
-        			Tipo de Propiedad
+        			Nombre de Director
         		</div>
         		<div class="valor">
-					{%for propiedad in datos.tipo_propiedad.all%}
-						{{propiedad}}<br>
-					{%endfor%}
+					{{datos.nombre_director}}
         		</div>
-
-
-
 				{%if datos.tel_convencional%}
 	 				<div class="labelficha">
 	        			Telefono
@@ -59,6 +58,16 @@
 	        		<div class="valor">
 						{{datos.tel_celular}}
 	        		</div>
+				{%endif%}
+			</div>
+			<div class="grid_3">
+				{%if datos.pagina_web%}
+				<div class="labelficha">
+        			Sitio web
+        		</div>
+        		<div class="valor">
+					{{datos.pagina_web}}
+				</div>
 				{%endif%}
 				{%if datos.email%}
 	 				<div class="labelficha">
@@ -77,40 +86,7 @@
 	        		</div>
 				{%endif%}
 			</div>
-			<div class="grid_3">
-				<div class="labelficha">
-        			Sexo
-        		</div>
-        		<div class="valor">
-					{{datos.get_sexo_propietario_display}}
-				</div>
 
-				<div class="labelficha">
-        			Nombre de Propiedad
-        		</div>
-        		<div class="valor">
-        			{{datos.nombre_propiedad}}
-        		</div>
-
- 				<div class="labelficha">
-        			Area Total
-        		</div>
-        		<div class="valor">
-					{{datos.area_propiedad}} ha
-        		</div>
-				
-
- 				<div class="labelficha">
-        			Municipio
-        		</div>
-        		<div class="valor">
-					{{datos.municipio}}
-        		</div>
-
-			</div>
-			<div class="grid_6">
-				<img src="/files/img/poligono.png">
-			</div>
 			<div class="clear"></div>
 			<div class="grid_6">
 
@@ -124,17 +100,6 @@
 						{%endfor%}
 					</div>
 					<div class="clear"></div>
-					{%if datos.organizacion.count > 0%}
-						<div class="labelfichabox">
-							Organziacion
-						</div>
-						<div class="valuefichabox">
-							
-							{%for orga in datos.organizacion.all%}
-								{{orga}},
-							{%endfor%}
-						</div>
-					{%endif%}
 					{%if datos.desde%}
 						<div class="labelfichabox">
 							Desde
@@ -144,15 +109,27 @@
 						</div>
 					{%endif%}
 					<div class="clear"></div>
+					{%if datos.alianza.count > 0%}
+						<div class="labelfichabox">
+							Alianza
+						</div>
+						<div class="valuefichabox">
+							
+							{%for orga in datos.alianza.all%}
+								{{orga}},
+							{%endfor%}
+						</div>
+					{%endif%}
+					<div class="clear"></div>
 				</div>
 
 				<div class="fichabox">
 					<div class="labelfichabox">
-						Tipo de Bosque
+						Productos que venden
 					</div>
 					<div class="valuefichabox">
-						{%for bosq in datos.bosques_umf.all%}
-							{{bosq}},
+						{%for p in datos.productos_venden.all%}
+							{{p}},
 						{%endfor%}
 					</div>
 					<div class="clear"></div>	
@@ -188,7 +165,32 @@
 
 				<br><br><br>
 			</div>
-			<div class="grid_6">
+			<div class="grid_6" style="margin-bottom:20px">
+
+				<div class="fichabox">
+					{%if datos.area_trabajo.count > 0%}
+					<div class="labelfichabox">
+						Area de trabajo
+					</div>
+					<div class="valuefichabox">
+						{%for tipo in datos.area_trabajo.all%}
+							{{tipo}},
+						{%endfor%}
+					</div>
+					<div class="clear"></div>	
+					{%endif%}
+					{%if datos.area_trabajo.count > 0%}
+					<div class="labelfichabox">
+						Servicio de secado
+					</div>
+					<div class="valuefichabox">
+						{%for sec in datos.servicio_secado.all%}
+							{{sec}},
+						{%endfor%}
+					</div>
+					<div class="clear"></div>	
+					{%endif%}
+				</div>
 
 				{%if datos.gobierno_gti%}
 				<div class="fichabox">

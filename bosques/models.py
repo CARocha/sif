@@ -500,7 +500,7 @@ class TrabajoTranformacion(models.Model):
         verbose_name_plural = ('Trabajo Tranformaciones')
 
     def __unicode__(self):
-        return self.nombre
+        pass
 
 class ServicioSecado(models.Model):
     nombre = models.CharField(max_length=200)
@@ -510,7 +510,7 @@ class ServicioSecado(models.Model):
         verbose_name_plural = ('Servicio secado de la maderas')
 
     def __unicode__(self):
-        return self.nombre
+        pass
 
 class ProductosVenden(models.Model):
     nombre = models.CharField(max_length=200)
@@ -520,7 +520,7 @@ class ProductosVenden(models.Model):
         verbose_name_plural = ('Productos que venden')
 
     def __unicode__(self):
-        return self.nombre
+        pass
 
 class EmpresaPrimeraTransformacion(models.Model):
     fecha_llenado = models.DateField()
@@ -583,7 +583,7 @@ class SeguimientoPrimeraTransformacion(models.Model):
         verbose_name_plural = ('Seguimiento Empresa forestal primera transformación')
             
     def __unicode__(self):
-        return self.nombre_empresa
+        pass
 
 class AsistenciaTecnica(models.Model):
     nombre = models.CharField(max_length=50)
@@ -656,8 +656,8 @@ class DatosPrimeraTransforma(models.Model):
 
     p_tranformacion = models.ForeignKey(SeguimientoPrimeraTransformacion)
 
-    #def __unicode__(self):
-    #    pass
+    def __unicode__(self):
+        pass
 
     class Meta:
         verbose_name_plural = "Datos de seguimiento primera transformacion"
