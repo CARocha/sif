@@ -60,7 +60,7 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
         }),
         ('Relaciones con actores', {
             'classes': ('actoresRela',),
-            'fields': (('primera_transformacion','producto_venden','regente')
+            'fields': (('primera_transformacion','producto_venden'), 'regente'
                      )
         }),
          
