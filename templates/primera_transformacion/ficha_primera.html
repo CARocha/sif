@@ -162,7 +162,17 @@
 					<div class="clear"></div>	
 				</div>
 				{%endif%}
-
+				{%if datos.capacidad_horno.count > 0%}
+				<div class="fichabox">
+					<div class="labelfichabox">
+						Capacidad de horno
+					</div>
+					<div class="valuefichabox">
+						{{datos.capacidad_horno}}
+					</div>
+					<div class="clear"></div>	
+				</div>
+				{%endif%}
 				<br><br><br>
 			</div>
 			<div class="grid_6" style="margin-bottom:20px">
