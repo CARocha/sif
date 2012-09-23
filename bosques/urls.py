@@ -19,4 +19,8 @@ urlpatterns = patterns('bosques.views',
     url(r'^segunda/ver/$', 'obtener_mapa_segunda', name='obtener-mapa-segunda'),
     url(r'^segunda/todo/$', 'obtener_todo_mapa_segunda', name='obtener-todo-mapa-segunda'),
 
+    # Regente Forestal
+    url(r'^regente/consultar/$', 'consultar_regente', name="consultar-regente"),
+    url(r'^regente/ficha/(?P<id>\d+)/$', 'ficha_regente', name='ficha-regente'),
+
     )

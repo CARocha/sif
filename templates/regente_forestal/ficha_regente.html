@@ -16,31 +16,30 @@
 	          	  <a href="#" id="" class="btn "><i class="icon-time"></i> Seguimiento</a>
 	            </div>
     		</div>
-            <div class="titulo-actor">Ficha Tecnica de Empresa Forestal de Segunda Transformación</div>
+            <div class="titulo-actor">Ficha Tecnica de Regente Forestal</div>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
         <div class="ficha">
         	<div class="grid_3">
         		<div class="labelficha">
-        			Nombre empresa forestal
+        			Nombre de regente
         		</div>
         		<div class="valor">
-        			{{datos.nombre_comercial}}
+        			{{datos.nombre_regente}}
         		</div>
 
         		<div class="labelficha">
-        			Año de creación
+        			Código de regente
         		</div>
         		<div class="valor">
-        			{{datos.creacion}}
+        			{{datos.codigo_regente}}
         		</div>
-
-				<div class="labelficha">
-        			Nombre de Director
+        		<div class="labelficha">
+        			Años de experiencia
         		</div>
         		<div class="valor">
-					{{datos.nombre_director}}
+        			{{datos.experiencia}}
         		</div>
 				{%if datos.tel_convencional%}
 	 				<div class="labelficha">
@@ -61,6 +60,14 @@
 				{%endif%}
 			</div>
 			<div class="grid_3">
+				{%if datos.pagina_web%}
+				<div class="labelficha">
+        			Fecha de acreditación
+        		</div>
+        		<div class="valor">
+					{{datos.fecha_acreditacion}}
+				</div>
+				{%endif%}
 				{%if datos.pagina_web%}
 				<div class="labelficha">
         			Sitio web
@@ -97,14 +104,12 @@
 			<div class="grid_6">
 
 				<div class="fichabox" style="margin-top:0px;">
-					{%if datos.area_trabajo.count > 0%}
+					{%if datos.perfil %}
 					<div class="labelfichabox">
-						Area de trabajo
+						Perfil / Experiencia
 					</div>
 					<div class="valuefichabox">
-						{%for tipo in datos.area_trabajo.all%}
-							{{tipo}},
-						{%endfor%}
+						{{datos.perfil}}
 					</div>
 					<div class="clear"></div>	
 					{%endif%}
@@ -173,143 +178,22 @@
 					<div class="clear"></div>
 				</div>
 
-				<div class="fichabox">
-					<div class="labelfichabox">
-						Productos que venden
-					</div>
-					<div class="valuefichabox">
-						{%for p in datos.producto_vende.all%}
-							{{p}},
-						{%endfor%}
-					</div>
-					<div class="clear"></div>
-					{%if datos.no_maderable.count > 0%}	
-						<div class="labelfichabox">
-							Productos no maderables
-						</div>
-						<div class="valuefichabox">
-							{%for mad in datos.no_maderable.all%}
-								{{mad}},
-							{%endfor%}
-						</div>
-						<div class="clear"></div>
-					{%endif%}	
-				</div>	
-
-				{%if datos.tipo_producto.count > 0%}
-				<div class="fichabox">
-					<div class="labelfichabox">
-						Tipo de Producto
-					</div>
-					<div class="valuefichabox">
-						{%for tipo_p in datos.tipo_producto.all%}
-							{{tipo_p}},
-						{%endfor%}
-					</div>
-					<div class="clear"></div>	
-				</div>
-				{%endif%}	
-
-				{%if datos.secado.count > 0%}
-				<div class="fichabox">
-					<div class="labelfichabox">
-						Tipo de Secado
-					</div>
-					<div class="valuefichabox">
-						{%for tipo_s in datos.secado.all%}
-							{{tipo_s}},
-						{%endfor%}
-					</div>
-					<div class="clear"></div>	
-				</div>
-				{%endif%}
-				{%if datos.capacidad_horno.count > 0%}
-				<div class="fichabox">
-					<div class="labelfichabox">
-						Capacidad de horno
-					</div>
-					<div class="valuefichabox">
-						{{datos.capacidad_horno}}
-					</div>
-					<div class="clear"></div>	
-				</div>
-				{%endif%}
 				<br><br><br>
 			</div>
 			<div class="grid_6" style="margin-bottom:20px">
 
-
-				{%if datos.gobierno_gti%}
 				<div class="fichabox">
 					<div class="labelfichabox">
-						Gobierno Territorial
+						Area de trabajo
 					</div>
 					<div class="valuefichabox">
-						{{datos.get_gobierno_gti_display}}
-					</div>
-					<div class="clear"></div>	
-				
-				{%if datos.nombre_gti%}
-					<div class="labelfichabox">
-						Nombre del GTI
-					</div>
-					<div class="valuefichabox">
-						{{datos.nombre_gti}}
+						{%for a in datos.area_trabajo.all%}
+							{{a}},
+						{%endfor%}
 					</div>
 					<div class="clear"></div>
-				{%endif%}	
-				</div>
-				{%endif%}
-
-				
-				<div class="fichabox">
-					{%if datos.otro_social.count > 0%}
-					<div class="labelfichabox">
-						Buenas practicas sociales y economicas
-					</div>
-					<div class="valuefichabox">
-						{%for soc in datos.otro_social.all%}
-							{{soc}},
-						{%endfor%}
-					</div>
-					<div class="clear"></div>	
-					{%endif%}
-
-					{%if datos.otro_ambiental.count > 0%}
-					<div class="labelfichabox">
-						Buenas practicas ambientales
-					</div>
-					<div class="valuefichabox">
-						{%for amb in datos.otro_ambiental.all%}
-							{{amb}},
-						{%endfor%}
-					</div>
-					<div class="clear"></div>	
-					{%endif%}
-					{%if datos.nivel_tecnologico.count > 0%}	
-						<div class="labelfichabox">
-							Nivel tecnologico
-						</div>
-						<div class="valuefichabox">
-							{%for tec in datos.nivel_tecnologico.all%}
-								{{tec}},
-							{%endfor%}
-						</div>
-						<div class="clear"></div>
-					{%endif%}	
-					{%if datos.vision_empresarial.count > 0%}	
-						<div class="labelfichabox">
-							Vision Empresarial
-						</div>
-						<div class="valuefichabox">
-							{%for vis in datos.vision_empresarial.all%}
-								{{vis}},
-							{%endfor%}
-						</div>
-						<div class="clear"></div>
-					{%endif%}	
-				</div>
-				
+	
+				</div>	
 			</div>
 		</div>
 	</div>

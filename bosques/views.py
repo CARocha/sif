@@ -9,6 +9,8 @@ from forms import *
 def index(request):
 	bosques = PropietarioBosques.objects.all().count()
 	empresa_primera = EmpresaPrimeraTransformacion.objects.all().count()
+	empresa_segunda = EmpresaSegundaTransformacion.objects.all().count()
+	regente = RegenteForestal.objects.all().count()
 
 	return render_to_response ('index.html', RequestContext(request, locals()))
 
@@ -176,11 +178,10 @@ def obtener_todo_mapa(request):
 
 def _queryset_filtrado_primera(request):
 	params = {}
-	if 'org_empresarial' in request.session:
-		params['org_empresarial'] = request.session['org_empresarial']
-		params['gobierno_gti'] = request.session['gobierno_gti']
-		params['area_trabajo'] = request.session['area_trabajo']
-		params['productos_venden'] = request.session['productos_venden']
+	params['org_empresarial'] = request.session['org_empresarial']
+	params['gobierno_gti'] = request.session['gobierno_gti']
+	params['area_trabajo'] = request.session['area_trabajo']
+	params['productos_venden'] = request.session['productos_venden']
 	unvalid_keys = []
 	for key in params:
 		if not params[key]:
@@ -270,11 +271,10 @@ def obtener_todo_mapa_primera(request):
 
 def _queryset_filtrado_segunda(request):
 	params = {}
-	if 'org_empresarial' in request.session:
-		params['org_empresarial'] = request.session['org_empresarial']
-		params['gobierno_gti'] = request.session['gobierno_gti']
-		params['area_trabajo'] = request.session['area_trabajo']
-		params['producto_vende'] = request.session['producto_vende']
+	params['org_empresarial'] = request.session['org_empresarial']
+	params['gobierno_gti'] = request.session['gobierno_gti']
+	params['area_trabajo'] = request.session['area_trabajo']
+	params['producto_vende'] = request.session['producto_vende']
 	unvalid_keys = []
 	for key in params:
 		if not params[key]:
@@ -355,6 +355,62 @@ def obtener_todo_mapa_segunda(request):
 
         serializado = simplejson.dumps(lista)
         return HttpResponse(serializado, mimetype='application/json')
+
+#######################################################
+#	Vistas para Regente forestal                      #
+#                    ficha 11                         #
+#######################################################
+
+def _queryset_filtrado_regente(request):
+	params = {}
+	params['organizado'] = request.session['organizado']
+	unvalid_keys = []
+	for key in params:
+		if not params[key]:
+			unvalid_keys.append(key)
+    
+	for key in unvalid_keys:
+		del params[key]
+    
+	return RegenteForestal.objects.filter(**params)
+
+def consultar_regente(request):    
+	if request.method == 'POST':
+		form = RegenteForestalForm(request.POST)
+		if form.is_valid():
+			request.session['organizado'] = form.cleaned_data['organizado']
+			request.session['area_trabajo'] = form.cleaned_data['area_trabajo']
+			centinel = 1
+	else:
+		form = RegenteForestalForm()
+		centinel = 0
+
+	lista = []
+	if centinel == 1:
+		consulta = _queryset_filtrado_regente(request)
+	else:
+		request.session['organizado'] = None
+		request.session['area_trabajo'] = None
+		consulta = RegenteForestal.objects.all()
+	for obj in consulta:
+		lista.append([obj.nombre_regente,
+			          obj.departamento,
+			          obj.municipio,
+			          obj.area_trabajo,
+			          obj.id,
+			        ]) 
+	return render_to_response('regente_forestal/consultar_regente.html', locals(),
+    	                      context_instance=RequestContext(request))
+	
+
+def ficha_regente(request, id):
+	datos = get_object_or_404(RegenteForestal, id=id)
+
+	return render_to_response('regente_forestal/ficha_regente.html', locals(),
+							  context_instance=RequestContext(request))
+
+
+
 
 
 

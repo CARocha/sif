@@ -1,0 +1,110 @@
+{%extends "base.html"%}
+
+{%block extra_js%}
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+     $(document).ready(function () {
+            /* Initialise datatables */
+         var oTable = $('#actortable').dataTable({
+               
+                "oLanguage": {
+                            "sProcessing":   "Procesando...",
+                            "sLengthMenu":   "Mostrar _MENU_ registros",
+                            "sZeroRecords":  "No se encontraron resultados",
+                            "sInfo":         "Mostrando desde _START_ hasta _END_ de _TOTAL_ registros",
+                            "sInfoEmpty":    "Mostrando desde 0 hasta 0 de 0 registros",
+                            "sInfoFiltered": "(filtrado de _MAX_ registros en total)",
+                            "sInfoPostFix":  "",
+                            "sSearch":       "Buscar:",
+                            "sUrl":          "",
+                            "oPaginate": {
+                                "sFirst":    "Primero",
+                                "sPrevious": "Anterior",
+                                "sNext":     "Siguiente",
+                                "sLast":     "Último"
+                            }
+                    }
+         });
+
+
+        //Agergar a combobox las variables seleccionadas
+
+        {% if request.session.organizado %}
+            $('#id_org_empresarial').val({{request.session.org_empresarial.id}});
+        {% endif %}
+        {% if request.session.gti %}
+            $('#id_gti').val({{request.session.gti.id}});
+        {% endif %}
+
+    }); //fin del initialize
+
+</script>
+
+{%endblock%}
+
+{%block contenido%}
+<style type="text/css">
+      #map_canvas {
+            display: none;
+      }
+</style>
+<div class="interna">
+    <div class="container_12">
+        <br>
+        <div class="grid_2">
+            <img class="fotoactor" src="/files/img/regente.jpg">
+        </div>
+        <div class="grid_10 despactor">
+            <div class="titulo-actor">Regente Forestal</div>
+            <p>
+Persona que ha sido acreditado por el Instituto Nacional Forestal (INAFOR), para que de conformidad con las leyes y reglamentos, garantice la ejecución del Plan de manejo forestal aprobado por la autoridad competente. 
+            </p>
+        </div>
+        <div class="clear"></div>
+        <div class="grid_12">
+            <form action="." method="POST">
+              {% csrf_token %}
+                <div class="generalform">
+                    <div class="formelement">
+                        <div class="labelform">{{form.organizado.label}}</div>
+                        <div class="filtros">{{form.organizado}}<br>{{form.organizado.errors}}</div>
+                    </div>
+                    <div class="formelement">
+                        <div class="labelform">{{form.area_trabajo.label}}</div>
+                        <div class="filtros">{{form.area_trabajo}}<br>{{form.area_trabajo.errors}}</div>
+                    </div>
+                    <button id="actualizarmapa"class="consultar btn btn-warning mapafiltrado"><i class="icon-refresh icon-white"></i> Actualizar lista </button>
+                    <div class="clear"></div>
+                </div>
+            </form>
+        </div>
+        <div class="grid_12">
+            <div id="tabladatos">
+                <table class="table table-striped table-bordered table-condensed" id="actortable">
+                    <thead>
+                        <tr>
+                            <th>Nombre de Regente</th>
+                            <th>Departamento</th>
+                            <th>Municipio</th>
+                            <th>Area de Trabajo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for obj in lista %}
+                        <tr class="gradeA">
+                            <td><a href="/regente/ficha/{{obj.4}}" class="btn btn-mini" style="margin-right:5px;"><i class="icon-zoom-in"></i> </a> <a href="/regente/ficha/{{obj.4}}">{{obj.0}}</a></td>
+                            <td>{{obj.1}}</td>
+                            <td>{{obj.2}}</td>
+                            <td>{%for b in obj.3.all%}
+                                {{b}},
+                                {%endfor%}
+                            </td> 
+                        </tr>
+                        {% endfor %}    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

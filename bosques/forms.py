@@ -88,3 +88,11 @@ class SegundaTransformacionForm(forms.Form):
     producto_vende = forms.ModelChoiceField(queryset=ProductosVendenSegunda.objects.all(), 
                                             label=u'Productos que venden',
                                             required=False)
+
+class RegenteForestalForm(forms.Form):
+    organizado = forms.ModelChoiceField(queryset=Organizado.objects.all(), 
+                                            label=u'Organizado',
+                                            required=False)
+    area_trabajo = forms.ModelChoiceField(queryset=AreaTrabajo.objects.all(), 
+                                            label=u'Area de Trabajo',
+                                            required=False)
