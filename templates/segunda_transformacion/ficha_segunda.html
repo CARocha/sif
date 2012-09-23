@@ -16,7 +16,7 @@
 	          	  <a href="#" id="" class="btn "><i class="icon-time"></i> Seguimiento</a>
 	            </div>
     		</div>
-            <div class="titulo-actor">Ficha Tecnica de Empresa Forestal de Primera Transformación</div>
+            <div class="titulo-actor">Ficha Tecnica de Empresa Forestal de Segunda Transformación</div>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
@@ -26,14 +26,14 @@
         			Nombre empresa forestal
         		</div>
         		<div class="valor">
-        			{{datos.nombre_empresa_forestal}}
+        			{{datos.nombre_comercial}}
         		</div>
 
         		<div class="labelficha">
         			Año de creación
         		</div>
         		<div class="valor">
-        			{{datos.fecha_creacion}}
+        			{{datos.creacion}}
         		</div>
 
 				<div class="labelficha">
@@ -100,25 +100,43 @@
 					</div>
 					<div class="clear"></div>	
 					{%endif%}
-					{%if datos.area_trabajo.count > 0%}
+					{%if datos.apoyo_produccion.count > 0%}
 					<div class="labelfichabox">
-						Servicio de secado
+						Apoyo a la producción
 					</div>
 					<div class="valuefichabox">
-						{%for sec in datos.servicio_secado.all%}
-							{{sec}},
+						{%for apo in datos.apoyo_produccion.all%}
+							{{apo}},
 						{%endfor%}
 					</div>
 					{%endif%}
 					<div class="clear"></div>	
-					{%if datos.capasidad_horno%}
-					<div class="labelfichabox">
-						Capacidad de horno
-					</div>
-					<div class="valuefichabox">
-						{{datos.capasidad_horno}}
-					</div>
-					<div class="clear"></div>	
+					{%if datos.propia_secado%}
+						<div class="labelfichabox">
+							Capacidad de secado
+						</div>
+						<div class="valuefichabox">
+							{{datos.propia_secado}}
+						</div>
+						<div class="clear"></div>	
+					{%endif%}
+					{%if datos.volumen_anual%}
+						<div class="labelfichabox">
+							Volumen Anual de materia procesada
+						</div>
+						<div class="valuefichabox">
+							{{datos.volumen_anual}}
+						</div>
+						<div class="clear"></div>	
+					{%endif%}
+					{%if datos.promedio%}
+						<div class="labelfichabox">
+							Promedio mensual de unicdades producidas
+						</div>
+						<div class="valuefichabox">
+							{{datos.promedio}}
+						</div>
+						<div class="clear"></div>	
 					{%endif%}
 				</div>
 			</div>
@@ -145,18 +163,6 @@
 						</div>
 					{%endif%}
 					<div class="clear"></div>
-					{%if datos.alianza.count > 0%}
-						<div class="labelfichabox">
-							Alianza
-						</div>
-						<div class="valuefichabox">
-							
-							{%for orga in datos.alianza.all%}
-								{{orga}},
-							{%endfor%}
-						</div>
-					{%endif%}
-					<div class="clear"></div>
 				</div>
 
 				<div class="fichabox">
@@ -164,11 +170,22 @@
 						Productos que venden
 					</div>
 					<div class="valuefichabox">
-						{%for p in datos.productos_venden.all%}
+						{%for p in datos.producto_vende.all%}
 							{{p}},
 						{%endfor%}
 					</div>
-					<div class="clear"></div>	
+					<div class="clear"></div>
+					{%if datos.no_maderable.count > 0%}	
+						<div class="labelfichabox">
+							Productos no maderables
+						</div>
+						<div class="valuefichabox">
+							{%for mad in datos.no_maderable.all%}
+								{{mad}},
+							{%endfor%}
+						</div>
+						<div class="clear"></div>
+					{%endif%}	
 				</div>	
 
 				{%if datos.tipo_producto.count > 0%}
@@ -261,6 +278,28 @@
 					</div>
 					<div class="clear"></div>	
 					{%endif%}
+					{%if datos.nivel_tecnologico.count > 0%}	
+						<div class="labelfichabox">
+							Nivel tecnologico
+						</div>
+						<div class="valuefichabox">
+							{%for tec in datos.nivel_tecnologico.all%}
+								{{tec}},
+							{%endfor%}
+						</div>
+						<div class="clear"></div>
+					{%endif%}	
+					{%if datos.vision_empresarial.count > 0%}	
+						<div class="labelfichabox">
+							Vision Empresarial
+						</div>
+						<div class="valuefichabox">
+							{%for vis in datos.vision_empresarial.all%}
+								{{vis}},
+							{%endfor%}
+						</div>
+						<div class="clear"></div>
+					{%endif%}	
 				</div>
 				
 			</div>

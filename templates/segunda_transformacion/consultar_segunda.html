@@ -62,7 +62,7 @@
         //Associate the styled map with the MapTypeId and set it to display.
         map.mapTypes.set('map_style', styledMap);
         map.setMapTypeId('map_style');
-        
+
         function ocultar(exist){
             if (exist==""){
                 return "hide";
@@ -70,9 +70,9 @@
         }
 
         if ({{centinel}} == 1){
-            var ruta = '/ver/';
+            var ruta = '/segunda/ver/';
         }else{
-            var ruta = '/ver/todo/';
+            var ruta = '/segunda/todo/';
         }
             $.getJSON(ruta, function(data){
             $.each(data, function(i, elemento){
@@ -82,22 +82,13 @@
                     map: map,
                     name: elemento.nombre,
                     desc: elemento.propiedad,
-                    icon: '/files/img/mapicon'+elemento.coloricon+'.png'                        
+                    icon: '/files/img/segundaicon.png'                        
                 });
                 //for each (var item in elemento.tipo) alert(item);
                 google.maps.event.addListener(marker, "click", function() {
-                    var html = '<div class="infobox"><b>' + unescape(elemento.propiedad) + 
-                               '</b><br>' + unescape(elemento.nombre) +
-                               '</b><br><br><div class="well"><b>Certificaciones</b><br>' + 
-                               '<div class="cert fsc '+ocultar(elemento.fsc)+'">'+unescape(elemento.fsc) +'<img src="/files/img/badgefsc.png"></div>'+ 
-                               '<div class="cert fsc '+ocultar(elemento.fsc_slimf)+'">' + unescape(elemento.fsc_slimf) +'<img src="/files/img/badgefsc.png"></div>'+ 
-                               '<div class="cert fsc '+ocultar(elemento.fsc_cw)+'">' + unescape(elemento.fsc_cw) +'<img src="/files/img/badgefsc.png"></div>'+ 
-                               '<div class="cert comer_justo '+ocultar(elemento.comer_justo)+'">' + unescape(elemento.comer_justo) +'<img src="/files/img/badgefsc.png"></div>'+ 
-                               '<div class="cert iso '+ocultar(elemento.iso)+'">' + unescape(elemento.iso) +'<img src="/files/img/badgeiso.png"></div>'+ 
-                               '<div class="cert fsc '+ocultar(elemento.otro)+'">' + unescape(elemento.otro) +'<img src="/files/img/badgeotro.png"></div>'+ 
-                                '<div class="cert notiene '+ocultar(elemento.no)+'">' + unescape(elemento.no) +'</div>'+ 
-                                '<div class="cert enproceso '+ocultar(elemento.proceso)+'">' + unescape(elemento.proceso) +'</div>'+ 
-                               '</div><a href="/ficha/'+unescape(elemento.id)+'" class="btn btn-mini" style="margin-right:5px; float:right;"><i class="icon-zoom-in"></i> Ver mas</a></div>';
+                    var html = '<div class="infobox"><b>' + unescape(elemento.nombre) + 
+                               '</b><br>Director: ' + unescape(elemento.director) + 
+                               '</div><a href="/segunda/ficha/'+unescape(elemento.id)+'" class="btn btn-mini" style="margin-right:5px; float:right;"><i class="icon-zoom-in"></i> Ver mas</a></div>';
                    infowindow = new google.maps.InfoWindow({
                                 content: html,
                                 zIndex: 999,
@@ -145,19 +136,10 @@
         //Agergar a combobox las variables seleccionadas
 
         {% if request.session.organizado %}
-            $('#id_organizado').val({{request.session.organizado.id}});
-        {% endif %}
-        {% if request.session.fecha %}
-            $('#id_fecha').val({{request.session.fecha.id}});
-        {% endif %}
-        {% if request.session.tipo_propiedad %}
-            $('#id_tipo_propiedad').val({{request.session.tipo_propiedad.id}});
+            $('#id_org_empresarial').val({{request.session.org_empresarial.id}});
         {% endif %}
         {% if request.session.gti %}
             $('#id_gti').val({{request.session.gti.id}});
-        {% endif %}
-        {% if request.session.tipo_bosque_umf %}
-            $('#id_tipo_bosque_umf').val({{request.session.tipo_bosque_umf.id}});
         {% endif %}
 
     }); //fin del initialize
@@ -176,12 +158,12 @@
     <div class="container_12">
         <br>
         <div class="grid_2">
-            <img class="fotoactor" src="/files/img/duenobosque.jpg">
+            <img class="fotoactor" src="/files/img/segunda.jpg">
         </div>
         <div class="grid_10 despactor">
-            <div class="titulo-actor">Empresa de manejo de bosque:</div>
+            <div class="titulo-actor">Empresa de Segunda Transformación</div>
             <p>
-Persona natural o jurídica que tiene dominio y posesión de una superficie de tierra, la que se encuentra total o parcialmente cubierta de bosques naturales , y pueden estar sometidos a un régimen de manejo forestal sostenible. La propiedad de la tierra del bosque puede ser individual, colectiva asociativa, y de comunidades indígenas y no indígenas.
+Persona natural o jurídica  que utiliza  la madera  como materia en la producción de productos acabados y semi acabados (muebles, paneles, entre otros) con aserraderos estacionarios (permanentes) y/o  móviles (portátiles). También se incluye aquellas Empresas que utilizan como materia prima los bienes derivados de la primera transformación y los convierte en cualquier bien intermedio o final. Se encuentran en la cadena de valor en el eslabón de la transformación.
             </p>
         </div>
         <div class="clear"></div>
@@ -189,40 +171,22 @@ Persona natural o jurídica que tiene dominio y posesión de una superficie de t
             <form action="." method="POST">
               {% csrf_token %}
                 <div class="generalform">
-                    <!-- 
                     <div class="formelement">
-                        <div class="labelform">{{form.fecha.label}}</div>
-                        <div class="filtros">{{form.fecha}}<br>{{form.fecha.errors}}</div>
+                        <div class="labelform">{{form.org_empresarial.label}}</div>
+                        <div class="filtros">{{form.org_empresarial}}<br>{{form.org_empresarial.errors}}</div>
                     </div>
-                    -->
                     <div class="formelement">
-                        <div class="labelform">{{form.tipo_propiedad.label}}</div>
-                        <div class="filtros">{{form.tipo_propiedad}}<br>{{form.tipo_propiedad.errors}}</div>
+                        <div class="labelform">{{form.gobierno_gti.label}}</div>
+                        <div class="filtros">{{form.gobierno_gti}}<br>{{form.gobierno_gti.errors}}</div>
                     </div>
-                    <!-- <div class="label">{{form.area_total.label}}</div>
-                    <div class="filtros">{{form.area_total}}<br>{{form.area_total.errors}}</div>
-                    <div class="clean"></div> -->
-                    <!-- 
                     <div class="formelement">
-                        <div class="labelform">{{form.organizado.label}}</div>
-                        <div class="filtros">{{form.organizado}}<br>{{form.organizado.errors}}</div>
-                    </div> -->
-
-                    <div class="formelement">
-                        <div class="labelform">{{form.gti.label}}</div>
-                        <div class="filtros">{{form.gti}}<br>{{form.gti.errors}}</div>
+                        <div class="labelform">{{form.area_trabajo.label}}</div>
+                        <div class="filtros">{{form.area_trabajo}}<br>{{form.area_trabajo.errors}}</div>
                     </div>
-
                     <div class="formelement">
-                        <div class="labelform">{{form.tipo_bosque_umf.label}}</div>
-                        <div class="filtros">{{form.tipo_bosque_umf}}<br>{{form.tipo_bosque_umf.errors}}</div>
+                        <div class="labelform">{{form.producto_vende.label}}</div>
+                        <div class="filtros">{{form.producto_vende}}<br>{{form.producto_vende.errors}}</div>
                     </div>
-
-                    <div class="formelement">
-                        <div class="labelform">{{form.tipo_certificacion.label}}</div>
-                        <div class="filtros">{{form.tipo_certificacion}}<br>{{form.tipo_certificacion.errors}}</div>
-                    </div>
-
                     <button id="actualizarmapa"class="consultar btn btn-warning mapafiltrado"><i class="icon-refresh icon-white"></i> Actualizar Mapa </button>
                     <div class="clear"></div>
                 </div>
@@ -241,30 +205,25 @@ Persona natural o jurídica que tiene dominio y posesión de una superficie de t
                 <div id="map" style="width: 100%; height: 500px">
                     
                 </div>
-                <img src="/files/img/leyenda.png" id="leyenda">
             </div>
             
             <div id="tabladatos">
                 <table class="table table-striped table-bordered table-condensed" id="actortable">
                     <thead>
                         <tr>
-                            <th>Nombre Propietario</th>
-                            <th>Sexo</th>
-                            <th>Area total (ha)</th>
+                            <th>Nombre de Empresa</th>
                             <th>Departamento</th>
                             <th>Municipio</th>
-                            <th>Tipo bosque UMF</th>
+                            <th>Tipo de Organización</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for obj in lista %}
                         <tr class="gradeA">
-                            <td><a href="/ficha/{{obj.6}}" class="btn btn-mini" style="margin-right:5px;"><i class="icon-zoom-in"></i> </a> <a href="/ficha/{{obj.6}}">{{obj.0}}</a></td>
+                            <td><a href="/segunda/ficha/{{obj.4}}" class="btn btn-mini" style="margin-right:5px;"><i class="icon-zoom-in"></i> </a> <a href="/segunda/ficha/{{obj.4}}">{{obj.0}}</a></td>
                             <td>{{obj.1}}</td>
                             <td>{{obj.2}}</td>
-                            <td>{{obj.3}}</td>
-                            <td>{{obj.4}}</td>
-                            <td>{%for b in obj.5.all%}
+                            <td>{%for b in obj.3.all%}
                                 {{b}},
                                 {%endfor%}
                             </td> 

@@ -263,3 +263,98 @@ def obtener_todo_mapa_primera(request):
         return HttpResponse(serializado, mimetype='application/json')
 
 
+#######################################################
+#	Vistas para empresa de Segunda trasnformacion     #
+#                    ficha 4                          #
+#######################################################
+
+def _queryset_filtrado_segunda(request):
+	params = {}
+	if 'org_empresarial' in request.session:
+		params['org_empresarial'] = request.session['org_empresarial']
+		params['gobierno_gti'] = request.session['gobierno_gti']
+		params['area_trabajo'] = request.session['area_trabajo']
+		params['producto_vende'] = request.session['producto_vende']
+	unvalid_keys = []
+	for key in params:
+		if not params[key]:
+			unvalid_keys.append(key)
+    
+	for key in unvalid_keys:
+		del params[key]
+    
+	return EmpresaSegundaTransformacion.objects.filter(**params)
+
+def consultar_segunda(request):    
+	if request.method == 'POST':
+		form = SegundaTransformacionForm(request.POST)
+		if form.is_valid():
+			request.session['org_empresarial'] = form.cleaned_data['org_empresarial']
+			request.session['gobierno_gti'] = form.cleaned_data['gobierno_gti']
+			request.session['area_trabajo'] = form.cleaned_data['area_trabajo']
+			request.session['producto_vende'] = form.cleaned_data['producto_vende']
+			centinel = 1
+	else:
+		form = SegundaTransformacionForm()
+		centinel = 0
+
+	lista = []
+	if centinel == 1:
+		consulta = _queryset_filtrado_segunda(request)
+	else:
+		request.session['org_empresarial'] = None
+		request.session['gobierno_gti'] = None
+		request.session['area_trabajo'] = None
+		request.session['producto_vende'] = None
+		consulta = EmpresaSegundaTransformacion.objects.all()
+	for obj in consulta:
+		lista.append([obj.nombre_comercial,
+			          obj.departamento,
+			          obj.municipio,
+			          obj.org_empresarial,
+			          obj.id,
+			        ]) 
+	return render_to_response('segunda_transformacion/consultar_segunda.html', locals(),
+    	                      context_instance=RequestContext(request))
+
+def obtener_mapa_segunda(request):
+    if request.is_ajax():
+        lista = []
+        params = _queryset_filtrado_segunda(request)
+        for objeto in params.distinct():
+            if objeto.latitud and objeto.longitud:
+                dicc = dict(nombre=objeto.nombre_comercial, 
+                	        id=objeto.id,
+                            lon=float(objeto.longitud) , 
+                            lat=float(objeto.latitud),
+                            director=objeto.nombre_director,
+                            )
+            lista.append(dicc)
+
+        serializado = simplejson.dumps(lista)
+    	return HttpResponse(serializado, mimetype='application/json')	
+
+def ficha_segunda(request, id):
+	datos = get_object_or_404(EmpresaSegundaTransformacion, id=id)
+
+	return render_to_response('segunda_transformacion/ficha_segunda.html', locals(),
+							  context_instance=RequestContext(request))
+
+def obtener_todo_mapa_segunda(request):
+	if request.is_ajax():
+		lista = []
+        for objeto in EmpresaSegundaTransformacion.objects.all():
+            if objeto.latitud and objeto.longitud:
+                dicc = dict(nombre=objeto.nombre_comercial, 
+                	        id=objeto.id,
+                            lon=float(objeto.longitud) , 
+                            lat=float(objeto.latitud),
+                            director=objeto.nombre_director,
+                            )
+            lista.append(dicc)
+
+        serializado = simplejson.dumps(lista)
+        return HttpResponse(serializado, mimetype='application/json')
+
+
+

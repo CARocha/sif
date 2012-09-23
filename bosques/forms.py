@@ -76,3 +76,15 @@ class PrimeraTransformacionForm(forms.Form):
     productos_venden = forms.ModelChoiceField(queryset=ProductosVenden.objects.all(), 
                                             label=u'Productos que venden',
                                             required=False)
+
+class SegundaTransformacionForm(forms.Form):
+    org_empresarial = forms.ModelChoiceField(queryset=OrganizacionEmpresarial.objects.all(), 
+                                            label=u'Organizacion',
+                                            required=False)
+    gobierno_gti = forms.ChoiceField(choices=SINO_CHOICE, label=u'Gobierno GTI', required=False)
+    area_trabajo = forms.ModelChoiceField(queryset=AreaTrabajoSegunda.objects.all(), 
+                                            label=u'Area de Trabajo',
+                                            required=False)
+    producto_vende = forms.ModelChoiceField(queryset=ProductosVendenSegunda.objects.all(), 
+                                            label=u'Productos que venden',
+                                            required=False)
