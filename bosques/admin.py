@@ -58,12 +58,6 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
                        'buenas_practicas','otro_social', 'otro_ambiental','tipo_certificacion'
             	       )
         }),
-        ('Relaciones con actores', {
-            'classes': ('actoresRela',),
-            'fields': (('primera_transformacion','producto_venden'), 'regente'
-                     )
-        }),
-         
     )
     class Media:
         css = {
@@ -118,6 +112,11 @@ class DatosAdminInline(admin.StackedInline):
                        ('tipo_certificacion',),
                        ('estado_certificado','entidad_certificadora')
                        )
+        }),
+        ('Relaciones con actores', {
+            'classes': ('actoresRela',),
+            'fields': (('primera_transformacion','producto_venden'), 'regente'
+                     )
         }),
     )
     

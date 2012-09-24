@@ -273,11 +273,6 @@ class PropietarioBosques(models.Model):
     otro_ambiental = models.ManyToManyField(Ambientales, null=True, blank=True)
     tipo_certificacion = models.ManyToManyField(TipoCertificacion, 
                         verbose_name="Tipo de certificacion")
-    primera_transformacion = models.ForeignKey('EmpresaPrimeraTransformacion',null=True, blank=True)
-    producto_venden = models.ManyToManyField(ProVendenBosque, 
-                                            verbose_name=u'Tipo de producto que venden',
-                                            null=True, blank=True)
-    regente = models.ForeignKey('RegenteForestal',null=True, blank=True)
 
     year = models.IntegerField(editable=False)
 
@@ -369,6 +364,11 @@ class Datos(models.Model):
     visita_auditoria = models.DateField(null=True, blank=True)
     auditor = models.ForeignKey(Auditor, null=True, blank=True)
     entidad_certificadora = models.ForeignKey(EntidadCertificadora, null=True, blank=True)
+    primera_transformacion = models.ForeignKey('EmpresaPrimeraTransformacion',null=True, blank=True)
+    producto_venden = models.ManyToManyField(ProVendenBosque, 
+                                            verbose_name=u'Tipo de producto que venden',
+                                            null=True, blank=True)
+    regente = models.ForeignKey('RegenteForestal',null=True, blank=True)
     
     sequimiento = models.ForeignKey(Seguimiento)
         
