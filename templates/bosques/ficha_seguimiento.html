@@ -1,0 +1,306 @@
+{%extends "base.html"%}
+
+{%block extra_js%} 
+	<script type="text/javascript" src="/files/js/highcharts.js"></script>
+	<script type="text/javascript" src="/files/js/chart_theme.js"></script>
+    <script type="text/javascript">
+$(function () {
+    var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25
+            },
+            title: {
+                text: 'Empleados UMF',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'distribucion por sexo',
+                x: -20
+            },
+            xAxis: {
+                categories: [
+                	{%for s in seguimiento%}
+                		'{{s.fecha_seguimiento.year}}',
+                	{%endfor%}
+                ]
+            },
+            yAxis: {
+                title: {
+                    text: 'cantidad de personas'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>año '+
+                        this.x +': '+ this.y +' personas';
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            series: [
+	            {
+	                name: 'Hombres',
+	                data: [
+	                	{%for h in seguimiento%}
+	                		{{h.hombre}},
+	                	{%endfor%}
+	                ]
+	            }, 
+	            {
+	                name: 'Mujeres',
+	                data: [
+	                	{%for m in seguimiento%}
+	                		{{m.mujeres}},
+	                	{%endfor%}
+	                ]
+	            }, 
+            ]
+        });
+    });
+    
+});
+
+$(function () {
+    var chart2;
+    $(document).ready(function() {
+        chart2 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container2',
+                type: 'column'
+            },
+            title: {
+                text: 'Datos de unidad de manejo'
+            },
+            subtitle: {
+                text: 'Volumen total disponible por cosecha anual (m3):'
+            },
+            xAxis: {
+                categories: [
+                	{%for s in seguimiento%}
+                		'{{s.fecha_seguimiento.year}}',
+                	{%endfor%}
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Metros cubicos m3'
+                }
+            },
+
+            tooltip: {
+                formatter: function() {
+                    return 'año '+
+                        this.x +': '+ this.y +' m3';
+                }
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+                series: [
+	            {
+	                name: 'Volumen total anual m3',
+	                data: [
+	                	{%for vol in seguimiento%}
+	                		{{vol.volumen_cosecha}},
+	                	{%endfor%}
+	                ]
+	            }, 
+            ]
+        });
+    });
+    
+});
+
+$(function () {
+    var chart3;
+    $(document).ready(function() {
+        chart3 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container3',
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25
+            },
+            title: {
+                text: 'Usos de la tierra',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'distribucion de hectareas',
+                x: -20
+            },
+            xAxis: {
+                categories: [
+                	{%for s in seguimiento%}
+                		'{{s.fecha_seguimiento.year}}',
+                	{%endfor%}
+                ]
+            },
+            yAxis: {
+                title: {
+                    text: 'Hectareas (ha)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>año '+
+                        this.x +': '+ this.y +' personas';
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            series: [
+	            {
+	                name: 'Agricola',
+	                data: [
+	                	{%for agri in seguimiento%}
+	                		{{agri.uso_agricola}},
+	                	{%endfor%}
+	                ]
+	            }, 
+	            {
+	                name: 'Pecuario',
+	                data: [
+	                	{%for pec in seguimiento%}
+	                		{{pec.uso_pecuario}},
+	                	{%endfor%}
+	                ]
+	            },
+	            {
+	                name: 'Forestal',
+	                data: [
+	                	{%for fore in seguimiento%}
+	                		{{fore.uso_foretal}},
+	                	{%endfor%}
+	                ]
+	            },
+	            {
+	                name: 'Bosque bajo manejo',
+	                data: [
+	                	{%for mane in seguimiento%}
+	                		{{mane.bosque_bajo_manejo}},
+	                	{%endfor%}
+	                ]
+	            },
+	            {
+	                name: 'Agroforestal',
+	                data: [
+	                	{%for agro in seguimiento%}
+	                		{{agro.uso_agroforestal}},
+	                	{%endfor%}
+	                ]
+	            },
+	            {
+	                name: 'Otros usos',
+	                data: [
+	                	{%for otro in seguimiento%}
+	                		{{otro.otros_usos}},
+	                	{%endfor%}
+	                ]
+	            },     
+            ]
+        });
+    });
+    
+});
+
+
+</script>
+{%endblock%}
+
+{%block contenido%}
+<div class="interna">
+    <div class="container_12">
+        <div class="grid_12 despactor">
+        	<br>
+	        <div class="botonesficha">
+	            <div class="btn-group">
+	           	  <a href="/ficha/{{datos.id}}" id=""class="btn "><i class="icon-file"></i>  Ficha Tecnica</a>
+	          	  <a href="/ficha/{{datos.id}}" id=""class="btn "><i class="icon-resize-small"></i> Relaciones de actores</a>
+	          	  <a href="/ficha/seguimiento/{{datos.id}}" id="" class="btn active"><i class="icon-time"></i> Seguimiento</a>
+	            </div>
+    		</div>
+            <div class="titulo-actor">Ficha de Seguimiento Propietario de Bosque</div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="ficha">
+        	<div class="grid_3">
+        		<div class="labelficha">
+        			Nombre del propietario
+        		</div>
+        		<div class="valor">
+        			{{datos.nombre_propietario}}
+        		</div>
+			</div>
+			<div class="grid_3">
+				<div class="labelficha">
+        			Nombre de Propiedad
+        		</div>
+        		<div class="valor">
+        			{{datos.nombre_propiedad}}
+        		</div>
+			</div>
+			
+			<div class="clear"></div>
+	    </div> 
+	    <div class="ficha"> 
+	        <div class="grid_6">
+	        	<div id="container" style=" height: 300px; margin: 0 auto"></div>
+	        	<div class="explicacion">
+	        		Sed posuere consectetur est at lobortis. Maecenas faucibus mollis interdum. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+	        	</div>
+	        </div>
+	        <div class="grid_6">
+	        	<div id="container2" style="min-width: 450px; height: 300px; margin: 0 auto"></div>
+	        	<div class="explicacion">
+	        		Sed posuere consectetur est at lobortis. Maecenas faucibus mollis interdum. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+	        	</div>
+	        </div>
+
+	        <div class="clear"></div>
+	        <br>
+	        <div class='grid_12'>
+	        	<div id="container3" style="min-width: 450px; height: 350px; margin: 0 auto"></div>
+	        	<div class="explicacion">
+	        		Sed posuere consectetur est at lobortis. Maecenas faucibus mollis interdum. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.	        		Sed posuere consectetur est at lobortis. Maecenas faucibus mollis interdum. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+	        	</div>
+	        </div>
+	       	<div class="clear"></div>     
+	        <br>
+    	</div>
+        
+	</div>
+</div>
+{%endblock%}

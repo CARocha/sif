@@ -5,6 +5,7 @@ urlpatterns = patterns('bosques.views',
     url(r'^consultar/$', 'consultar', name="consultar"),
     url(r'^ver/$', 'obtener_mapa', name='obtener-mapa'),
     url(r'^ficha/(?P<id>\d+)/$', 'ficha_propierario', name='ficha-propierario'),
+    url(r'^ficha/seguimiento/(?P<id>\d+)/$', 'ficha_propierario_seguimiento', name='ficha-propierario-seguimiento'),
     url(r'^ver/todo/$', 'obtener_todo_mapa', name='obtener-todo-mapa'),
 
     # Empresas de primera transformacion

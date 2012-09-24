@@ -131,6 +131,13 @@ def ficha_propierario(request, id):
     return render_to_response('bosques/ficha.html', locals(),
 							  context_instance=RequestContext(request))
 
+def ficha_propierario_seguimiento(request, id):
+    datos = get_object_or_404(PropietarioBosques, id=id)
+    seguimiento = Datos.objects.filter(sequimiento__propietario__id=id)
+
+    return render_to_response('bosques/ficha_seguimiento.html', locals(),
+							  context_instance=RequestContext(request))
+
 def obtener_todo_mapa(request):
 	if request.is_ajax():
 		lista = []
