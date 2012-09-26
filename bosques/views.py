@@ -261,6 +261,13 @@ def ficha_primera(request, id):
 	return render_to_response('primera_transformacion/ficha_primera.html', locals(),
 							  context_instance=RequestContext(request))
 
+def ficha_primera_seguimiento(request, id):
+    datos = get_object_or_404(EmpresaPrimeraTransformacion, id=id)
+    seguimiento = DatosPrimeraTransforma.objects.filter(p_tranformacion__nombre_empresa__id=id)
+
+    return render_to_response('primera_transformacion/primera_seguimiento.html', locals(),
+							  context_instance=RequestContext(request))
+
 def ficha_primera_relacion(request, id):
     datos = get_object_or_404(EmpresaPrimeraTransformacion, id=id)
     relacion = DatosPrimeraTransforma.objects.filter(p_tranformacion__nombre_empresa__id=id)

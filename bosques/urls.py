@@ -24,12 +24,12 @@ urlpatterns = patterns('bosques.views',
     url(r'^segunda/ficha/(?P<id>\d+)/$', 'ficha_segunda', name='ficha-segunda'),
     url(r'^segunda/ver/$', 'obtener_mapa_segunda', name='obtener-mapa-segunda'),
     url(r'^segunda/todo/$', 'obtener_todo_mapa_segunda', name='obtener-todo-mapa-segunda'),
-    url(r'^segunda/relacion/(?P<id>\d+)/$', 'ficha_segunda_relacion', name='ficha-segunda-relacion'),
-    url(r'^segunda/seguimiento/(?P<id>\d+)/$', 'ficha_segunda_seguimiento', name='ficha-segunda-seguimiento'),
+   # url(r'^segunda/relacion/(?P<id>\d+)/$', 'ficha_segunda_relacion', name='ficha-segunda-relacion'),
+   # url(r'^segunda/seguimiento/(?P<id>\d+)/$', 'ficha_segunda_seguimiento', name='ficha-segunda-seguimiento'),
 
     # Regente Forestal
     url(r'^regente/consultar/$', 'consultar_regente', name="consultar-regente"),
     url(r'^regente/ficha/(?P<id>\d+)/$', 'ficha_regente', name='ficha-regente'),
-    url(r'^regente/relacion/(?P<id>\d+)/$', 'ficha_regente_relacion', name='ficha-regente-relacion'),
-    url(r'^regente/seguimiento/(?P<id>\d+)/$', 'ficha_regente_seguimiento', name='ficha-regente-seguimiento'),
+    #url(r'^regente/relacion/(?P<id>\d+)/$', 'ficha_regente_relacion', name='ficha-regente-relacion'),
+    #url(r'^regente/seguimiento/(?P<id>\d+)/$', 'ficha_regente_seguimiento', name='ficha-regente-seguimiento'),
     )
