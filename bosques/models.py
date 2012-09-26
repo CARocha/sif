@@ -572,7 +572,7 @@ class EmpresaPrimeraTransformacion(models.Model):
         verbose_name_plural = ('Empresa forestal de primera transformación')
 
     def __unicode__(self):
-        return self.nombre_empresa_forestal
+        return self.nombre_corto
 
 # -------------------------- Seguimiento Primera transformacion ----------------
     
@@ -584,7 +584,7 @@ class SeguimientoPrimeraTransformacion(models.Model):
         verbose_name_plural = ('Seguimiento Empresa forestal primera transformación')
             
     def __unicode__(self):
-        return self.nombre_empresa
+        return self.nombre_empresa.nombre_corto
 
 class AsistenciaTecnica(models.Model):
     nombre = models.CharField(max_length=50)
