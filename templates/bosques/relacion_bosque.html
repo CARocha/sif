@@ -1,0 +1,80 @@
+{%extends "base.html"%}
+
+{%block extra_js%} 
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    
+    });
+
+
+</script>
+{%endblock%}
+
+{%block contenido%}
+<div class="interna">
+    <div class="container_12">
+        <div class="grid_12 despactor">
+        	<br>
+	        <div class="botonesficha">
+	            <div class="btn-group">
+	           	  <a href="/ficha/{{datos.id}}" id=""class="btn "><i class="icon-file"></i>  Ficha Tecnica</a>
+	          	  <a href="/ficha/relacion/{{datos.id}}" id=""class="btn active"><i class="icon-resize-small"></i> Relaciones de actores</a>
+	          	  <a href="/ficha/seguimiento/{{datos.id}}" id="" class="btn"><i class="icon-time"></i> Seguimiento</a>
+	            </div>
+    		</div>
+            <div class="titulo-actor">Relación de Propietario de Bosque</div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="ficha">
+        	<div class="grid_3">
+        		<div class="labelficha">
+        			Nombre del propietario
+        		</div>
+        		<div class="valor">
+        			{{datos.nombre_propietario}}
+        		</div>
+			</div>
+			<div class="grid_3">
+				<div class="labelficha">
+        			Nombre de Propiedad
+        		</div>
+        		<div class="valor">
+        			{{datos.nombre_propiedad}}
+        		</div>
+			</div>
+			
+			<div class="clear"></div>
+	    </div> 
+	    <div class="ficha"> 
+                {%for r in relacion.all %}
+                    <div class='grid_12'>
+                       <center> <div class="ano_seguimiento">
+                            {{r.fecha_seguimiento.year}}
+                        </div>
+                       </center>
+                   </div>  
+                   <div class="clear"></div>
+                   {%if r.regente%}
+                        <div class="grid_3">
+                           <div class="seguimiento_box">
+                               <div class="seguimiento_label">Regente</div>
+                               <div class="seguimiento_valor">
+                                    {{r.regente.nombre_regente}}<br>
+                                    <i>Codigo: </i>{{r.regente.codigo_regente}}<br>
+                                    <a href="/regente/ficha/{{r.regente.id}}" class="der btn btn-mini btn-success">Ver →</a>
+                                    <div class="clear"></div>
+                               </div>
+                           </div>
+                        </div>
+                   {%endif%}
+                   <div class="clear"></div>
+                {%endfor%}
+	        <br>
+    	</div>
+        
+	</div>
+</div>
+{%endblock%}

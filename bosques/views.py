@@ -138,6 +138,13 @@ def ficha_propierario_seguimiento(request, id):
     return render_to_response('bosques/ficha_seguimiento.html', locals(),
 							  context_instance=RequestContext(request))
 
+def ficha_propierario_relacion(request, id):
+    datos = get_object_or_404(PropietarioBosques, id=id)
+    relacion = Datos.objects.filter(sequimiento__propietario__id=id)
+
+    return render_to_response('bosques/relacion_bosque.html', locals(),
+							  context_instance=RequestContext(request))
+
 def obtener_todo_mapa(request):
 	if request.is_ajax():
 		lista = []
@@ -252,6 +259,13 @@ def ficha_primera(request, id):
 	datos = get_object_or_404(EmpresaPrimeraTransformacion, id=id)
 
 	return render_to_response('primera_transformacion/ficha_primera.html', locals(),
+							  context_instance=RequestContext(request))
+
+def ficha_primera_relacion(request, id):
+    datos = get_object_or_404(EmpresaPrimeraTransformacion, id=id)
+    relacion = DatosPrimeraTransforma.objects.filter(p_tranformacion__nombre_empresa__id=id)
+
+    return render_to_response('primera_transformacion/relacion_primera.html', locals(),
 							  context_instance=RequestContext(request))
 
 def obtener_todo_mapa_primera(request):
