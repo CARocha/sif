@@ -657,8 +657,8 @@ class DatosPrimeraTransforma(models.Model):
 
     p_tranformacion = models.ForeignKey(SeguimientoPrimeraTransformacion)
 
-    def __unicode__(self):
-        return self.fecha
+    #def __unicode__(self):
+    #    return self.fecha
 
     class Meta:
         verbose_name_plural = "Datos de seguimiento primera transformacion"
