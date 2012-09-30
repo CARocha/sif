@@ -298,13 +298,13 @@ class DatosSegundaTransformacionInline(admin.StackedInline):
                         'codigo',
                        ('estado_certificado','entidad_certificadora'),
                        ('fecha_status','proveedores'),('servicio_operacionales'),
-                       ('tipo_producto'),('desde_cuando','volumen_promedio')
+                       ('relacion','tipo_producto'),('desde_cuando','volumen_promedio')
                       )
         }),
     )
     extra = 1
 
-class SeguimientoPrimeraTransformacionAdmin(AutocompleteModelAdmin):
+class SeguimientoSegundaTransformacionAdmin(AutocompleteModelAdmin):
     related_search_fields = { 
 
                 'nombre': ('nombre_comercial',),
@@ -313,4 +313,4 @@ class SeguimientoPrimeraTransformacionAdmin(AutocompleteModelAdmin):
 
 admin.site.register(AlianzaNegocion)
 admin.site.register(PrestadoresServicioOperacionales)
-admin.site.register(SeguimientoSegundaTranformacion, SeguimientoPrimeraTransformacionAdmin)
+admin.site.register(SeguimientoSegundaTranformacion, SeguimientoSegundaTransformacionAdmin)
