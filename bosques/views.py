@@ -368,6 +368,20 @@ def ficha_segunda(request, id):
 	return render_to_response('segunda_transformacion/ficha_segunda.html', locals(),
 							  context_instance=RequestContext(request))
 
+def ficha_segunda_seguimiento(request, id):
+    datos = get_object_or_404(EmpresaSegundaTransformacion, id=id)
+    seguimiento = DatosSegundaTransforma.objects.filter(fksegunda__nombre__id=id)
+
+    return render_to_response('primera_transformacion/segunda_seguimiento.html', locals(),
+							  context_instance=RequestContext(request))
+
+def ficha_segunda_relacion(request, id):
+    datos = get_object_or_404(EmpresaSegundaTransformacion, id=id)
+    relacion = DatosSegundaTransforma.objects.filter(fksegunda__nombre__id=id)
+
+    return render_to_response('primera_transformacion/relacion_segunda.html', locals(),
+							  context_instance=RequestContext(request))
+
 def obtener_todo_mapa_segunda(request):
 	if request.is_ajax():
 		lista = []

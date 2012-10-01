@@ -28,7 +28,7 @@ $(function () {
             xAxis: {
                 categories: [
                 	{%for s in seguimiento%}
-                		'{{s.fecha_seguimiento.year}}',
+                		'{{s.fecha.year}}',
                 	{%endfor%}
                 ]
             },
@@ -61,7 +61,7 @@ $(function () {
 	                name: 'Hombres',
 	                data: [
 	                	{%for h in seguimiento%}
-	                		{{h.hombre}},
+	                		{{h.hombres}},
 	                	{%endfor%}
 	                ]
 	            }, 
@@ -70,64 +70,6 @@ $(function () {
 	                data: [
 	                	{%for m in seguimiento%}
 	                		{{m.mujeres}},
-	                	{%endfor%}
-	                ]
-	            }, 
-            ]
-        });
-    });
-    
-});
-
-$(function () {
-    var chart2;
-    $(document).ready(function() {
-        chart2 = new Highcharts.Chart({
-            chart: {
-                renderTo: 'container2',
-                type: 'column'
-            },
-            title: {
-                text: 'Datos de unidad de manejo'
-            },
-            credits: {
-               text: '',
-            },
-            subtitle: {
-                text: 'Volumen total disponible por cosecha anual (m3):'
-            },
-            xAxis: {
-                categories: [
-                	{%for s in seguimiento%}
-                		'{{s.fecha_seguimiento.year}}',
-                	{%endfor%}
-                ]
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Metros cubicos m3'
-                }
-            },
-
-            tooltip: {
-                formatter: function() {
-                    return 'año '+
-                        this.x +': '+ this.y +' m3';
-                }
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-                series: [
-	            {
-	                name: 'Volumen total anual m3',
-	                data: [
-	                	{%for vol in seguimiento%}
-	                		{{vol.volumen_cosecha}},
 	                	{%endfor%}
 	                ]
 	            }, 
@@ -147,27 +89,27 @@ $(function () {
                 marginRight: 130,
                 marginBottom: 25
             },
+            credits: {
+               text: '',
+            },
             title: {
-                text: 'Usos de la tierra',
+                text: 'Volumenes de venta',
                 x: -20 //center
             },
             subtitle: {
-                text: 'distribucion de hectareas',
+                text: 'promedios anuales',
                 x: -20
-            },
-            credits: {
-               text: '',
             },
             xAxis: {
                 categories: [
                 	{%for s in seguimiento%}
-                		'{{s.fecha_seguimiento.year}}',
+                		'{{s.fecha.year}}',
                 	{%endfor%}
                 ]
             },
             yAxis: {
                 title: {
-                    text: 'Hectareas (ha)'
+                    text: 'volumen de unidades'
                 },
                 plotLines: [{
                     value: 0,
@@ -178,7 +120,7 @@ $(function () {
             tooltip: {
                 formatter: function() {
                         return '<b>'+ this.series.name +'</b><br/>año '+
-                        this.x +': '+ this.y +' hectareas';
+                        this.x +': '+ this.y +'unidades';
                 }
             },
             legend: {
@@ -191,58 +133,44 @@ $(function () {
             },
             series: [
 	            {
-	                name: 'Agricola',
+	                name: 'Madera en Rollo',
 	                data: [
-	                	{%for agri in seguimiento%}
-	                		{{agri.uso_agricola}},
+	                	{%for rol in seguimiento%}
+	                		{{rol.volumen_madera_rollo}},
 	                	{%endfor%}
 	                ]
 	            }, 
 	            {
-	                name: 'Pecuario',
+	                name: 'Madera Aserrada',
 	                data: [
-	                	{%for pec in seguimiento%}
-	                		{{pec.uso_pecuario}},
+	                	{%for mad in seguimiento%}
+	                		{{mad.volumen_madera_aserrada}},
 	                	{%endfor%}
 	                ]
 	            },
 	            {
-	                name: 'Forestal',
+	                name: 'Carbón',
 	                data: [
-	                	{%for fore in seguimiento%}
-	                		{{fore.uso_foretal}},
+	                	{%for car in seguimiento%}
+	                		{{car.volumen_carbon}},
 	                	{%endfor%}
 	                ]
 	            },
 	            {
-	                name: 'Bosque bajo manejo',
+	                name: 'Leña',
 	                data: [
-	                	{%for mane in seguimiento%}
-	                		{{mane.bosque_bajo_manejo}},
+	                	{%for len in seguimiento%}
+	                		{{len.volumen_lena}},
 	                	{%endfor%}
 	                ]
-	            },
-	            {
-	                name: 'Agroforestal',
-	                data: [
-	                	{%for agro in seguimiento%}
-	                		{{agro.uso_agroforestal}},
-	                	{%endfor%}
-	                ]
-	            },
-	            {
-	                name: 'Otros usos',
-	                data: [
-	                	{%for otro in seguimiento%}
-	                		{{otro.otros_usos}},
-	                	{%endfor%}
-	                ]
-	            },     
+	            },  
             ]
         });
     });
     
 });
+
+
 </script>
 {%endblock%}
 
@@ -253,12 +181,12 @@ $(function () {
         	<br>
 	        <div class="botonesficha">
 	            <div class="btn-group">
-	           	  <a href="/ficha/{{datos.id}}" id=""class="btn "><i class="icon-file"></i>  Ficha Tecnica</a>
-	          	  <a href="/ficha/relacion/{{datos.id}}" id=""class="btn "><i class="icon-resize-small"></i> Relaciones de actores</a>
-	          	  <a href="/ficha/seguimiento/{{datos.id}}" id="" class="btn active"><i class="icon-time"></i> Seguimiento</a>
+                <a href="/primera/ficha/{{datos.id}}" id=""class="btn"><i class="icon-file"></i>  Ficha Tecnica</a>
+                <a href="/primera/relacion/{{datos.id}}" id=""class="btn "><i class="icon-resize-small"></i> Relaciones de actores</a>
+                <a href="/primera/seguimiento/{{datos.id}}" id="" class="btn active"><i class="icon-time"></i> Seguimiento</a>
 	            </div>
     		</div>
-            <div class="titulo-actor">Ficha de Seguimiento Propietario de Bosque</div>
+            <div class="titulo-actor">Seguimiento de empresa de primera transformacion</div>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
@@ -268,7 +196,7 @@ $(function () {
         			Nombre del propietario
         		</div>
         		<div class="valor">
-        			{{datos.nombre_propietario}}
+        			{{datos.nombre_empresa_forestal}}
         		</div>
 			</div>
 			<div class="grid_3">
@@ -276,7 +204,7 @@ $(function () {
         			Nombre de Propiedad
         		</div>
         		<div class="valor">
-        			{{datos.nombre_propiedad}}
+        			{{datos.nombre_director}}
         		</div>
 			</div>
 			
@@ -288,9 +216,9 @@ $(function () {
 	        	<div class="explicacion">
 	        		Sed posuere consectetur est at lobortis. Maecenas faucibus mollis interdum. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
 	        	</div>
-	        </div>
-	        <div class="grid_6">
-	        	<div id="container2" style="min-width: 450px; height: 300px; margin: 0 auto"></div>
+	        </div> 
+	        <div class="grid_6" style="display:none">
+	        	
 	        	<div class="explicacion">
 	        		Sed posuere consectetur est at lobortis. Maecenas faucibus mollis interdum. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
 	        	</div>
