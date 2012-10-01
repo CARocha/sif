@@ -115,7 +115,9 @@ class DatosAdminInline(admin.StackedInline):
         }),
         ('Relaciones con actores', {
             'classes': ('actoresRela',),
-            'fields': (('primera_transformacion','producto_venden'), 'regente'
+            'fields': (('primera_transformacion','producto_venden'), 
+                       ('primera_transformacion2','producto_venden2'),
+                       ('primera_transformacion3','producto_venden3'), 'regente'
                      )
         }),
     )
