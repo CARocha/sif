@@ -362,9 +362,26 @@ class Datos(models.Model):
     visita_auditoria = models.DateField(null=True, blank=True)
     auditor = models.ForeignKey(Auditor, null=True, blank=True)
     entidad_certificadora = models.ForeignKey(EntidadCertificadora, null=True, blank=True)
-    primera_transformacion = models.ForeignKey('EmpresaPrimeraTransformacion',null=True, blank=True)
+    primera_transformacion = models.ForeignKey('EmpresaPrimeraTransformacion',
+                                                related_name='EmpresaPrimeraTransformacion1',
+                                                null=True, blank=True)
     producto_venden = models.ManyToManyField(ProVendenBosque, 
-                                            verbose_name=u'Tipo de producto que venden',
+                                            verbose_name=u'Tipo de producto que venden 1',
+                                            related_name=u'producto_vende1',
+                                            null=True, blank=True)
+    primera_transformacion2 = models.ForeignKey('EmpresaPrimeraTransformacion',
+                                                related_name='EmpresaPrimeraTransformacion2',
+                                                null=True, blank=True)
+    producto_venden2 = models.ManyToManyField(ProVendenBosque, 
+                                            verbose_name=u'Tipo de producto que venden 2',
+                                            related_name=u'producto_vende2',
+                                            null=True, blank=True)
+    primera_transformacion3 = models.ForeignKey('EmpresaPrimeraTransformacion',
+                                                related_name='EmpresaPrimeraTransformacion3',
+                                                null=True, blank=True)
+    producto_venden3 = models.ManyToManyField(ProVendenBosque, 
+                                            verbose_name=u'Tipo de producto que venden 3',
+                                            related_name=u'producto_vende3',
                                             null=True, blank=True)
     regente = models.ForeignKey('RegenteForestal',null=True, blank=True)
     
@@ -642,12 +659,12 @@ class DatosPrimeraTransforma(models.Model):
     entidad_certificadora = models.ForeignKey(EntidadCertificadora, null=True, blank=True)
     status = models.DateField()
     regente = models.ForeignKey(RegenteForestal, null=True, blank=True)
-    asistencia = models.ForeignKey(AsistenciaTecnica)
-    servicio_extraccion = models.ForeignKey(ServicioExtraccion)
-    empresa = models.ForeignKey(EmpresaComercializadora)
-    relacion = models.ForeignKey(RelacionComercial)
-    producto_vende = models.ManyToManyField(ProductoVenden)
-    desde = models.IntegerField('Desde cuando le vende')
+    asistencia = models.ForeignKey(AsistenciaTecnica, null=True, blank=True)
+    servicio_extraccion = models.ForeignKey(ServicioExtraccion, null=True, blank=True)
+    empresa = models.ForeignKey(EmpresaComercializadora, null=True, blank=True)
+    relacion = models.ForeignKey(RelacionComercial, null=True, blank=True)
+    producto_vende = models.ManyToManyField(ProductoVenden, null=True, blank=True)
+    desde = models.IntegerField('Desde cuando le vende', null=True, blank=True)
     volumen_madera_rollo = models.FloatField()
     volumen_madera_aserrada = models.FloatField()
     volumen_carbon = models.FloatField()
@@ -811,12 +828,12 @@ class DatosSegundaTranformacion(models.Model):
     entidad_certificadora = models.ForeignKey(EntidadCertificadora, null=True, blank=True)
     fecha_status = models.DateField()
     proveedores = models.ManyToManyField(ProveedoresSuministros)
-    servicio_operacionales = models.ManyToManyField(PrestadoresServicioOperacionales)
+    servicio_operacionales = models.ManyToManyField(PrestadoresServicioOperacionales, null=True, blank=True)
     #empresa = models.ForeignKey(EmpresaComercializadora)
-    relacion = models.ForeignKey(RelacionComercial)
+    relacion = models.ForeignKey(RelacionComercial, null=True, blank=True)
     tipo_producto = models.ManyToManyField(TipoProducto, null=True, blank=True)
-    desde_cuando = models.DateField()
-    volumen_promedio = models.FloatField()
+    desde_cuando = models.DateField(null=True, blank=True)
+    volumen_promedio = models.FloatField(null=True, blank=True)
 
     fksegunda = models.ForeignKey(SeguimientoSegundaTranformacion)
 
