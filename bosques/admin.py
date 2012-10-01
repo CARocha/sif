@@ -145,6 +145,7 @@ admin.site.register(Ambientales)
 #------------------------  Regente foresal  -------------------------------
 
 class RegenteAdmin(admin.ModelAdmin):
+    form = RegenteForm
     filter_horizontal = ('organizado','organizacion','area_trabajo')
     date_hierarchy = 'llenado'
     fieldsets = (
@@ -193,6 +194,7 @@ admin.site.register(SeguimientoRegente, RegenteSeguimientoAdmin)
 
 #---------------------------admin primera tranformacion --------------------------------
 class PrimeraTransformacionAdmin(admin.ModelAdmin):
+    form = PrimeraTForm
     #filter_horizontal = ('organizado','organizacion','area_trabajo')
     date_hierarchy = 'fecha_llenado'
     fieldsets = (
@@ -256,6 +258,7 @@ admin.site.register(SeguimientoPrimeraTransformacion,SeguimientoPrimeraTransform
 #-------------------------- Admin segunda tranformación ------------------------------
 
 class SegundaTranformacionAdmin(admin.ModelAdmin):
+    form = SegundaTForm
     #filter_horizontal = ('organizado','organizacion','area_trabajo')
     date_hierarchy = 'fecha'
     fieldsets = (
