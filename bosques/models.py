@@ -643,7 +643,7 @@ class DatosPrimeraTransforma(models.Model):
     estado_certificado = models.IntegerField(choices=ESTADO_CERTIFICADO_CHOICE)
     entidad_certificadora = models.ForeignKey(EntidadCertificadora, null=True, blank=True)
     status = models.DateField()
-    regente = models.ForeignKey(RegenteForestal)
+    regente = models.ForeignKey(RegenteForestal, null=True, blank=True)
     asistencia = models.ForeignKey(AsistenciaTecnica)
     servicio_extraccion = models.ForeignKey(ServicioExtraccion)
     empresa = models.ForeignKey(EmpresaComercializadora)
