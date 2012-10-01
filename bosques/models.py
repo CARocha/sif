@@ -225,7 +225,6 @@ class PropietarioBosques(models.Model):
     longitud = models.FloatField(null=True, blank=True)
     
     departamento = models.ForeignKey(Departamento)
-    #municipio = models.ForeignKey(Municipio)
     municipio = ChainedForeignKey(
         Municipio,
         chained_field="departamento",
@@ -233,7 +232,6 @@ class PropietarioBosques(models.Model):
         show_all=False,
         auto_choose=True
     )
-    #comunidad = models.ForeignKey(Comunidad)
     comunidad = ChainedForeignKey(
         Comunidad,
         chained_field="municipio",
