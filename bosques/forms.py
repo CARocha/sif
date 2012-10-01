@@ -42,6 +42,57 @@ SINO_CHOICE = (
     (2, 'No')
 )
 
+class RegenteForm(ModelForm):
+    area_trabajo = forms.ModelMultipleChoiceField(queryset = AreaTrabajo.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    class Meta:
+        model = RegenteForestal
+
+class PrimeraTForm(ModelForm):
+    org_empresarial = forms.ModelMultipleChoiceField(queryset = OrganizacionEmpresarial.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    alianza = forms.ModelMultipleChoiceField(queryset = AlianzaNegocio.objects.order_by('nombre'),
+                                            widget=forms.CheckboxSelectMultiple())
+    organizado = forms.ModelMultipleChoiceField(queryset = Organizado.objects.order_by('nombre'),
+                                            widget=forms.CheckboxSelectMultiple())
+    area_trabajo = forms.ModelMultipleChoiceField(queryset = TrabajoTranformacion.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    servicio_secado = forms.ModelMultipleChoiceField(queryset = ServicioSecado.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    productos_venden = forms.ModelMultipleChoiceField(queryset = ProductosVenden.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    otro_social = forms.ModelMultipleChoiceField(queryset = SocialesEconomico.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    otro_ambiental = forms.ModelMultipleChoiceField(queryset = Ambientales.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    class Meta:
+        model = EmpresaPrimeraTransformacion
+
+class SegundaTForm(ModelForm):
+    org_empresarial = forms.ModelMultipleChoiceField(queryset = OrganizacionEmpresarial.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    organizado = forms.ModelMultipleChoiceField(queryset = Organizado.objects.order_by('nombre'),
+                                            widget=forms.CheckboxSelectMultiple())
+    area_trabajo = forms.ModelMultipleChoiceField(queryset = AreaTrabajoSegunda.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    apoyo_produccion = forms.ModelMultipleChoiceField(queryset = ApoyoProduccion.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    productos_vende = forms.ModelMultipleChoiceField(queryset = ProductosVendenSegunda.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    no_maderable = forms.ModelMultipleChoiceField(queryset = NoMaderable.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    nivel_tecnologico = forms.ModelMultipleChoiceField(queryset = NivelTecnologico.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    otro_social = forms.ModelMultipleChoiceField(queryset = SocialesEconomico.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    otro_ambiental = forms.ModelMultipleChoiceField(queryset = Ambientales.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    vision_empresarial = forms.ModelMultipleChoiceField(queryset = VisionEmpresarial.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+
+    class Meta:
+        model = EmpresaSegundaTransformacion
+
 def get_anios():
     choices = []
     years = []
