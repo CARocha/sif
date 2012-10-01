@@ -434,6 +434,10 @@ z-index: 100;
 }
 
 //Fichas de seguimiento
+
+.der{
+	float:right;
+}
 .explicacion{
 	background: #fff;
 	font-family: @mako;
@@ -443,6 +447,45 @@ z-index: 100;
 	margin-top:-3px;
 	.box-shadow(0px, 1px, 2px, #d4d4d4);
 	color:#525252;
+}
+
+.seguimiento_box{
+	background: #fff;
+	.box-shadow(0px,2px,2px,#eee);
+	margin-top:10px;
+	.seguimiento_label{
+		background: #c4c7c1;
+		padding:10px;
+		color:#fff;
+		font-family: @mako;
+		text-align: center;
+		border-top:#989a98 1px solid ;
+		.text-shadow(0px, 1px, 0px, #989a98);
+
+	}
+	.seguimiento_valor{
+		padding:10px;
+	}
+}
+
+.ano_seguimiento.back{
+	background: #aaae50;
+	color:#fff;
+	.rounded-corners(10px);
+	border-bottom:#fff 1px solid;
+	font-family: @mako;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.ano_seguimiento{
+	color:#333;
+	border-bottom:#adadad 1px dotted;
+	font-family: Georgia;
+	font-size: 25px;
+	margin-top:10px;
+	margin-bottom:10px;
+	padding-bottom:5px;
 }
 
 //Footer

@@ -770,7 +770,7 @@ class EmpresaSegundaTransformacion(models.Model):
     vision_empresarial = models.ManyToManyField(VisionEmpresarial)
 
     def __unicode__(self):
-        return self.nombre_director
+        return self.nombre_comercial
 
     class Meta:
         verbose_name_plural = "Empresas forestal de segunda tranformación"
@@ -823,7 +823,7 @@ class DatosSegundaTranformacion(models.Model):
     fksegunda = models.ForeignKey(SeguimientoSegundaTranformacion)
 
     def __unicode__(self):
-        return self.alianza
+        return self.codigo
 
     class Meta:
         verbose_name = ('Datos de seguimiento segunda tranformación')
