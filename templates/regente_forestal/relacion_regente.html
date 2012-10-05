@@ -1,0 +1,124 @@
+{%extends "base.html"%}
+
+{%block extra_js%} 
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    
+    });
+
+
+</script>
+{%endblock%}
+
+{%block contenido%}
+<div class="interna">
+    <div class="container_12">
+        <div class="grid_12 despactor">
+        	<br>
+	        <div class="botonesficha">
+              <div class="btn-group">
+                <a href="/regente/ficha/{{datos.id}}" id=""class="btn"><i class="icon-file"></i>  Ficha Tecnica</a>
+                <a href="/regente/relacion/{{datos.id}}" id=""class="btn active "><i class="icon-resize-small"></i> Relaciones de actores</a>
+                <a href="/regente/seguimiento/{{datos.id}}" id="" class="btn"><i class="icon-time"></i> Seguimiento</a>
+              </div>
+    		</div>
+            <div class="titulo-actor">Relación de Regente</div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="ficha">
+        	<div class="grid_3">
+        		<div class="labelficha">
+        			Nombre del regente
+        		</div>
+        		<div class="valor">
+        			{{datos.nombre_regente}}
+        		</div>
+			</div>
+			<div class="grid_3">
+				<div class="labelficha">
+        			Codigo Regente
+        		</div>
+        		<div class="valor">
+        			{{datos.codigo_regente}}
+        		</div>
+			</div>
+			
+			<div class="clear"></div>
+	    </div> 
+
+      <div class="grid_12 ficha">
+      <div class="tabbable"> <!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#tab1" data-toggle="tab">Empresas de manejo de bosques</a></li>
+          <li><a href="#tab2" data-toggle="tab">Empresas de primera trasnformación</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active fade" id="tab1">
+                 {%if bosques%}
+
+                      <div class="box_relacion_full">
+                         <div class="seguimiento_box">
+                             <div class="seguimiento_label">Empresas de manejo de bosques que el regente aborda</div>
+                             <div class="seguimiento_valor">
+                                {%for b in bosques%}
+                                  {%ifchanged b.fecha_seguimiento.year%}
+                                 <br> <span class="label label-warning">{{b.fecha_seguimiento.year}}</span><br>
+                                {%endifchanged%}
+                                    <div class="field_lista">
+                                      <br><b>Nombre de propiedad</b><br>{{b.sequimiento.propietario.nombre_propiedad}}
+                                   </div>
+                                    <div class="field_lista">
+                                      <br><b>Municipio</b><br>{{b.sequimiento.propietario.municipio}}
+                                   </div>
+                                    <a href="/bosques/ficha/{{b.sequimiento.propietario.id}}" class="der btn btn-mini btn-success boton_rel">Ver →</a>
+                                   <div class="clear"></div><br>
+                                   <hr>
+                                 {%endfor%}
+                             </div>
+                         </div>
+                      </div>
+                 {%endif%}
+              
+
+              <br>
+          </div>
+          <div class="tab-pane fade" id="tab2">
+                 {%if primera%}
+
+                      <div class="box_relacion_full">
+                         <div class="seguimiento_box">
+                             <div class="seguimiento_label">Empresas de primera transformación que el regente aborda</div>
+                             <div class="seguimiento_valor">
+                                {%for b in primera%}
+                                  {%ifchanged b.fecha.year%}
+                                 <br> <span class="label label-warning">{{b.fecha.year}}</span><br>
+                                {%endifchanged%}
+                                    <div class="field_lista">
+                                      <br><b>Nombre de propiedad</b><br>{{b.p_tranformacion.nombre_empresa.nombre_empresa_forestal}}
+                                   </div>
+                                    <div class="field_lista">
+                                      <br><b>Municipio</b><br>{{b.p_tranformacion.nombre_empresa.municipio}}
+                                   </div>
+                                    <a href="/bosques/ficha/{{b.sequimiento.propietario.id}}" class="der btn btn-mini btn-success boton_rel">Ver →</a>
+                                   <div class="clear"></div><br>
+                                   <hr>
+                                 {%endfor%}
+                             </div>
+                         </div>
+                      </div>
+                 {%endif%}
+
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="clear"></div>
+
+
+        
+	</div>
+</div>
+{%endblock%}

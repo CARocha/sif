@@ -1,0 +1,149 @@
+{%extends "base.html"%}
+
+{%block extra_js%} 
+	<script type="text/javascript" src="/files/js/highcharts.js"></script>
+	<script type="text/javascript" src="/files/js/chart_theme.js"></script>
+    <script type="text/javascript">
+
+
+$(function () {
+    var chart3;
+    $(document).ready(function() {
+        chart3 = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container3',
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25
+            },
+            credits: {
+               text: '',
+            },
+            title: {
+                text: 'Datos de seguimiento de regente',
+                x: -20 //center
+            },
+            subtitle: {
+                text: '',
+                x: -20
+            },
+            xAxis: {
+                categories: [
+                    {%for s in seguimiento%}
+                        '{{s.fecha.year}}',
+                    {%endfor%}
+                ]
+            },
+            yAxis: {
+                title: {
+                    text: 'Hectareas'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>año '+
+                        this.x +': '+ this.y +'hectareas';
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            series: [
+                {
+                    name: 'Area total poa',
+                    data: [
+                        {%for rol in seguimiento%}
+                            {{rol.area_total_poa}},
+                        {%endfor%}
+                    ]
+                }, 
+                {
+                    name: 'Volumenes totales',
+                    data: [
+                        {%for mad in seguimiento%}
+                            {{mad.volumenes_totales}},
+                        {%endfor%}
+                    ]
+                },
+                {
+                    name: 'Area Pgmf',
+                    data: [
+                        {%for car in seguimiento%}
+                            {{car.area_pgmf}},
+                        {%endfor%}
+                    ]
+                }, 
+            ]
+        });
+    });
+    
+});
+
+
+</script>
+{%endblock%}
+
+{%block contenido%}
+<div class="interna">
+    <div class="container_12">
+        <div class="grid_12 despactor">
+        	<br>
+	        <div class="botonesficha">
+	            <div class="btn-group">
+                <a href="/regente/ficha/{{datos.id}}" id=""class="btn"><i class="icon-file"></i>  Ficha Tecnica</a>
+                <a href="/regente/relacion/{{datos.id}}" id=""class="btn "><i class="icon-resize-small"></i> Relaciones de actores</a>
+                <a href="/regente/seguimiento/{{datos.id}}" id="" class="btn active"><i class="icon-time"></i> Seguimiento</a>
+	            </div>
+    		</div>
+            <div class="titulo-actor">Seguimiento de empresa de primera transformacion</div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="ficha">
+        	<div class="grid_3">
+                <div class="labelficha">
+                    Nombre del regente
+                </div>
+                <div class="valor">
+                    {{datos.nombre_regente}}
+                </div>
+			</div>
+			<div class="grid_3">
+                <div class="labelficha">
+                    Codigo Regente
+                </div>
+                <div class="valor">
+                    {{datos.codigo_regente}}
+                </div>
+
+			</div>
+			
+			<div class="clear"></div>
+	    </div> 
+	    <div class="ficha"> 
+
+	        <div class="clear"></div>
+	        <br>
+	        <div class='grid_12'>
+	        	<div id="container3" style="min-width: 450px; height: 350px; margin: 0 auto"></div>
+	        	<div class="explicacion">
+	        		Sed posuere consectetur est at lobortis. Maecenas faucibus mollis interdum. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.	        		Sed posuere consectetur est at lobortis. Maecenas faucibus mollis interdum. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+	        	</div>
+	        </div>
+	       	<div class="clear"></div>     
+	        <br>
+    	</div>
+        
+	</div>
+</div>
+{%endblock%}

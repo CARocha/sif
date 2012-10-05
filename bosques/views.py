@@ -4,6 +4,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.utils import simplejson
 from models import *
 from forms import *
+from django.db.models import Q
 
 # Create your views here.
 def index(request):
@@ -140,7 +141,7 @@ def ficha_propierario_seguimiento(request, id):
 
 def ficha_propierario_relacion(request, id):
     datos = get_object_or_404(PropietarioBosques, id=id)
-    relacion = Datos.objects.filter(sequimiento__propietario__id=id)
+    relacion = Datos.objects.filter(sequimiento__propietario__id=id).order_by('-fecha_seguimiento')
 
     return render_to_response('bosques/relacion_bosque.html', locals(),
 							  context_instance=RequestContext(request))
@@ -270,8 +271,8 @@ def ficha_primera_seguimiento(request, id):
 
 def ficha_primera_relacion(request, id):
     datos = get_object_or_404(EmpresaPrimeraTransformacion, id=id)
-    relacion = DatosPrimeraTransforma.objects.filter(p_tranformacion__nombre_empresa__id=id)
-
+    relacion = DatosPrimeraTransforma.objects.filter(p_tranformacion__nombre_empresa__id=id).order_by('-fecha')
+    bosques = Datos.objects.filter(Q(primera_transformacion_id = id) | Q(primera_transformacion2_id = id) |  Q(primera_transformacion3_id = id))
     return render_to_response('primera_transformacion/relacion_primera.html', locals(),
 							  context_instance=RequestContext(request))
 
@@ -370,16 +371,16 @@ def ficha_segunda(request, id):
 
 def ficha_segunda_seguimiento(request, id):
     datos = get_object_or_404(EmpresaSegundaTransformacion, id=id)
-    seguimiento = DatosSegundaTransforma.objects.filter(fksegunda__nombre__id=id)
+    seguimiento = DatosSegundaTranformacion.objects.filter(fksegunda__nombre__id=id)
 
-    return render_to_response('primera_transformacion/segunda_seguimiento.html', locals(),
+    return render_to_response('segunda_transformacion/segunda_seguimiento.html', locals(),
 							  context_instance=RequestContext(request))
 
 def ficha_segunda_relacion(request, id):
     datos = get_object_or_404(EmpresaSegundaTransformacion, id=id)
-    relacion = DatosSegundaTransforma.objects.filter(fksegunda__nombre__id=id)
+    relacion = DatosSegundaTranformacion.objects.filter(fksegunda__nombre__id=id).order_by('-fecha')
 
-    return render_to_response('primera_transformacion/relacion_segunda.html', locals(),
+    return render_to_response('segunda_transformacion/relacion_segunda.html', locals(),
 							  context_instance=RequestContext(request))
 
 def obtener_todo_mapa_segunda(request):
@@ -449,6 +450,21 @@ def ficha_regente(request, id):
 	datos = get_object_or_404(RegenteForestal, id=id)
 
 	return render_to_response('regente_forestal/ficha_regente.html', locals(),
+							  context_instance=RequestContext(request))
+
+def ficha_regente_seguimiento(request, id):
+    datos = get_object_or_404(RegenteForestal, id=id)
+    seguimiento = DatosSeguimientoRegente.objects.filter(fkregente__regente__id=id)
+
+    return render_to_response('regente_forestal/regente_seguimiento.html', locals(),
+							  context_instance=RequestContext(request))
+
+def ficha_regente_relacion(request, id):
+    datos = get_object_or_404(RegenteForestal, id=id)
+    relacion = DatosSeguimientoRegente.objects.filter(fkregente__regente__id=id).order_by('-fecha')
+    bosques = Datos.objects.filter(regente_id = id )
+    primera = DatosPrimeraTransforma.objects.filter(regente__id = id)
+    return render_to_response('regente_forestal/relacion_regente.html', locals(),
 							  context_instance=RequestContext(request))
 
 
