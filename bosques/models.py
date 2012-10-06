@@ -464,7 +464,7 @@ class SeguimientoRegente(models.Model):
         verbose_name_plural = ('Seguimiento Regente forestal')
 
     def __unicode__(self):
-        return self.regente
+        return self.regente.nombre_regente
     
 class DatosSeguimientoRegente(models.Model):
     fecha_seguimiento = models.DateField()
@@ -482,7 +482,7 @@ class DatosSeguimientoRegente(models.Model):
     fkregente = models.ForeignKey(SeguimientoRegente)
     
     def __unicode__(self):
-        return self.fecha_seguimiento
+        return self.no_pgmf_regencia
         
     class Meta:
         verbose_name = ('Seguimiento Datos regente forestal')
