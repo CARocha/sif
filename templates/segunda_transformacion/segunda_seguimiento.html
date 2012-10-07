@@ -1,0 +1,169 @@
+{%extends "base.html"%}
+
+{%block extra_js%} 
+	<script type="text/javascript" src="/files/js/highcharts.js"></script>
+	<script type="text/javascript" src="/files/js/chart_theme.js"></script>
+    <script type="text/javascript">
+$(function () {
+    var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25
+            },
+            credits: {
+               text: '',
+            },
+            title: {
+                text: 'Empleados UMF',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'distribucion por sexo',
+                x: -20
+            },
+            xAxis: {
+                categories: [
+                	{%for s in seguimiento%}
+                		'{{s.fecha.year}}',
+                	{%endfor%}
+                ]
+            },
+            yAxis: {
+                title: {
+                    text: 'cantidad de personas'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>año '+
+                        this.x +': '+ this.y +' personas';
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            series: [
+	            {
+	                name: 'Hombres',
+	                data: [
+	                	{%for h in seguimiento%}
+	                		{{h.hombres}},
+	                	{%endfor%}
+	                ]
+	            }, 
+	            {
+	                name: 'Mujeres',
+	                data: [
+	                	{%for m in seguimiento%}
+	                		{{m.mujeres}},
+	                	{%endfor%}
+	                ]
+	            }, 
+            ]
+        });
+    });
+    
+});
+
+
+</script>
+{%endblock%}
+
+{%block contenido%}
+<div class="interna">
+    <div class="container_12">
+        <div class="grid_12 despactor">
+        	<br>
+	        <div class="botonesficha">
+	            <div class="btn-group">
+                  <a href="/segunda/ficha/{{datos.id}}" id=""class="btn"><i class="icon-file"></i>  Ficha Tecnica</a>
+                  <a href="/segunda/relacion/{{datos.id}}" id=""class="btn "><i class="icon-resize-small"></i> Relaciones de actores</a>
+                  <a href="/segunda/seguimiento/{{datos.id}}" id="" class="btn active"><i class="icon-time"></i> Seguimiento</a>
+	            </div>
+    		</div>
+            <div class="titulo-actor">Seguimiento de empresa de segunda transformacion</div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="ficha">
+        	<div class="grid_3">
+        		<div class="labelficha">
+        			Nombre del propietario
+        		</div>
+        		<div class="valor">
+        			{{datos.nombre_comercial}}
+        		</div>
+			</div>
+			<div class="grid_3">
+				<div class="labelficha">
+        			Nombre de Propiedad
+        		</div>
+        		<div class="valor">
+        			{{datos.nombre_director}}
+        		</div>
+			</div>
+			
+			<div class="clear"></div>
+	    </div> 
+	    <div class="ficha"> 
+	        <div class="grid_6">
+	        	<div id="container" style=" height: 300px; margin: 0 auto"></div>
+	        	<div class="explicacion">
+	        		Sed posuere consectetur est at lobortis. Maecenas faucibus mollis interdum. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+	        	</div>
+	        </div> 
+	        <div class="grid_6">
+	        	{% for s in seguimiento%}
+                    <center> <div class="ano_seguimiento">
+                        {{s.fecha.year}}
+                    </div>
+                    </center>
+                    <div class="fichabox">
+                        {%if s.alianza.count > 0%}
+                        <div class="labelfichabox">
+                            Alianzas
+                        </div>
+                        <div class="valuefichabox">
+                            {%for a in s.alianza.all%}
+                                {{a.nombre}},
+                            {%endfor%}
+                        </div>
+                        <div class="clear"></div>   
+                        {%endif%}
+                        {%if s.proveedores.count > 0%}
+                        <div class="labelfichabox">
+                            Proveedores de materiales
+                        </div>
+                        <div class="valuefichabox">
+                            {%for a in s.proveedores.all%}
+                                {{a.nombre}},
+                            {%endfor%}
+                        </div>
+                        <div class="clear"></div>   
+                        {%endif%}
+                    </div>
+                {%endfor%}
+	        </div>
+
+	        <div class="clear"></div>
+	        <br>
+
+    	</div>
+        
+	</div>
+</div>
+{%endblock%}

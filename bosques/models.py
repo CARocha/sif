@@ -367,7 +367,7 @@ class Datos(models.Model):
                                                 null=True, blank=True)
     producto_venden = models.ManyToManyField(ProVendenBosque, 
                                             verbose_name=u'Tipo de producto que venden 1',
-                                            related_name=u'producto_vende1',
+                                            related_name=u'producto_venden',
                                             null=True, blank=True)
     primera_transformacion2 = models.ForeignKey('EmpresaPrimeraTransformacion',
                                                 related_name='EmpresaPrimeraTransformacion2',
