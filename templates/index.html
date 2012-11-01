@@ -2,13 +2,13 @@
 {%block extra_js%} 
 	<script type="text/javascript">
 	$(document).ready(function() {
-		$('#leermasboton').click(function(){
-			$('#lista-actores').css('margin-top','0px');
-		    $('#bienvenida').animate({height:'460'});
-		    $('#bienvenida').animate({width:'852'});
-		    $('.preindex').hide();
-		    $('.fullindex').show();
-		});
+		// $('#leermasboton').click(function(){
+		// 	$('#lista-actores').css('margin-top','0px');
+		//     $('#bienvenida').animate({height:'460'});
+		//     $('#bienvenida').animate({width:'852'});
+		//     $('.preindex').hide();
+		//     $('.fullindex').show();
+		// });
 
 		var r=Math.floor(Math.random()*2);
 		$('#feature').css({'background':'url(/files/img/index'+r+'.jpg)','background-repeat':'no-repeat','background-position':'center'});
@@ -21,20 +21,6 @@
 		<div class="grid_12">
 			<center>
 				<div id="bienvenida">
-					<div class="preindex">
-						<div class="titulo">
-							Acerca del Sistema
-						</div>
-						<div class="texto">
-							
-								<p>
-									Bienvenidos a este interesante sitio de interacción virtual e información sobre el desempeño y oportunidades que brinda el sector forestal nicaragüense, cómo avanza la certificación forestal, quiénes y cómo se relacionan los que participan en los negocios forestales establecidos en el país.
-								</p>
-								<p>
-									<a id="leermasboton" href="#">Leer mas <img src="/files/img/leermasicon.png"></a>
-								</p>
-						</div>
-					</div>
 					<div class="fullindex">
 						<div class="conicefv">
 							<img src="/files/img/logoverde.jpg">
@@ -87,9 +73,10 @@
 			<div class="titulo-bloque"><img src="/files/img/operadoresicon.png">OPERADORES</div>
 			<div class="bloque_actor_externo">
 				<div class="bloque_actor_interno">
-					<a href="/consultar"><div class="conteo">{{bosques}}</div>Empresa de manejo de bosque</a>
-					<a href="/primera/consultar/"><div class="conteo">{{empresa_primera}}</div>Empresa forestal de primera trasnformación</a>
-					<a href="/segunda/consultar/"><div class="conteo">{{empresa_segunda}}</div>Empresa forestal de segunda trasnformación</a>
+					<a href="/consultar" class="on"><div class="conteo">{{bosques}}</div>Empresa de manejo de bosque</a>
+					<a href="/primera/consultar/" class="on"><div class="conteo">{{empresa_primera}}</div>Empresa forestal de primera trasnformación</a>
+					<a href="/segunda/consultar/" class="on"><div class="conteo">{{empresa_segunda}}</div>Empresa forestal de segunda trasnformación</a>
+					<a href="#"><div class="conteo"></div>Empresa de extracción forestal</a>
 				</div>
 			</div>
 		</div>
@@ -97,12 +84,10 @@
 			<div class="titulo-bloque"><img src="/files/img/prestadoresicon.png">PRESTADORES DE SERVICIO</div>
 			<div class="bloque_actor_externo">
 				<div class="bloque_actor_interno">
-					
-					<a href="/regente/consultar/"><div class="conteo">{{regente}}</div>Regentes Forestales</a>
-					<!--
 					<a href=""><div class="conteo"></div>Asistencia Tecnica</a>
-					<a href=""><div class="conteo"></div>PYMES Madera</a>
-					-->
+					<a href=""><div class="conteo"></div>Empresa comercializadora de productos forestales</a>
+					<a href=""><div class="conteo"></div>Prestadores de Servicios financieros</a>
+					<a href=""><div class="conteo"></div>Proveedor de insumos y servicios de apoyo </a>
 				</div>
 			</div>
 		</div>
@@ -110,13 +95,11 @@
 			<div class="titulo-bloque"><img src="/files/img/serviciosicon.png">SERVICIOS OPERACIONALES</div>
 			<div class="bloque_actor_externo">
 				<div class="bloque_actor_interno">
-					<!--
 					<a href=""><div class="conteo"></div>Servicios de extracción</a>
 					<a href=""><div class="conteo"></div>Comercializadora</a>
 					<a href=""><div class="conteo"></div>Plantaciones Forestales</a>
 					<a href=""><div class="conteo"></div>Empresas de Insumos</a>
 					<a href=""><div class="conteo"></div>Servicios Financieros</a>
-					-->
 				</div>
 			</div>
 		</div>
@@ -124,17 +107,17 @@
 			<div class="titulo-bloque"><img src="/files/img/reguladoresicon.png">REGULADORES</div>
 			<div class="bloque_actor_externo">
 				<div class="bloque_actor_interno">
-					<!--
+					<a href="/regente/consultar/" class="on"><div class="conteo">{{regente}}</div>Regentes Forestales</a>
 					<a href=""><div class="conteo"></div>Organizaciones Publicas</a>
 					<a href=""><div class="conteo"></div>Auditores Forestales</a>
-					-->
+					<a href=""><div class="conteo"></div>Entidad Certificadora</a>
 				</div>
 			</div>
 		</div>
 	</div>
 	<bR>
 </div>
-<div id="estadisticas">
+<div id="estadisticas" style="display:none;">
 	<center><img src="/files/img/sel_estadisticas.png"></center>
 	<div class="container_12">
 		<div class="grid_6">
