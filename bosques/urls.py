@@ -1,8 +1,8 @@
 from django.conf.urls.defaults import *
-
+from django.views.generic.simple import direct_to_template
 urlpatterns = patterns('bosques.views',
     #url(r'index/$', 'index', name="index"),
-
+    url(r'^acerca/$',direct_to_template,{'template': 'acerca.html'}),
     # Empresa de manejo de bosque
     url(r'^consultar/$', 'consultar', name="consultar"),
     url(r'^ver/$', 'obtener_mapa', name='obtener-mapa'),
