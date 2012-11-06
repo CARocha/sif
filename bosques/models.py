@@ -358,7 +358,7 @@ class Datos(models.Model):
     #certificado = models.IntegerField(choices=CERTIFICADO_CHOICE)
     tipo_certificacion = models.ManyToManyField(TipoCertificacion, 
                         verbose_name="Tipo de certificacion")
-    estado_certificado = models.IntegerField(choices=ESTADO_CERTIFICADO_CHOICE)
+    estado_certificado = models.IntegerField(choices=ESTADO_CERTIFICADO_CHOICE, null=True, blank=True)
     visita_auditoria = models.DateField(null=True, blank=True)
     auditor = models.ForeignKey(Auditor, null=True, blank=True)
     entidad_certificadora = models.ForeignKey(EntidadCertificadora, null=True, blank=True)
@@ -462,6 +462,7 @@ class SeguimientoRegente(models.Model):
     class Meta:
         verbose_name = ('Seguimiento Regente forestal')
         verbose_name_plural = ('Seguimiento Regente forestal')
+        unique_together = ('regente',)
 
     def __unicode__(self):
         return self.regente.nombre_regente
@@ -550,7 +551,7 @@ class EmpresaPrimeraTransformacion(models.Model):
     cedula = models.CharField(max_length=50)
     alianza = models.ManyToManyField(AlianzaNegocio)
     organizado = models.ManyToManyField(Organizado)
-    desde = models.DateField()
+    desde = models.DateField(null=True, blank=True)
     tel_convencional = models.CharField(max_length=50, null=True, blank=True)
     tel_celular = models.CharField(max_length=50, null=True, blank=True)
     correo = models.EmailField(null=True, blank=True)
@@ -597,6 +598,7 @@ class SeguimientoPrimeraTransformacion(models.Model):
     class Meta:
         verbose_name = ('Seguimiento Empresa forestal primera transformación')
         verbose_name_plural = ('Seguimiento Empresa forestal primera transformación')
+        unique_together = ('nombre_empresa',)
             
     def __unicode__(self):
         return self.nombre_empresa.nombre_corto
@@ -740,13 +742,13 @@ class EmpresaSegundaTransformacion(models.Model):
     empresa = models.ForeignKey(Empresa)
     nombre_comercial = models.CharField(max_length=200)
     nombre_corto = models.CharField(max_length=50)
-    creacion = models.IntegerField('Año de creacioón')
+    creacion = models.IntegerField('Año de creación')
     funcionando = models.IntegerField('Años funcionando')
     org_empresarial = models.ManyToManyField(OrganizacionEmpresarial)
     nombre_director = models.CharField(max_length=200)
     cedula = models.CharField(max_length=50)
     organizado = models.ManyToManyField(Organizado)
-    desde = models.DateField()
+    desde = models.DateField(null=True, blank=True)
     tel_convencional = models.CharField(max_length=50, null=True, blank=True)
     tel_celular = models.CharField(max_length=50, null=True, blank=True)
     correo = models.EmailField(null=True, blank=True)
@@ -796,8 +798,10 @@ class SeguimientoSegundaTranformacion(models.Model):
 
     def __unicode__(self):
         return self.nombre.nombre_comercial
+
     class Meta:
         verbose_name_plural = "Seguimiento Empresas forestal de segunda tranformación"
+        unique_together = ('nombre',)
 
 class AlianzaNegocion(models.Model):
     nombre = models.CharField(max_length=200)

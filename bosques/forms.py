@@ -77,7 +77,7 @@ class SegundaTForm(ModelForm):
                                                   widget = forms.CheckboxSelectMultiple())
     apoyo_produccion = forms.ModelMultipleChoiceField(queryset = ApoyoProduccion.objects.order_by('nombre'),
                                                   widget = forms.CheckboxSelectMultiple())
-    productos_vende = forms.ModelMultipleChoiceField(queryset = ProductosVendenSegunda.objects.order_by('nombre'),
+    producto_vende = forms.ModelMultipleChoiceField(queryset = ProductosVendenSegunda.objects.order_by('nombre'),
                                                   widget = forms.CheckboxSelectMultiple())
     no_maderable = forms.ModelMultipleChoiceField(queryset = NoMaderable.objects.order_by('nombre'),
                                                   widget = forms.CheckboxSelectMultiple())
