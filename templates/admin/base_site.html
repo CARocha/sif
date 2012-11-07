@@ -13,11 +13,11 @@
 {% block branding %}
 <div class="degradado"></div>
 <div class="aux1">
-    <h1>Administraci&oacute;n Linea base Medios de vidas Cantera</h1>
+    <h1>Administraci&oacute;n Conicefv</h1>
 </div>
 {% endblock %}
 {% block userlinks %}
-<a href="/"><img src="{{MEDIA_URL}}img/home.png" alt="home"> Portada</a> / 
+<a href="/"><img src="{{STATIC_URL}}img/home.png" alt="home"> Portada</a> / 
 {% url django-admindocs-docroot as docsroot %}
 {% if docsroot %}
 <a href="{{ docsroot }}">{% trans 'Documentation' %}</a> /
