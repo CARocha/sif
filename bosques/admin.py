@@ -319,3 +319,4 @@ class SeguimientoSegundaTransformacionAdmin(AutocompleteModelAdmin):
 admin.site.register(AlianzaNegocion)
 admin.site.register(PrestadoresServicioOperacionales)
 admin.site.register(SeguimientoSegundaTranformacion, SeguimientoSegundaTransformacionAdmin)
+admin.site.register(TipoProducto2tranformacion)

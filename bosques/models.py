@@ -819,6 +819,14 @@ class PrestadoresServicioOperacionales(models.Model):
         verbose_name_plural = "Principales prestadores de servicios operacionales"
 
 # ---------------------------Datos seguimiento segunda tranformación ---------------------
+class TipoProductoDosT(models.Model):
+    nombre = models.CharField(max_length=150)
+
+    def __unicode__(self):
+        return self.nombre
+
+    class Meta:
+        verbose_name_plural = "Tipos de productos de la segunda transformación"
 
 class DatosSegundaTranformacion(models.Model):
     fecha = models.DateField()
@@ -835,7 +843,7 @@ class DatosSegundaTranformacion(models.Model):
     servicio_operacionales = models.ManyToManyField(PrestadoresServicioOperacionales, null=True, blank=True)
     #empresa = models.ForeignKey(EmpresaComercializadora)
     relacion = models.ForeignKey(RelacionComercial, null=True, blank=True)
-    tipo_producto = models.ManyToManyField(TipoProducto, null=True, blank=True)
+    tipo_producto = models.ManyToManyField(TipoProductoDosT, null=True, blank=True)
     desde_cuando = models.DateField(null=True, blank=True)
     volumen_promedio = models.FloatField(null=True, blank=True)
 
