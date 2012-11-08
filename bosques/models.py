@@ -305,7 +305,7 @@ class Seguimiento(models.Model):
         return self.propietario.nombre_propietario
         
     class Meta:
-        verbose_name_plural = "Datos para seguimiento de manejo de bosques"
+        verbose_name_plural = "Seguimiento de manejo de bosques"
         unique_together = ('propietario',)
 
 CERTIFICADO_CHOICE = (
