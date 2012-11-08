@@ -8,38 +8,29 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding unique constraint on 'SeguimientoSegundaTranformacion', fields ['nombre']
-        #db.create_unique('bosques_seguimientosegundatranformacion', ['nombre_id'])
+        # Adding model 'TipoProductoSegundaTransformacion'
+        db.create_table('bosques_tipoproductosegundatransformacion', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('nombre', self.gf('django.db.models.fields.CharField')(max_length=150)),
+        ))
+        db.send_create_signal('bosques', ['TipoProductoSegundaTransformacion'])
 
-        # Adding unique constraint on 'SeguimientoRegente', fields ['regente']
-        #db.create_unique('bosques_seguimientoregente', ['regente_id'])
-
-
-        # Changing field 'EmpresaPrimeraTransformacion.desde'
-        db.alter_column('bosques_empresaprimeratransformacion', 'desde', self.gf('django.db.models.fields.DateField')(null=True))
-
-        # Changing field 'Datos.estado_certificado'
-        db.alter_column('bosques_datos', 'estado_certificado', self.gf('django.db.models.fields.IntegerField')(null=True))
-        # Adding unique constraint on 'SeguimientoPrimeraTransformacion', fields ['nombre_empresa']
-        #db.create_unique('bosques_seguimientoprimeratransformacion', ['nombre_empresa_id'])
+        # Adding M2M table for field t_producto on 'DatosSegundaTranformacion'
+        db.create_table('bosques_datossegundatranformacion_t_producto', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('datossegundatranformacion', models.ForeignKey(orm['bosques.datossegundatranformacion'], null=False)),
+            ('tipoproductosegundatransformacion', models.ForeignKey(orm['bosques.tipoproductosegundatransformacion'], null=False))
+        ))
+        db.create_unique('bosques_datossegundatranformacion_t_producto', ['datossegundatranformacion_id', 'tipoproductosegundatransformacion_id'])
 
 
     def backwards(self, orm):
-        # Removing unique constraint on 'SeguimientoPrimeraTransformacion', fields ['nombre_empresa']
-        #db.delete_unique('bosques_seguimientoprimeratransformacion', ['nombre_empresa_id'])
+        # Deleting model 'TipoProductoSegundaTransformacion'
+        db.delete_table('bosques_tipoproductosegundatransformacion')
 
-        # Removing unique constraint on 'SeguimientoRegente', fields ['regente']
-        #db.delete_unique('bosques_seguimientoregente', ['regente_id'])
+        # Removing M2M table for field t_producto on 'DatosSegundaTranformacion'
+        db.delete_table('bosques_datossegundatranformacion_t_producto')
 
-        # Removing unique constraint on 'SeguimientoSegundaTranformacion', fields ['nombre']
-        #db.delete_unique('bosques_seguimientosegundatranformacion', ['nombre_id'])
-
-
-        # Changing field 'EmpresaPrimeraTransformacion.desde'
-        db.alter_column('bosques_empresaprimeratransformacion', 'desde', self.gf('django.db.models.fields.DateField')(default=None))
-
-        # Changing field 'Datos.estado_certificado'
-        db.alter_column('bosques_datos', 'estado_certificado', self.gf('django.db.models.fields.IntegerField')(default=None))
 
     models = {
         'bosques.alianzanegocio': {
@@ -175,8 +166,8 @@ class Migration(SchemaMigration):
             'proveedores': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['bosques.ProveedoresSuministros']", 'symmetrical': 'False'}),
             'relacion': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['bosques.RelacionComercial']", 'null': 'True', 'blank': 'True'}),
             'servicio_operacionales': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['bosques.PrestadoresServicioOperacionales']", 'null': 'True', 'blank': 'True'}),
+            't_producto': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['bosques.TipoProductoSegundaTransformacion']", 'null': 'True', 'blank': 'True'}),
             'tipo_certificacion': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['bosques.TipoCertificacion']", 'symmetrical': 'False'}),
-            'tipo_producto': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['bosques.TipoProducto']", 'null': 'True', 'blank': 'True'}),
             'volumen_promedio': ('django.db.models.fields.FloatField', [], {'null': 'True', 'blank': 'True'})
         },
         'bosques.empresa': {
@@ -232,7 +223,7 @@ class Migration(SchemaMigration):
             'correo': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'null': 'True', 'blank': 'True'}),
             'creacion': ('django.db.models.fields.IntegerField', [], {}),
             'departamento': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['lugar.Departamento']"}),
-            'desde': ('django.db.models.fields.DateField', [], {}),
+            'desde': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'direccion': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'empresa': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['bosques.Empresa']"}),
             'encuestador': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['bosques.Encuestador']"}),
@@ -496,6 +487,11 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'TipoProducto'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'nombre': ('django.db.models.fields.CharField', [], {'max_length': '200'})
+        },
+        'bosques.tipoproductosegundatransformacion': {
+            'Meta': {'object_name': 'TipoProductoSegundaTransformacion'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'nombre': ('django.db.models.fields.CharField', [], {'max_length': '150'})
         },
         'bosques.tipopropiedadbosque': {
             'Meta': {'object_name': 'TipoPropiedadBosque'},
