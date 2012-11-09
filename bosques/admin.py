@@ -21,6 +21,7 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
     form = PropietarioBosquesForm
     filter_horizontal = ('organizacion','naturales','tipo_certificacion')
     date_hierarchy = 'fecha'
+    search_fields = ['nombre_propietario']
     fieldsets = (
         (None, {
             'fields': ('fecha', ('encuestador', 'empresa'))
@@ -131,6 +132,7 @@ class DatosAdminInline(admin.StackedInline):
 
 
 class SeguimientoAdmin(AutocompleteModelAdmin):
+    search_fields = ['__unicode__']
     related_search_fields = { 
 
                 'propietario': ('nombre_propietario',),
@@ -150,6 +152,8 @@ class RegenteAdmin(admin.ModelAdmin):
     form = RegenteForm
     filter_horizontal = ('organizado','organizacion','area_trabajo')
     date_hierarchy = 'llenado'
+    search_fields = ['nombre_regente']
+
     fieldsets = (
         (None, {
             'fields': ('llenado', ('encuestador'))
@@ -186,6 +190,7 @@ class SeguimientoRegenteAdminInline(admin.StackedInline):
     extra = 1
 
 class RegenteSeguimientoAdmin(AutocompleteModelAdmin):
+    search_fields = ['__unicode__']
     related_search_fields = { 
 
                 'regente': ('nombre_regente',),
@@ -199,6 +204,7 @@ class PrimeraTransformacionAdmin(admin.ModelAdmin):
     form = PrimeraTForm
     #filter_horizontal = ('organizado','organizacion','area_trabajo')
     date_hierarchy = 'fecha_llenado'
+    search_fields = ['nombre_empresa_forestal']
     fieldsets = (
         (None, {
             'fields': ('fecha_llenado', ('encuestador','empresa'))
@@ -244,6 +250,7 @@ class DatosPrimeroTransformacionInline(admin.StackedInline):
     extra = 1
 
 class SeguimientoPrimeraTransformacionAdmin(AutocompleteModelAdmin):
+    search_fields = ['__unicode__']
     related_search_fields = { 
 
                 'nombre_empresa': ('nombre_empresa_forestal',),
@@ -263,6 +270,7 @@ class SegundaTranformacionAdmin(admin.ModelAdmin):
     form = SegundaTForm
     #filter_horizontal = ('organizado','organizacion','area_trabajo')
     date_hierarchy = 'fecha'
+    search_fields = ['nombre_comercial']
     fieldsets = (
         (None, {
             'fields': ('fecha', ('encuestador','empresa'))
@@ -310,8 +318,8 @@ class DatosSegundaTransformacionInline(admin.StackedInline):
     extra = 1
 
 class SeguimientoSegundaTransformacionAdmin(AutocompleteModelAdmin):
+    search_fields = ['__unicode__']
     related_search_fields = { 
-
                 'nombre': ('nombre_comercial',),
         }
     inlines = [DatosSegundaTransformacionInline]
