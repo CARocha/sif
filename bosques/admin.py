@@ -11,13 +11,13 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
     # formfield_overrides = {
     #     models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     # }
-#    field_formfield_overrides = { 
-#        'tipo_propiedad': { 'widget':CheckboxSelectMultiple}, 
+#    field_formfield_overrides = {
+#        'tipo_propiedad': { 'widget':CheckboxSelectMultiple},
 #    }
 #    def formfield_for_dbfield(self, db_field, **kwargs):
 #        if db_field.name == 'tipo_propiedad':
 #            kwargs['widget'] = CheckboxSelectMultiple
-#        return super(PropietarioBosqueAdmin, self).formfield_for_dbfield(db_field, **kwargs) 
+#        return super(PropietarioBosqueAdmin, self).formfield_for_dbfield(db_field, **kwargs)
     form = PropietarioBosquesForm
     filter_horizontal = ('organizacion','naturales','tipo_certificacion')
     date_hierarchy = 'fecha'
@@ -33,7 +33,7 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
                        'tipo_propiedad','area_propiedad',('tel_convencional','tel_celular'),
                        ('email','web'),'direccion')
         }),
-        ('Ubicación geografica (coordenadas de punto de referencia) de la propiedad', {
+        ('Ubicación geográfica (coordenadas de punto de referencia) de la propiedad', {
             'classes': ('pruebaubicacion',),
             'fields': (('latitud', 'longitud'),
             	       ('departamento','municipio','comunidad'),
@@ -105,7 +105,7 @@ class DatosAdminInline(admin.StackedInline):
             'fields': (('uso_agricola','uso_pecuario','uso_foretal'),
                         ('bosque_bajo_manejo','uso_agroforestal','otros_usos'),)
         }),
-        ('Datos de la unidad de Manejo', {
+        ('Datos de la unidad de manejo', {
             'classes': ('datoseguimiento',),
             'fields': (('poa_ejecucion','area_poa','permiso_poa'),
                        ('volumen_cosecha','segui_plantaciones','registro_orfn'),
@@ -116,13 +116,13 @@ class DatosAdminInline(admin.StackedInline):
         }),
         ('Relaciones con actores', {
             'classes': ('actoresRela',),
-            'fields': (('primera_transformacion','producto_venden'), 
+            'fields': (('primera_transformacion','producto_venden'),
                        ('primera_transformacion2','producto_venden2'),
                        ('primera_transformacion3','producto_venden3'), 'regente'
                      )
         }),
     )
-    
+
     extra = 1
 
     class Media:
@@ -133,7 +133,7 @@ class DatosAdminInline(admin.StackedInline):
 
 class SeguimientoAdmin(AutocompleteModelAdmin):
     search_fields = ['__unicode__']
-    related_search_fields = { 
+    related_search_fields = {
 
                 'propietario': ('nombre_propietario',),
         }
@@ -181,7 +181,7 @@ class SeguimientoRegenteAdminInline(admin.StackedInline):
         (None, {
             'fields': ('fecha_seguimiento',)
         }),
-        ('Datos seguimiento para monitoreo', {
+        ('Datos de seguimiento para monitoreo', {
             'fields': (('hombre', 'mujeres',),('no_pgmf_regencia','area_pgmf'),
                        ('codigo_pgmf','fecha_ingreso'),('no_poa_regencia','area_total_poa'),
                        ('codigo_poa','volumenes_totales'))
@@ -191,7 +191,7 @@ class SeguimientoRegenteAdminInline(admin.StackedInline):
 
 class RegenteSeguimientoAdmin(AutocompleteModelAdmin):
     search_fields = ['__unicode__']
-    related_search_fields = { 
+    related_search_fields = {
 
                 'regente': ('nombre_regente',),
         }
@@ -209,12 +209,12 @@ class PrimeraTransformacionAdmin(admin.ModelAdmin):
         (None, {
             'fields': ('fecha_llenado', ('encuestador','empresa'))
         }),
-        ('Datos generales primera tranformación', {
+        ('Datos generales de primera transformación', {
             'classes': ('pruebabosque',),
             'fields': ('nombre_empresa_forestal', ('nombre_corto','fecha_creacion'),
                        'org_empresarial', ('nombre_director','cedula'),'alianza',
                        ('organizado','desde'),('tel_convencional','tel_celular'),
-                       ('correo','pagina_web'),'direccion', 
+                       ('correo','pagina_web'),'direccion',
                        ('departamento','municipio','comunidad'),
                        ('latitud', 'longitud'), 'gobierno_gti','nombre_gti',
                        'area_trabajo','servicio_secado','capasidad_horno',
@@ -238,7 +238,7 @@ class DatosPrimeroTransformacionInline(admin.StackedInline):
         (None, {
             'fields': ('fecha',)
         }),
-        ('Datos seguimiento para primera transformacion', {
+        ('Datos de seguimiento para primera transformación', {
             'fields': (('hombres', 'mujeres',),'tipo_certificacion','codigo_certificacion',
                        ('estado_certificado','entidad_certificadora'),
                        ('status','regente'),('asistencia','servicio_extraccion'),
@@ -251,7 +251,7 @@ class DatosPrimeroTransformacionInline(admin.StackedInline):
 
 class SeguimientoPrimeraTransformacionAdmin(AutocompleteModelAdmin):
     search_fields = ['__unicode__']
-    related_search_fields = { 
+    related_search_fields = {
 
                 'nombre_empresa': ('nombre_empresa_forestal',),
         }
@@ -275,12 +275,12 @@ class SegundaTranformacionAdmin(admin.ModelAdmin):
         (None, {
             'fields': ('fecha', ('encuestador','empresa'))
         }),
-        ('Datos generales segunda tranformación', {
+        ('Datos generales de segunda transformación', {
             'classes': ('pruebabosque',),
             'fields': ('nombre_comercial', ('nombre_corto','creacion','funcionando'),
                        'org_empresarial', ('nombre_director','cedula'),
                        ('organizado','desde'),('tel_convencional','tel_celular'),
-                       ('correo','pagina_web'),'direccion', 
+                       ('correo','pagina_web'),'direccion',
                        ('departamento','municipio','comunidad'),
                        ('latitud', 'longitud'), 'gobierno_gti','nombre_gti',
                        'area_trabajo','apoyo_produccion','madera',
@@ -306,7 +306,7 @@ class DatosSegundaTransformacionInline(admin.StackedInline):
         (None, {
             'fields': ('fecha',)
         }),
-        ('Datos seguimiento para primera transformacion', {
+        ('Datos de seguimiento para segunda transformación', {
             'fields': (('alianza','hombres', 'mujeres',),'tipo_certificacion',
                         'codigo',
                        ('estado_certificado','entidad_certificadora'),
@@ -319,7 +319,7 @@ class DatosSegundaTransformacionInline(admin.StackedInline):
 
 class SeguimientoSegundaTransformacionAdmin(AutocompleteModelAdmin):
     search_fields = ['__unicode__']
-    related_search_fields = { 
+    related_search_fields = {
                 'nombre': ('nombre_comercial',),
         }
     inlines = [DatosSegundaTransformacionInline]
