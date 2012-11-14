@@ -88,7 +88,7 @@
                 google.maps.event.addListener(marker, "click", function() {
                     var html = '<div class="infobox"><b>' + unescape(elemento.nombre) + 
                                '</b><br>Director: ' + unescape(elemento.director) + 
-                               '</div><a href="/segunda/ficha/'+unescape(elemento.id)+'" class="btn btn-mini" style="margin-right:5px; float:right;"><i class="icon-zoom-in"></i> Ver mas</a></div>';
+                               '</div><a href="/segunda/ficha/'+unescape(elemento.id)+'" class="btn btn-mini" style="margin-right:5px; float:right;"><i class="icon-zoom-in"></i> Ver más</a></div>';
                    infowindow = new google.maps.InfoWindow({
                                 content: html,
                                 zIndex: 999,
@@ -161,9 +161,9 @@
             <img class="fotoactor" src="/files/img/segunda.jpg">
         </div>
         <div class="grid_10 despactor">
-            <div class="titulo-actor">Empresa de Segunda Transformación</div>
+            <div class="titulo-actor">Empresa de segunda transformación de la madera</div>
             <p>
-Persona natural o jurídica  que utiliza  la madera  como materia en la producción de productos acabados y semi acabados (muebles, paneles, entre otros) con aserraderos estacionarios (permanentes) y/o  móviles (portátiles). También se incluye aquellas Empresas que utilizan como materia prima los bienes derivados de la primera transformación y los convierte en cualquier bien intermedio o final. Se encuentran en la cadena de valor en el eslabón de la transformación.
+Persona natural o jurídica  que utiliza  la madera  como materia en la producción de productos acabados y semi-acabados (muebles, paneles, entre otros); con aserraderos estacionarios (permanentes) y/o  móviles (portátiles). También se incluye aquellas empresas que utilizan como materia prima los bienes derivados de la primera transformación, y los convierte en cualquier bien intermedio o final. Se encuentran en la cadena de valor en el eslabón de la transformación.
             </p>
         </div>
         <div class="clear"></div>
@@ -187,7 +187,7 @@ Persona natural o jurídica  que utiliza  la madera  como materia en la producci
                         <div class="labelform">{{form.producto_vende.label}}</div>
                         <div class="filtros">{{form.producto_vende}}<br>{{form.producto_vende.errors}}</div>
                     </div>
-                    <button id="actualizarmapa"class="consultar btn btn-warning mapafiltrado"><i class="icon-refresh icon-white"></i> Actualizar Mapa </button>
+                    <button id="actualizarmapa"class="consultar btn btn-warning mapafiltrado"><i class="icon-refresh icon-white"></i> Actualizar mapa </button>
                     <div class="clear"></div>
                 </div>
             </form>
@@ -195,11 +195,11 @@ Persona natural o jurídica  que utiliza  la madera  como materia en la producci
         <div class="grid_12">
             <div class="maptabs">
                 <div class="btn-group">
-                <a href="#" id="vermapa"class="btn  btn-large active"><i class="icon-globe"></i>  Ver Mapa</a>
-                <a href="#" id="vertabla"class="btn  btn-large"><i class="icon-list-alt"></i>  Ver lista de Datos</a>
+                <a href="#" id="vermapa"class="btn  btn-large active"><i class="icon-globe"></i>  Ver mapa</a>
+                <a href="#" id="vertabla"class="btn  btn-large"><i class="icon-list-alt"></i>  Ver lista de datos</a>
                 </div>
             </div>
-            <div class="alert alert-success conteo"><b>{{consulta.count}}</b> Dueños de Bosques encontrados</div>
+            <div class="alert alert-success conteo"><b>{{consulta.count}}</b> Dueños de bosques encontrados</div>
             <div class="clear"></div>
             <div id="contenedor_mapa">
                 <div id="map" style="width: 100%; height: 500px">
@@ -214,7 +214,7 @@ Persona natural o jurídica  que utiliza  la madera  como materia en la producci
                             <th>Nombre de Empresa</th>
                             <th>Departamento</th>
                             <th>Municipio</th>
-                            <th>Tipo de Organización</th>
+                            <th>Tipo de organización</th>
                         </tr>
                     </thead>
                     <tbody>

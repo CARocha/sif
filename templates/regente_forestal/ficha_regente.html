@@ -11,12 +11,12 @@
         	<br>
 	        <div class="botonesficha">
 	            <div class="btn-group">
-                <a href="/regente/ficha/{{datos.id}}" id=""class="btn active"><i class="icon-file"></i>  Ficha Tecnica</a>
+                <a href="/regente/ficha/{{datos.id}}" id=""class="btn active"><i class="icon-file"></i> Ficha técnica</a>
                 <a href="/regente/relacion/{{datos.id}}" id=""class="btn "><i class="icon-resize-small"></i> Relaciones de actores</a>
                 <a href="/regente/seguimiento/{{datos.id}}" id="" class="btn"><i class="icon-time"></i> Seguimiento</a>
 	            </div>
     		</div>
-            <div class="titulo-actor">Ficha Tecnica de Regente Forestal</div>
+            <div class="titulo-actor">Ficha técnica de Regente Forestal</div>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
@@ -43,7 +43,7 @@
         		</div>
 				{%if datos.tel_convencional%}
 	 				<div class="labelficha">
-	        			Telefono
+	        			Teléfono
 	        		</div>
 	        		<div class="valor">
 						{{datos.tel_convencional}}
@@ -86,7 +86,7 @@
 				{%endif%}
 				{%if datos.direccion%}
 	 				<div class="labelficha">
-	        			Direccion
+	        			Dirección
 	        		</div>
 	        		<div class="valor">
 						{{datos.direccion}}
@@ -135,7 +135,7 @@
 					{%endif%}
 					{%if datos.volumen_anual%}
 						<div class="labelfichabox">
-							Volumen Anual de materia procesada
+							Volumen anual de materia procesada
 						</div>
 						<div class="valuefichabox">
 							{{datos.volumen_anual}}
@@ -144,7 +144,7 @@
 					{%endif%}
 					{%if datos.promedio%}
 						<div class="labelfichabox">
-							Promedio mensual de unicdades producidas
+							Promedio mensual de unidades producidas
 						</div>
 						<div class="valuefichabox">
 							{{datos.promedio}}
@@ -184,7 +184,7 @@
 
 				<div class="fichabox">
 					<div class="labelfichabox">
-						Area de trabajo
+						Área de trabajo
 					</div>
 					<div class="valuefichabox">
 						{%for a in datos.area_trabajo.all%}

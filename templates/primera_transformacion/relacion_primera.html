@@ -19,12 +19,12 @@
         	<br>
 	        <div class="botonesficha">
 	            <div class="btn-group">
-                <a href="/primera/ficha/{{datos.id}}" id=""class="btn"><i class="icon-file"></i>  Ficha Tecnica</a>
+                <a href="/primera/ficha/{{datos.id}}" id=""class="btn"><i class="icon-file"></i> Ficha técnica</a>
                 <a href="/primera/relacion/{{datos.id}}" id=""class="btn active"><i class="icon-resize-small"></i> Relaciones de actores</a>
                 <a href="/primera/seguimiento/{{datos.id}}" id="" class="btn "><i class="icon-time"></i> Seguimiento</a>
 	            </div>
     		</div>
-            <div class="titulo-actor">Relación de Empresa de primera transformacion</div>
+            <div class="titulo-actor">Relación de empresa de primera transformacion</div>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
@@ -64,7 +64,7 @@
                              <div class="seguimiento_label">Regente {{r.fecha.year}}</div>
                              <div class="seguimiento_valor">
                                   {{r.regente.nombre_regente}}<br>
-                                  <i>Codigo: </i>{{r.regente.codigo_regente}}<br>
+                                  <i>Código: </i>{{r.regente.codigo_regente}}<br>
                                   <a href="/regente/ficha/{{r.regente.id}}" class="der btn btn-mini btn-success">Ver →</a>
                                   <div class="clear"></div>
                              </div>
@@ -81,7 +81,7 @@
 
                       <div class="box_relacion_full">
                          <div class="seguimiento_box">
-                             <div class="seguimiento_label">Empresas de manejo de bosques a la que se compra madera</div>
+                             <div class="seguimiento_label">Empresas de manejo de bosques a las que se compra madera</div>
                              <div class="seguimiento_valor">
                                 {%for b in bosques%}
                                   {%ifchanged b.fecha_seguimiento.year%}

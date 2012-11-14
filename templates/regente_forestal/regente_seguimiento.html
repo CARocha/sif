@@ -36,7 +36,7 @@ $(function () {
             },
             yAxis: {
                 title: {
-                    text: 'Hectareas'
+                    text: 'Hectáreas'
                 },
                 plotLines: [{
                     value: 0,
@@ -47,7 +47,7 @@ $(function () {
             tooltip: {
                 formatter: function() {
                         return '<b>'+ this.series.name +'</b><br/>año '+
-                        this.x +': '+ this.y +'hectareas';
+                        this.x +': '+ this.y +'hectáreas';
                 }
             },
             legend: {
@@ -60,7 +60,7 @@ $(function () {
             },
             series: [
                 {
-                    name: 'Area total poa',
+                    name: 'Área total poa',
                     data: [
                         {%for rol in seguimiento%}
                             {{rol.area_total_poa}},
@@ -68,7 +68,7 @@ $(function () {
                     ]
                 }, 
                 {
-                    name: 'Volumenes totales',
+                    name: 'Volúmenes totales',
                     data: [
                         {%for mad in seguimiento%}
                             {{mad.volumenes_totales}},
@@ -76,7 +76,7 @@ $(function () {
                     ]
                 },
                 {
-                    name: 'Area Pgmf',
+                    name: 'Área Pgmf',
                     data: [
                         {%for car in seguimiento%}
                             {{car.area_pgmf}},
@@ -100,12 +100,12 @@ $(function () {
         	<br>
 	        <div class="botonesficha">
 	            <div class="btn-group">
-                <a href="/regente/ficha/{{datos.id}}" id=""class="btn"><i class="icon-file"></i>  Ficha Tecnica</a>
+                <a href="/regente/ficha/{{datos.id}}" id=""class="btn"><i class="icon-file"></i> Ficha técnica</a>
                 <a href="/regente/relacion/{{datos.id}}" id=""class="btn "><i class="icon-resize-small"></i> Relaciones de actores</a>
                 <a href="/regente/seguimiento/{{datos.id}}" id="" class="btn active"><i class="icon-time"></i> Seguimiento</a>
 	            </div>
     		</div>
-            <div class="titulo-actor">Seguimiento de empresa de primera transformacion</div>
+            <div class="titulo-actor">Seguimiento de regente forestal</div>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
@@ -120,7 +120,7 @@ $(function () {
 			</div>
 			<div class="grid_3">
                 <div class="labelficha">
-                    Codigo Regente
+                    Código del regente
                 </div>
                 <div class="valor">
                     {{datos.codigo_regente}}

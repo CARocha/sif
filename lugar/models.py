@@ -5,8 +5,8 @@ from django.db import models
 class Departamento(models.Model):
     id = models.IntegerField("Código", primary_key=True)
     nombre = models.CharField(max_length=30, unique= True)
-    slug = models.SlugField(unique=True, null=True, help_text="Usado como url unica(autorellenado)")
-    extension = models.DecimalField("Extension Territorials", max_digits=10,decimal_places=2, 
+    slug = models.SlugField(unique=True, null=True, help_text="Usado como url única (autorellenado)")
+    extension = models.DecimalField("Extensión territorial", max_digits=10,decimal_places=2, 
                                     null=True, blank=True)
 
     def __unicode__(self):
@@ -19,7 +19,7 @@ class Municipio(models.Model):
     id = models.IntegerField("Código", primary_key=True)
     departamento = models.ForeignKey(Departamento)
     nombre = models.CharField(max_length=30, unique=True)
-    slug = models.SlugField(unique=True, null=True, help_text="Usado como url única(autorellenado)")
+    slug = models.SlugField(unique=True, null=True, help_text="Usado como url única (autorellenado)")
     extension = models.DecimalField("Extensión territorial", max_digits=10, decimal_places=2, 
                                     blank=True, null=True)
     latitud = models.DecimalField('Latitud', max_digits=8, decimal_places=5, blank=True, null = True)

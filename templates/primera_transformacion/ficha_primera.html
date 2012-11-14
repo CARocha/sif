@@ -11,12 +11,12 @@
         	<br>
 	        <div class="botonesficha">
 	            <div class="btn-group">
-	           	  <a href="/primera/ficha/{{datos.id}}" id=""class="btn active"><i class="icon-file"></i>  Ficha Tecnica</a>
+	           	  <a href="/primera/ficha/{{datos.id}}" id=""class="btn active"><i class="icon-file"></i> Ficha técnica</a>
 	          	  <a href="/primera/relacion/{{datos.id}}" id=""class="btn "><i class="icon-resize-small"></i> Relaciones de actores</a>
 	          	  <a href="/primera/seguimiento/{{datos.id}}" id="" class="btn "><i class="icon-time"></i> Seguimiento</a>
 	            </div>
     		</div>
-            <div class="titulo-actor">Ficha Tecnica de Empresa Forestal de Primera Transformación</div>
+            <div class="titulo-actor">Ficha técnica de empresa forestal de primera transformación</div>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
@@ -37,14 +37,14 @@
         		</div>
 
 				<div class="labelficha">
-        			Nombre de Director
+        			Nombre de director
         		</div>
         		<div class="valor">
 					{{datos.nombre_director}}
         		</div>
 				{%if datos.tel_convencional%}
 	 				<div class="labelficha">
-	        			Telefono
+	        			Teléfono
 	        		</div>
 	        		<div class="valor">
 						{{datos.tel_convencional}}
@@ -79,7 +79,7 @@
 				{%endif%}
 				{%if datos.direccion%}
 	 				<div class="labelficha">
-	        			Direccion
+	        			Dirección
 	        		</div>
 	        		<div class="valor">
 						{{datos.direccion}}
@@ -99,7 +99,7 @@
 				<div class="fichabox" style="margin-top:0px;">
 					{%if datos.area_trabajo.count > 0%}
 					<div class="labelfichabox">
-						Area de trabajo
+						Área de trabajo
 					</div>
 					<div class="valuefichabox">
 						{%for tipo in datos.area_trabajo.all%}
@@ -182,7 +182,7 @@
 				{%if datos.tipo_producto.count > 0%}
 				<div class="fichabox">
 					<div class="labelfichabox">
-						Tipo de Producto
+						Tipo de producto
 					</div>
 					<div class="valuefichabox">
 						{%for tipo_p in datos.tipo_producto.all%}
@@ -196,7 +196,7 @@
 				{%if datos.secado.count > 0%}
 				<div class="fichabox">
 					<div class="labelfichabox">
-						Tipo de Secado
+						Tipo de secado
 					</div>
 					<div class="valuefichabox">
 						{%for tipo_s in datos.secado.all%}
@@ -248,7 +248,7 @@
 				<div class="fichabox">
 					{%if datos.otro_social.count > 0%}
 					<div class="labelfichabox">
-						Buenas practicas sociales y economicas
+						Buenas prácticas sociales y económicas
 					</div>
 					<div class="valuefichabox">
 						{%for soc in datos.otro_social.all%}
@@ -260,7 +260,7 @@
 
 					{%if datos.otro_ambiental.count > 0%}
 					<div class="labelfichabox">
-						Buenas practicas ambientales
+						Buenas prácticas ambientales
 					</div>
 					<div class="valuefichabox">
 						{%for amb in datos.otro_ambiental.all%}
