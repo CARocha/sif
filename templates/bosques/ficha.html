@@ -42,12 +42,12 @@
         	<br>
 	        <div class="botonesficha">
 	            <div class="btn-group">
-	           	  <a href="/ficha/{{datos.id}}" id=""class="btn active"><i class="icon-file"></i>  Ficha Tecnica</a>
+	           	  <a href="/ficha/{{datos.id}}" id=""class="btn active"><i class="icon-file"></i>  Ficha técnica</a>
 	          	  <a href="/ficha/relacion/{{datos.id}}" id=""class="btn "><i class="icon-resize-small"></i> Relaciones de actores</a>
 	          	  <a href="/ficha/seguimiento/{{datos.id}}" id="" class="btn "><i class="icon-time"></i> Seguimiento</a>
 	            </div>
     		</div>
-            <div class="titulo-actor">Ficha Tecnica de Propietario de Bosque</div>
+            <div class="titulo-actor">Ficha técnica de propietario de bosque</div>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
@@ -61,14 +61,14 @@
         		</div>
 
         		<div class="labelficha">
-        			No. Registro Catastral
+        			No. registro catastral
         		</div>
         		<div class="valor">
         			{{datos.registro_catastral}}
         		</div>
 
 				<div class="labelficha">
-        			Tipo de Propiedad
+        			Tipo de propiedad
         		</div>
         		<div class="valor">
 					{%for propiedad in datos.tipo_propiedad.all%}
@@ -77,7 +77,7 @@
         		</div>
 				{%if datos.tel_convencional%}
 	 				<div class="labelficha">
-	        			Telefono
+	        			Teléfono
 	        		</div>
 	        		<div class="valor">
 						{{datos.tel_convencional}}
@@ -102,7 +102,7 @@
 				{%endif%}
 				{%if datos.direccion%}
 	 				<div class="labelficha">
-	        			Direccion
+	        			Dirección
 	        		</div>
 	        		<div class="valor">
 						{{datos.direccion}}
@@ -118,14 +118,14 @@
 				</div>
 
 				<div class="labelficha">
-        			Nombre de Propiedad
+        			Nombre de propiedad
         		</div>
         		<div class="valor">
         			{{datos.nombre_propiedad}}
         		</div>
 
  				<div class="labelficha">
-        			Area Total
+        			Área total
         		</div>
         		<div class="valor">
 					{{datos.area_propiedad}} ha
@@ -162,7 +162,7 @@
 					<div class="clear"></div>
 					{%if datos.organizacion.count > 0%}
 						<div class="labelfichabox">
-							Organziacion
+							Organización
 						</div>
 						<div class="valuefichabox">
 							
@@ -184,7 +184,7 @@
 
 				<div class="fichabox">
 					<div class="labelfichabox">
-						Tipo de Bosque
+						Tipo de bosque
 					</div>
 					<div class="valuefichabox">
 						{%for bosq in datos.bosques_umf.all%}
@@ -197,7 +197,7 @@
 				{%if datos.tipo_producto.count > 0%}
 				<div class="fichabox">
 					<div class="labelfichabox">
-						Tipo de Producto
+						Tipo de producto
 					</div>
 					<div class="valuefichabox">
 						{%for tipo_p in datos.tipo_producto.all%}
@@ -211,7 +211,7 @@
 				{%if datos.secado.count > 0%}
 				<div class="fichabox">
 					<div class="labelfichabox">
-						Tipo de Secado
+						Tipo de secado
 					</div>
 					<div class="valuefichabox">
 						{%for tipo_s in datos.secado.all%}
@@ -229,7 +229,7 @@
 				<div class="fichabox">
 					{%if datos.tipo_certificacion.count > 0%}
 					<div class="labelfichabox">
-						Certificacion
+						Certificación
 					</div>
 					<div class="valuefichabox">
 						{%for cert in datos.tipo_certificacion.all%}
@@ -257,7 +257,7 @@
 				{%if datos.gobierno_gti%}
 				<div class="fichabox">
 					<div class="labelfichabox">
-						Gobierno Territorial
+						Gobierno territorial
 					</div>
 					<div class="valuefichabox">
 						{{datos.get_gobierno_gti_display}}
@@ -280,7 +280,7 @@
 				<div class="fichabox">
 					{%if datos.naturales.count > 0%}
 					<div class="labelfichabox">
-						Especies Naturales
+						Especies naturales
 					</div>
 					<div class="valuefichabox">
 						{%for nat in datos.naturales.all%}
@@ -292,7 +292,7 @@
 
 					{%if datos.introducida.count > 0%}
 					<div class="labelfichabox">
-						Especies Introducidas
+						Especies introducidas
 					</div>
 					<div class="valuefichabox">
 						{%for int in datos.introducida.all%}
