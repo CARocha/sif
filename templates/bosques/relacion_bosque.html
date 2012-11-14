@@ -19,7 +19,7 @@
         	<br>
 	        <div class="botonesficha">
 	            <div class="btn-group">
-	           	  <a href="/ficha/{{datos.id}}" id=""class="btn "><i class="icon-file"></i>  Ficha Tecnica</a>
+	           	  <a href="/ficha/{{datos.id}}" id=""class="btn "><i class="icon-file"></i>  Ficha técnica</a>
 	          	  <a href="/ficha/relacion/{{datos.id}}" id=""class="btn active"><i class="icon-resize-small"></i> Relaciones de actores</a>
 	          	  <a href="/ficha/seguimiento/{{datos.id}}" id="" class="btn"><i class="icon-time"></i> Seguimiento</a>
 	            </div>
@@ -39,7 +39,7 @@
 			</div>
 			<div class="grid_3">
 				<div class="labelficha">
-        			Nombre de Propiedad
+        			Nombre de propiedad
         		</div>
         		<div class="valor">
         			{{datos.nombre_propiedad}}
@@ -53,7 +53,7 @@
       <div class="tabbable"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab1" data-toggle="tab">Regentes</a></li>
-          <li><a href="#tab2" data-toggle="tab">Empresas de primera trasnformación</a></li>
+          <li><a href="#tab2" data-toggle="tab">Empresas de primera transformación</a></li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane active fade" id="tab1">
@@ -64,7 +64,7 @@
                              <div class="seguimiento_label">Regente {{r.fecha_seguimiento.year}}</div>
                              <div class="seguimiento_valor">
                                   {{r.regente.nombre_regente}}<br>
-                                  <i>Codigo: </i>{{r.regente.codigo_regente}}<br>
+                                  <i>Código: </i>{{r.regente.codigo_regente}}<br>
                                   <a href="/regente/ficha/{{r.regente.id}}" class="der btn btn-mini btn-success">Ver →</a>
                                   <div class="clear"></div>
                              </div>

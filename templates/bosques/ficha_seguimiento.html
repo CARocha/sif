@@ -22,7 +22,7 @@ $(function () {
                 x: -20 //center
             },
             subtitle: {
-                text: 'distribucion por sexo',
+                text: 'Distribución por sexo',
                 x: -20
             },
             xAxis: {
@@ -34,7 +34,7 @@ $(function () {
             },
             yAxis: {
                 title: {
-                    text: 'cantidad de personas'
+                    text: 'Cantidad de personas'
                 },
                 plotLines: [{
                     value: 0,
@@ -106,13 +106,13 @@ $(function () {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Metros cubicos m3'
+                    text: 'Metros cúbicos m3'
                 }
             },
 
             tooltip: {
                 formatter: function() {
-                    return 'año '+
+                    return 'Año '+
                         this.x +': '+ this.y +' m3';
                 }
             },
@@ -152,7 +152,7 @@ $(function () {
                 x: -20 //center
             },
             subtitle: {
-                text: 'distribucion de hectareas',
+                text: 'Distribución de hectáreas',
                 x: -20
             },
             credits: {
@@ -167,7 +167,7 @@ $(function () {
             },
             yAxis: {
                 title: {
-                    text: 'Hectareas (ha)'
+                    text: 'Hectáreas (ha)'
                 },
                 plotLines: [{
                     value: 0,
@@ -191,7 +191,7 @@ $(function () {
             },
             series: [
 	            {
-	                name: 'Agricola',
+	                name: 'Agrícola',
 	                data: [
 	                	{%for agri in seguimiento%}
 	                		{{agri.uso_agricola}},
@@ -253,7 +253,7 @@ $(function () {
         	<br>
 	        <div class="botonesficha">
 	            <div class="btn-group">
-	           	  <a href="/ficha/{{datos.id}}" id=""class="btn "><i class="icon-file"></i>  Ficha Tecnica</a>
+	           	  <a href="/ficha/{{datos.id}}" id=""class="btn "><i class="icon-file"></i>  Ficha técnica</a>
 	          	  <a href="/ficha/relacion/{{datos.id}}" id=""class="btn "><i class="icon-resize-small"></i> Relaciones de actores</a>
 	          	  <a href="/ficha/seguimiento/{{datos.id}}" id="" class="btn active"><i class="icon-time"></i> Seguimiento</a>
 	            </div>
@@ -273,7 +273,7 @@ $(function () {
 			</div>
 			<div class="grid_3">
 				<div class="labelficha">
-        			Nombre de Propiedad
+        			Nombre de propiedad
         		</div>
         		<div class="valor">
         			{{datos.nombre_propiedad}}

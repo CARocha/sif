@@ -118,11 +118,11 @@ class FiltroBosquesForm(forms.Form):
 
 class PrimeraTransformacionForm(forms.Form):
     org_empresarial = forms.ModelChoiceField(queryset=OrganizacionEmpresarial.objects.all(), 
-                                            label=u'Organizacion',
+                                            label=u'Organización',
                                             required=False)
     gobierno_gti = forms.ChoiceField(choices=SINO_CHOICE, label=u'Gobierno GTI', required=False)
     area_trabajo = forms.ModelChoiceField(queryset=TrabajoTranformacion.objects.all(), 
-                                            label=u'Area de Trabajo',
+                                            label=u'Área de trabajo',
                                             required=False)
     productos_venden = forms.ModelChoiceField(queryset=ProductosVenden.objects.all(), 
                                             label=u'Productos que venden',
@@ -130,11 +130,11 @@ class PrimeraTransformacionForm(forms.Form):
 
 class SegundaTransformacionForm(forms.Form):
     org_empresarial = forms.ModelChoiceField(queryset=OrganizacionEmpresarial.objects.all(), 
-                                            label=u'Organizacion',
+                                            label=u'Organización',
                                             required=False)
     gobierno_gti = forms.ChoiceField(choices=SINO_CHOICE, label=u'Gobierno GTI', required=False)
     area_trabajo = forms.ModelChoiceField(queryset=AreaTrabajoSegunda.objects.all(), 
-                                            label=u'Area de Trabajo',
+                                            label=u'Área de trabajo',
                                             required=False)
     producto_vende = forms.ModelChoiceField(queryset=ProductosVendenSegunda.objects.all(), 
                                             label=u'Productos que venden',
@@ -145,5 +145,5 @@ class RegenteForestalForm(forms.Form):
                                             label=u'Organizado',
                                             required=False)
     area_trabajo = forms.ModelChoiceField(queryset=AreaTrabajo.objects.all(), 
-                                            label=u'Area de Trabajo',
+                                            label=u'Área de trabajo',
                                             required=False)
