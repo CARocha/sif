@@ -253,7 +253,7 @@ class SeguimientoPrimeraTransformacionAdmin(AutocompleteModelAdmin):
     search_fields = ['__unicode__']
     related_search_fields = {
 
-                'nombre_empresa': ('nombre_empresa_forestal',),
+                'nombre_empresa': ('nombre_corto',),
         }
     inlines = [DatosPrimeroTransformacionInline]
 
