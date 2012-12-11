@@ -10,8 +10,8 @@ class PropietarioBosquesForm(ModelForm):
                                                     widget = forms.CheckboxSelectMultiple())
     organizado = forms.ModelMultipleChoiceField(queryset = Organizado.objects.order_by('nombre'),
                                                     widget = forms.CheckboxSelectMultiple())
-    #organizacion = forms.ModelMultipleChoiceField(queryset = Organizacion.objects.order_by('nombre'),
-     #                                             required=False)
+    organizacion = forms.ModelMultipleChoiceField(queryset = Organizacion.objects.order_by('nombre'),
+                                                  required=False)
     tipo_producto = forms.ModelMultipleChoiceField(queryset = TipoProducto.objects.order_by('nombre'),
                                                     widget = forms.CheckboxSelectMultiple(), required=False)
     procesos_industriales = forms.ModelMultipleChoiceField(queryset = ProcesoIndustrialBosque.objects.order_by('nombre'),
@@ -26,7 +26,8 @@ class PropietarioBosquesForm(ModelForm):
                                                     widget = forms.CheckboxSelectMultiple())
     extraccion = forms.ModelMultipleChoiceField(queryset = MetodoExtraccion.objects.order_by('nombre'),
                                                     widget = forms.CheckboxSelectMultiple())
-
+    tipo_certificacion = forms.ModelMultipleChoiceField(queryset = TipoCertificacion.objects.order_by('nombre'),
+                                                    widget = forms.CheckboxSelectMultiple())
     # def __init__(self, *args, **kwargs):
     #     super(PropietarioBosquesForm, self).__init__(*args, **kwargs)
     #     rel = ManyToOneRel(self.instance.tipo_producto.model, 'id') 
@@ -44,6 +45,8 @@ SINO_CHOICE = (
 
 class RegenteForm(ModelForm):
     area_trabajo = forms.ModelMultipleChoiceField(queryset = AreaTrabajo.objects.order_by('nombre'),
+                                                  widget = forms.CheckboxSelectMultiple())
+    organizacion = forms.ModelMultipleChoiceField(queryset = Organizacion.objects.order_by('nombre'),
                                                   widget = forms.CheckboxSelectMultiple())
     class Meta:
         model = RegenteForestal

@@ -19,7 +19,7 @@ class PropietarioBosqueAdmin(admin.ModelAdmin):
 #            kwargs['widget'] = CheckboxSelectMultiple
 #        return super(PropietarioBosqueAdmin, self).formfield_for_dbfield(db_field, **kwargs)
     form = PropietarioBosquesForm
-    filter_horizontal = ('organizacion','naturales','tipo_certificacion')
+    filter_horizontal = ('organizacion','naturales','tipo_certificacion',)
     date_hierarchy = 'fecha'
     search_fields = ['nombre_propietario']
     fieldsets = (
