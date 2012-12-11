@@ -90,7 +90,7 @@ admin.site.register(PropietarioBosques, PropietarioBosqueAdmin)
 
 class DatosAdminInline(admin.StackedInline):
     model = Datos
-    filter_horizontal = ('tipo_certificacion',)
+    #filter_horizontal = ('tipo_certificacion',)
 
     fieldsets = (
         (None, {
