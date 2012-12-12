@@ -132,7 +132,7 @@ class DatosAdminInline(admin.StackedInline):
 
 
 class SeguimientoAdmin(AutocompleteModelAdmin):
-    search_fields = ['__unicode__']
+    search_fields = ['propietario__nombre_propietario']
     related_search_fields = {
 
                 'propietario': ('nombre_propietario',),
@@ -190,7 +190,7 @@ class SeguimientoRegenteAdminInline(admin.StackedInline):
     extra = 1
 
 class RegenteSeguimientoAdmin(AutocompleteModelAdmin):
-    search_fields = ['__unicode__']
+    search_fields = ['regente__nombre_regente']
     related_search_fields = {
 
                 'regente': ('nombre_regente',),
@@ -250,7 +250,7 @@ class DatosPrimeroTransformacionInline(admin.StackedInline):
     extra = 1
 
 class SeguimientoPrimeraTransformacionAdmin(AutocompleteModelAdmin):
-    search_fields = ['__unicode__']
+    search_fields = ['nombre_empresa__nombre_corto']
     related_search_fields = {
 
                 'nombre_empresa': ('nombre_corto',),
@@ -318,7 +318,7 @@ class DatosSegundaTransformacionInline(admin.StackedInline):
     extra = 1
 
 class SeguimientoSegundaTransformacionAdmin(AutocompleteModelAdmin):
-    search_fields = ['__unicode__']
+    search_fields = ['nombre__nombre_comercial']
     related_search_fields = {
                 'nombre': ('nombre_comercial',),
         }
