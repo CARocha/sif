@@ -105,7 +105,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'lugar',
     'bosques',
-    'smart_selects',
+    #'smart_selects',
     'south',
 )
 
