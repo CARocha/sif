@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^$', 'bosques.views.index', name="index"),
     url(r'^', include('bosques.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^chaining/', include('smart_selects.urls')),
+    #url(r'^chaining/', include('smart_selects.urls')),
 )
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns

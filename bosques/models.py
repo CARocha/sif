@@ -3,7 +3,7 @@
 from django.db import models
 from lugar.models import *
 import datetime
-from smart_selects.db_fields import ChainedForeignKey
+#from smart_selects.db_fields import ChainedForeignKey
 
 # Create your models here.
 
@@ -225,20 +225,22 @@ class PropietarioBosques(models.Model):
     longitud = models.FloatField(null=True, blank=True)
     
     departamento = models.ForeignKey(Departamento)
-    municipio = ChainedForeignKey(
-        Municipio,
-        chained_field="departamento",
-        chained_model_field="departamento",
-        show_all=False,
-        auto_choose=True
-    )
-    comunidad = ChainedForeignKey(
-        Comunidad,
-        chained_field="municipio",
-        chained_model_field="municipio",
-        show_all=False,
-        auto_choose=True
-    )
+    # municipio = ChainedForeignKey(
+    #     Municipio,
+    #     chained_field="departamento",
+    #     chained_model_field="departamento",
+    #     show_all=False,
+    #     auto_choose=True
+    # )
+    municipio = models.ForeignKey(Municipio)
+    # comunidad = ChainedForeignKey(
+    #     Comunidad,
+    #     chained_field="municipio",
+    #     chained_model_field="municipio",
+    #     show_all=False,
+    #     auto_choose=True
+    # )
+    comunidad = models.ForeignKey(Comunidad)
     
     organizado = models.ManyToManyField(Organizado)
     organizacion = models.ManyToManyField(Organizacion, verbose_name="Nombre de organización", null=True, blank=True)
@@ -425,20 +427,22 @@ class RegenteForestal(models.Model):
     pagina_web = models.URLField(null=True, blank=True)
     direccion = models.CharField(max_length=200, null=True, blank=True)
     departamento = models.ForeignKey(Departamento)
-    municipio = ChainedForeignKey(
-        Municipio,
-        chained_field="departamento",
-        chained_model_field="departamento",
-        show_all=False,
-        auto_choose=True
-    )
-    comunidad = ChainedForeignKey(
-        Comunidad,
-        chained_field="municipio",
-        chained_model_field="municipio",
-        show_all=False,
-        auto_choose=True
-    )
+    # municipio = ChainedForeignKey(
+    #     Municipio,
+    #     chained_field="departamento",
+    #     chained_model_field="departamento",
+    #     show_all=False,
+    #     auto_choose=True
+    # )
+    municipio = models.ForeignKey(Municipio)
+    # comunidad = ChainedForeignKey(
+    #     Comunidad,
+    #     chained_field="municipio",
+    #     chained_model_field="municipio",
+    #     show_all=False,
+    #     auto_choose=True
+    # )
+    comunidad = models.ForeignKey(Comunidad)
     fecha_acreditacion = models.DateField()
     experiencia = models.IntegerField()
     organizado = models.ManyToManyField(Organizado)
@@ -558,20 +562,23 @@ class EmpresaPrimeraTransformacion(models.Model):
     pagina_web = models.URLField(null=True, blank=True)
     direccion = models.CharField(max_length=200, null=True, blank=True)
     departamento = models.ForeignKey(Departamento)
-    municipio = ChainedForeignKey(
-        Municipio,
-        chained_field="departamento",
-        chained_model_field="departamento",
-        show_all=False,
-        auto_choose=True
-    )
-    comunidad = ChainedForeignKey(
-        Comunidad,
-        chained_field="municipio",
-        chained_model_field="municipio",
-        show_all=False,
-        auto_choose=True
-    )
+    
+    # municipio = ChainedForeignKey(
+    #     Municipio,
+    #     chained_field="departamento",
+    #     chained_model_field="departamento",
+    #     show_all=False,
+    #     auto_choose=True
+    # )
+    municipio = models.ForeignKey(Municipio)
+    # comunidad = ChainedForeignKey(
+    #     Comunidad,
+    #     chained_field="municipio",
+    #     chained_model_field="municipio",
+    #     show_all=False,
+    #     auto_choose=True
+    # )
+    comunidad = models.ForeignKey(Comunidad)
     latitud = models.FloatField(null=True, blank=True)
     longitud = models.FloatField(null=True, blank=True)
     gobierno_gti = models.IntegerField('Gobierno territorial indígena (GTI)', choices=SINO_CHOICE)
@@ -755,20 +762,23 @@ class EmpresaSegundaTransformacion(models.Model):
     pagina_web = models.URLField(null=True, blank=True)
     direccion = models.CharField(max_length=200, null=True, blank=True)
     departamento = models.ForeignKey(Departamento)
-    municipio = ChainedForeignKey(
-        Municipio,
-        chained_field="departamento",
-        chained_model_field="departamento",
-        show_all=False,
-        auto_choose=True
-    )
-    comunidad = ChainedForeignKey(
-        Comunidad,
-        chained_field="municipio",
-        chained_model_field="municipio",
-        show_all=False,
-        auto_choose=True
-    )
+    
+    # municipio = ChainedForeignKey(
+    #     Municipio,
+    #     chained_field="departamento",
+    #     chained_model_field="departamento",
+    #     show_all=False,
+    #     auto_choose=True
+    # )
+    municipio = models.ForeignKey(Municipio)
+    # comunidad = ChainedForeignKey(
+    #     Comunidad,
+    #     chained_field="municipio",
+    #     chained_model_field="municipio",
+    #     show_all=False,
+    #     auto_choose=True
+    # )
+    comunidad = models.ForeignKey(Comunidad)
     latitud = models.FloatField(null=True, blank=True)
     longitud = models.FloatField(null=True, blank=True)
     gobierno_gti = models.IntegerField('Gobierno territorial indígena (GTI)', choices=SINO_CHOICE)
